@@ -17,7 +17,7 @@ markers <- c(BFs_sim[1:5729, 'MRK'])
 
 #Create data frame with markers & BFs for each covariable as rows
 BFs_ALL <- data.frame(markers, BFs_SSSmean, BFs_SSTmean, BFs_Lat)
-names(BFs_ALL) <- c("snp", "SSS Mean", "SST Mean", "Lat")
+names(BFs_ALL) <- c("snp_id", "SSS Mean", "SST Mean", "Lat")
 
 #Write out
 #write.table(BFs_ALL, file = "aux1_all_BFs.txt", sep="\t", row.names = FALSE, col.names = TRUE)
@@ -55,20 +55,25 @@ potential_loci_list <- append(potential_loci_list, BFs_greater_than15_SSTmin)
 
 #### Grabbing the ID names of the contigs containing candidate SNPs ####
 #Read in loc names
-locnames <- read_table2("Loc_Names_All2.txt", col_names = TRUE)
+locnames <- read_table2("Loc_Names_All.txt", col_names = TRUE)
 dim(locnames) #800 x 2 (Name & Position)
 #rownames(locnames)
 #locnames["snp"] <- rownames(locnames)
 #dim(locnames) # 800 x 3 (Name, Position, snp)
+snps <- c(1:5729)
+locnames$snp_id <- snps
 
 can_loci <- unique(sort(potential_loci_list)) #keep only unique loci (ignore repeats)
 can_names <- locnames[c(can_loci),] #create matrix of contigs that have been flagged with BF > 10
+can_BFs <- BFs_ALL[c(can_loci),]
+
+can_all <- merge(can_names, can_BFs, by = "snp_id")
 
 #Write out
 write.table(can_loci, file = "aux1_all_candidate_loci.txt", sep="\t", row.names = FALSE, col.names = TRUE)
 
 #merge BFs_ALL & locnames data frames
-all <- merge(locnames, BFs_ALL, by = "snp")
+all <- merge(locnames, BFs_ALL, by = "snp_id")
 
 #write out
 write.table(all, file = "aux1_all_BFs.txt", sep="\t", row.names = FALSE, col.names = TRUE)
