@@ -16,6 +16,7 @@ remove(list = ls())
 library(maps)
 library(mapdata)
 library(tidyverse)
+#library(ggsn)
 
 #read in data
 JNP <- c("Japan", "Philippines", "Indonesia")
@@ -40,7 +41,7 @@ JNP_plot <- ggplot(JNP_map, aes(x = long, y = lat, group = group)) +
   coord_cartesian(xlim = c(115, 140), ylim = c(-5, 40)) + 
   geom_point(data = ssites_df, aes(x = long, y = lat, fill = "black", size = 4), inherit.aes = FALSE)
 JNP_plot
-JNP_plot_annotated <- JNP_plot + xlab("Longitude (Â°)") + ylab("Latitude (Â°)") + 
+JNP_plot_annotated <- JNP_plot + xlab("Longitude (°)") + ylab("Latitude (°)") + 
   annotate("text", x = 134, y = 31, label = "Japan", size = 6) + 
   annotate("text", x = 129, y = 14, label = "Philippines", size = 6) + 
   annotate("text", x = 122, y = 3, label = "Indonesia", size = 6) + theme_bw() + 
