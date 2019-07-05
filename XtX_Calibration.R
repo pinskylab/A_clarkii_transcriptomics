@@ -1,4 +1,4 @@
-s############################################## Calibrate Xtx significance cut-off for BayPass ##################################################
+############################################## Calibrate Xtx significance cut-off for BayPass ##################################################
 
 #follows Gautier (2015) instructions for calibrating and determining Xtx significance cut-offs
 #creates and assesses quality of PODs (pseudo-observed datasets) and generates cut-off for Xtx based on dataset
