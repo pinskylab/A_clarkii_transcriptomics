@@ -15,7 +15,6 @@ getwd()
 library(readr)
 
 #read in BFs
-library(readr)
 BFs <- read_table2("aux1_all_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
 
 ################################################################################################################################################
