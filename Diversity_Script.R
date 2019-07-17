@@ -48,9 +48,9 @@ colnames(P_info) <- header
 colnames(I_info) <- header
 
 #write out
-write.table(J_info, file = "Japan_diversity.csv", sep = "\t", row.names = FALSE, col.names = TRUE)
-write.table(P_info, file = "Philippines_diversity.csv", sep = "\t", row.names = FALSE, col.names = TRUE)
-write.table(I_info, file = "Indonesia_diversity.csv", sep = "\t", row.names = FALSE, col.names = TRUE)
+write.table(J_info, file = "Japan_diversity.csv", sep = "\t", row.names = TRUE, col.names = TRUE)
+write.table(P_info, file = "Philippines_diversity.csv", sep = "\t", row.names = TRUE, col.names = TRUE)
+write.table(I_info, file = "Indonesia_diversity.csv", sep = "\t", row.names = TRUE, col.names = TRUE)
 
 #inbreeding measure
 J_inbred <- inbreeding(J_inds) #creates likelihood distribution for Fis of each locus
