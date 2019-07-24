@@ -34,13 +34,15 @@ data_PC_mac2_nooutliers <- read_csv("output.hicov2.snps.only.mac2.nooutliers.str
 
 #create line plot of SSTs
 SST_line_plot <- ggplot(data = temp_data, aes(x = Population, y = Temperature, group = Temp)) + 
-  geom_line(aes(color = Temp, size = Temp)) + 
-  geom_point(aes(color = Temp, size = Temp)) + scale_size_manual(values = c(1.5, 1.5, 1.5))
-SST_line_plot_annotated <- SST_line_plot + scale_x_discrete(labels = c("Indonesia", "Philippines", "Japan")) + 
-  ggtitle("Sea Surface Temperature Across Sites") + ylab("Temperature (C)") + theme_bw() + 
-  theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        legend.justification = c(1, 0), axis.line = element_line(size = 1), plot.title = element_text(face = "bold"), 
-        legend.position = c(0.33, 0.25), legend.text = element_text(size = 16), legend.title = element_text(size = 16), 
+  geom_line(aes(color = Temp, linetype = Temp), size = 1.5) + 
+  scale_color_manual(values = c("#990000", "#666666", "#0066CC")) + scale_linetype_manual(values = c("solid", "dashed", "dotted")) + 
+  geom_point(aes(color = Temp, shape = Temp), size = 3.5) + scale_shape_manual(values = c(15, 16, 17))
+SST_line_plot_annotated <- SST_line_plot + scale_x_discrete(labels = c("Japan", "Philippines", "Indonesia")) + 
+  ggtitle("Sea Surface Temperature Across Sites") + ylab("Temperature (C)") + theme_minimal() + 
+  theme(panel.border = element_blank(), panel.grid.major = element_line(size = 1.5), 
+        legend.justification = c(1, 0), axis.line = element_blank(), plot.title = element_text(face = "bold"), 
+        legend.position = c(0.87, 0.22), legend.text = element_text(size = 16), legend.title = element_blank(), 
+        axis.ticks = element_line(size = 2), axis.ticks.length = unit(2, units = "mm"), 
         axis.text = element_text(size = 14, color = "black"), axis.title = element_text(size = 18, face = "bold")) 
 SST_line_plot_annotated
 
