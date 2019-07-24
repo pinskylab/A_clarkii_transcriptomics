@@ -45,7 +45,7 @@ JNP_plot_annotated <- JNP_plot + xlab("Longitude (?)") + ylab("Latitude (?)") +
   annotate("text", x = 134, y = 31, label = "Japan", size = 6) + 
   annotate("text", x = 129, y = 14, label = "Philippines", size = 6) + 
   annotate("text", x = 122, y = 3, label = "Indonesia", size = 6) + theme_bw() + 
-  theme(legend.position = "none", panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+  theme(legend.position = "none", panel.grid.major = element_blank(), panel.grid.minor = element_blank(), panel.border = element_blank(),
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1),
         axis.text = element_text(size = 16, color = "black"), axis.title = element_text(size = 18, face = "bold"))
 JNP_plot_annotated

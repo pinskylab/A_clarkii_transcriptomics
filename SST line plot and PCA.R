@@ -41,7 +41,7 @@ SST_line_plot_annotated <- SST_line_plot + scale_x_discrete(labels = c("Japan", 
   ggtitle("Sea Surface Temperature Across Sites") + ylab("Temperature (C)") + theme_minimal() + 
   theme(panel.border = element_blank(), panel.grid.major = element_line(size = 1.5), 
         legend.justification = c(1, 0), axis.line = element_blank(), plot.title = element_text(face = "bold"), 
-        legend.position = c(0.87, 0.22), legend.text = element_text(size = 16), legend.title = element_blank(), 
+        legend.position = c(0.83, 0.22), legend.text = element_text(size = 16), legend.title = element_blank(), 
         axis.ticks = element_line(size = 2), axis.ticks.length = unit(2, units = "mm"), 
         axis.text = element_text(size = 14, color = "black"), axis.title = element_text(size = 18, face = "bold")) 
 SST_line_plot_annotated
