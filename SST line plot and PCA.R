@@ -32,7 +32,7 @@ data_PC_mac2_nooutliers <- read_csv("output.hicov2.snps.only.mac2.nooutliers.str
 
 #temp_data$Population <- factor(temp_data$Population, levels = c("Indonesia", "Philippines", "Japan"))
 
-#create line plot of SSTs
+#create line plot of SSTs (x-axis as population)
 SST_line_plot <- ggplot(data = temp_data, aes(x = Population, y = Temperature, group = Temp)) + 
   geom_line(aes(color = Temp, linetype = Temp), size = 1.5) + 
   scale_color_manual(values = c("#990000", "#666666", "#0066CC")) + scale_linetype_manual(values = c("solid", "dashed", "dotted")) + 
@@ -45,6 +45,23 @@ SST_line_plot_annotated <- SST_line_plot + scale_x_discrete(labels = c("Japan", 
         axis.ticks = element_line(size = 2), axis.ticks.length = unit(2, units = "mm"), 
         axis.text = element_text(size = 14, color = "black"), axis.title = element_text(size = 18, face = "bold")) 
 SST_line_plot_annotated
+
+#create line plot of SSTs (x-axis as SST)
+SST_line_plot_2 <- ggplot(data = temp_data, aes(x = Temp, y = Temperature, group = Population)) + 
+  geom_line(aes(color = Population, linetype = Population), size = 1.5) + 
+  geom_point(aes(color = Population, shape = Population), size = 3.5) + 
+  scale_color_manual(values = c("#0066CC", "#666666", "#990000"), labels = c("Japan", "Philippines", "Indonesia")) + 
+  scale_linetype_manual(values = c("solid", "dashed", "dotted"), labels = c("Japan", "Philippines", "Indonesia")) + 
+  scale_shape_manual(values = c(15, 16, 17), labels = c("Japan", "Philippines", "Indonesia")) 
+SST_line_plot_2_annotated <- SST_line_plot_2 + ylim(0,30) + 
+  ggtitle("Sea Surface Temperature Across Sites") + ylab("Temperature (C)") + theme_minimal() + 
+  theme(panel.border = element_blank(), panel.grid.major = element_line(size = 1.5), 
+        legend.justification = c(1, 0), axis.line = element_blank(), plot.title = element_text(face = "bold"),
+        legend.position = c(0.85, 0.2), legend.text = element_text(size = 16), legend.title = element_blank(), 
+        axis.ticks = element_line(size = 2), axis.ticks.length = unit(2, units = "mm"),
+        axis.text = element_text(size = 14, color = "black"), axis.title.y = element_text(size = 18, face = "bold"), 
+        axis.title.x = element_blank())
+  
 
 #################################################################################################################################################
 
