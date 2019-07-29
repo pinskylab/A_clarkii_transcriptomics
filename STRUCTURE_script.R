@@ -24,12 +24,18 @@ library(pophelper)
 #read in data
 all_SNPs_sfiles <- list.files(path = "../../STRUCTURE_Output/allSNPs_results/allSNPs/allSNPs_StructureResults/", full.names = TRUE) #create list of file names of STRUCTURE runs with all SNPs
 all_SNPs_slist <- readQ(files = all_SNPs_sfiles, filetype = "structure") #read in all STRUCTURE files with all SNPs included (creates set of dataframes)
-HWE_SNPs_sfiles <- list.files(path = "../../STRUCTURE_Output/inhweSNPs_results/inhwe_StructureResults/", full.names = TRUE)
+HWE_SNPs_sfiles <- list.files(path = "../../STRUCTURE_Output/inhweSNPs_results/inhwe/inhwe_StructureResults/", full.names = TRUE)
 HWE_SNPs_slist <- readQ(files = HWE_SNPs_sfiles, filetype = "structure")
 outlier_SNPs_sfiles <- list.files(path = "../../STRUCTURE_Output/outliersonly_results/outliersonly_strict/outliersonly_strict_StructureResults/", full.names = TRUE)
 outlier_SNPs_slist <- readQ(files = outlier_SNPs_sfiles, filetype = "structure")
 nooutlier_SNPs_sfiles <- list.files(path = "../../STRUCTURE_Output/nooutliers_results/nooutliers_strict/nooutliers_strict_StructureResults/", full.names = TRUE)
 nooutlier_SNPs_slist <- readQ(files = nooutlier_SNPs_sfiles, filetype = "structure")
+mac2_SNPs_sfiles <- list.files(path = "../../STRUCTURE_Output/allSNPs_results/mac2/mac2SNPs_StructureResults/", full.names = TRUE)
+mac2_SNPs_slist <- readQ(files = mac2_SNPs_sfiles, filetype = "structure")
+mac2_HWE_SNPs_sfiles <- list.files(path = "../../STRUCTURE_Output/inhweSNPs_results/inhwe_mac2/inhwe_mac2_StructureResults/", full.names = TRUE)
+mac2_HWE_SNPs_slist <- readQ(files = mac2_HWE_SNPs_sfiles, filetype = "structure")
+nooutlier_mac2_sfiles <- list.files(path = "../../STRUCTURE_Output/nooutliers_results/nooutliers_mac2_strict/nooutliers_mac2_StructureResults/", full.names = TRUE)
+nooutlier_mac2_slist <- readQ(files = nooutlier_mac2_sfiles, filetype = "structure")
 
 ################################################################################################################################################
 
@@ -242,3 +248,159 @@ nooutlier_SNPs_K5 <- plotQ(nooutlier_SNPs_aligned_K5[1], imgoutput = "sep", retu
                          showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5,
                          grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1,
                          showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "no outlier SNPs included")
+
+################################################################################################################################################
+
+######## SNPs w/mac > 2 Only Set-up ########
+
+#summarize mac2_SNPs results
+mac2_SNPs_table <- tabulateQ(qlist = mac2_SNPs_slist) #pulls parameters (including mean ln likelihood - mvli) from mac2_SNPs runs and puts into dataframe
+mac2_SNPs_table_sum <- summariseQ(mac2_SNPs_table) #summarizes mac2_SNPs_table by K
+
+#evanno method
+mac2_SNPs_em <- evannoMethodStructure(data = mac2_SNPs_table_sum) #evanno method to pick best value of K
+mac2_SNPs_em_plot <- evannoMethodStructure(data = mac2_SNPs_table_sum, exportplot = TRUE)
+
+#clumpp
+clumppExport(qlist = mac2_SNPs_slist, useexe = TRUE) #run clumpp to order clusters properly
+
+######## Create STRUCTURE Plot ########
+
+#read in CLUMPP data
+mac2_SNPs_aligned_K2 <- readQ("../../STRUCTURE_Output/allSNPs_results/mac2/mac2SNPs_CLUMPP/K2/pop_K2-combined-aligned.txt")
+mac2_SNPs_aligned_K3 <- readQ("../../STRUCTURE_Output/allSNPs_results/mac2/mac2SNPs_CLUMPP/K3/pop_K3-combined-aligned.txt")
+mac2_SNPs_aligned_K4 <- readQ("../../STRUCTURE_Output/allSNPs_results/mac2/mac2SNPs_CLUMPP/K4/pop_K4-combined-aligned.txt")
+mac2_SNPs_aligned_K5 <- readQ("../../STRUCTURE_Output/allSNPs_results/mac2/mac2SNPs_CLUMPP/K5/pop_K5-combined-aligned.txt")
+
+#create plots
+mac2_SNPs_K2 <- plotQ(mac2_SNPs_aligned_K2[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE, 
+                           clustercol = c("#2121D9", "#9999FF"),
+                           showsp = TRUE, spbgcol = "white", splab = "K = 2", splabsize = 6, 
+                           showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5, 
+                           grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1, 
+                           showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "SNPs w/mac > 2 included")
+
+mac2_SNPs_K3 <- plotQ(mac2_SNPs_aligned_K3[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE,  
+                           clustercol = c("#2121D9", "#9999FF", "#FF9329"),
+                           showsp = TRUE, spbgcol = "white", splab = "K = 3", splabsize = 6,
+                           showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5,
+                           grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1,
+                           showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "SNPs w/mac > 2 included")
+
+mac2_SNPs_K4 <- plotQ(mac2_SNPs_aligned_K4[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE,  
+                           clustercol = c("#2121D9", "#9999FF", "#FF9329", "#FFFB23"),
+                           showsp = TRUE, spbgcol = "white", splab = "K = 4", splabsize = 6,
+                           showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5,
+                           grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1,
+                           showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "SNPs w/mac > 2 included")
+
+mac2_SNPs_K5 <- plotQ(mac2_SNPs_aligned_K5[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE,  
+                           clustercol = c("#2121D9", "#9999FF", "#FF9329", "#FFFB23", "#610B5E"),
+                           showsp = TRUE, spbgcol = "white", splab = "K = 5", splabsize = 6,
+                           showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5,
+                           grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1,
+                           showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "SNPs w/mac > 2 included")
+
+################################################################################################################################################
+
+######## HWE SNPs w/mac > 2 Only Set-up ########
+
+#summarize mac2_HWE_SNPs results
+mac2_HWE_SNPs_table <- tabulateQ(qlist = mac2_HWE_SNPs_slist) #pulls parameters (including mean ln likelihood - mvli) from mac2_HWE_SNPs runs and puts into dataframe
+mac2_HWE_SNPs_table_sum <- summariseQ(mac2_HWE_SNPs_table) #summarizes mac2_HWE_SNPs_table by K
+
+#evanno method
+mac2_HWE_SNPs_em <- evannoMethodStructure(data = mac2_HWE_SNPs_table_sum) #evanno method to pick best value of K
+mac2_HWE_SNPs_em_plot <- evannoMethodStructure(data = mac2_HWE_SNPs_table_sum, exportplot = TRUE)
+
+#clumpp
+clumppExport(qlist = mac2_HWE_SNPs_slist, useexe = TRUE) #run clumpp to order clusters properly
+
+######## Create STRUCTURE Plot ########
+
+#read in CLUMPP data
+mac2_HWE_SNPs_aligned_K2 <- readQ("../../STRUCTURE_Output/inhweSNPs_results/inhwe_mac2/inhwe_mac2_CLUMPP/K2/pop_K2-combined-aligned.txt")
+mac2_HWE_SNPs_aligned_K3 <- readQ("../../STRUCTURE_Output/inhweSNPs_results/inhwe_mac2/inhwe_mac2_CLUMPP/K3/pop_K3-combined-aligned.txt")
+mac2_HWE_SNPs_aligned_K4 <- readQ("../../STRUCTURE_Output/inhweSNPs_results/inhwe_mac2/inhwe_mac2_CLUMPP/K4/pop_K4-combined-aligned.txt")
+mac2_HWE_SNPs_aligned_K5 <- readQ("../../STRUCTURE_Output/inhweSNPs_results/inhwe_mac2/inhwe_mac2_CLUMPP/K5/pop_K5-combined-aligned.txt")
+
+#create plots
+mac2_HWE_SNPs_K2 <- plotQ(mac2_HWE_SNPs_aligned_K2[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE, 
+                      clustercol = c("#2121D9", "#9999FF"),
+                      showsp = TRUE, spbgcol = "white", splab = "K = 2", splabsize = 6, 
+                      showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5, 
+                      grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1, 
+                      showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "HWE SNPs w/mac > 2 included")
+
+mac2_HWE_SNPs_K3 <- plotQ(mac2_HWE_SNPs_aligned_K3[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE,  
+                      clustercol = c("#2121D9", "#9999FF", "#FF9329"),
+                      showsp = TRUE, spbgcol = "white", splab = "K = 3", splabsize = 6,
+                      showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5,
+                      grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1,
+                      showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "HWE SNPs w/mac > 2 included")
+
+mac2_HWE_SNPs_K4 <- plotQ(mac2_HWE_SNPs_aligned_K4[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE,  
+                      clustercol = c("#2121D9", "#9999FF", "#FF9329", "#FFFB23"),
+                      showsp = TRUE, spbgcol = "white", splab = "K = 4", splabsize = 6,
+                      showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5,
+                      grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1,
+                      showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "HWE SNPs w/mac > 2 included")
+
+mac2_HWE_SNPs_K5 <- plotQ(mac2_HWE_SNPs_aligned_K5[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE,  
+                      clustercol = c("#2121D9", "#9999FF", "#FF9329", "#FFFB23", "#610B5E"),
+                      showsp = TRUE, spbgcol = "white", splab = "K = 5", splabsize = 6,
+                      showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5,
+                      grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1,
+                      showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "HWE SNPs w/mac > 2 included")
+
+################################################################################################################################################
+
+######## No Outlier mac > 2 SNPs Only Set-up ########
+
+#summarize nooutlier_mac2_SNPs results
+nooutlier_mac2_SNPs_table <- tabulateQ(qlist = nooutlier_mac2_slist) #pulls parameters (including mean ln likelihood -mvli) from nooutlier_mac2_SNPs runs and puts into dataframe
+nooutlier_mac2_SNPs_table_sum <- summariseQ(nooutlier_mac2_SNPs_table) #summarizes nooutlier_mac2_SNPs_table_sum by K
+
+#evanno method
+nooutlier_mac2_SNPs_em <- evannoMethodStructure(data = nooutlier_mac2_SNPs_table_sum) #evanno method to pick best value of K
+nooutlier_mac2_SNPs_em_plot <- evannoMethodStructure(data = nooutlier_mac2_SNPs_table_sum, exportplot = TRUE)
+
+#clumpp
+clumppExport(qlist = nooutlier_mac2_slist, useexe = TRUE) #run clumpp to order clusters properly
+
+######## Create STRUCTURE Plot ########
+
+#read in CLUMPP data
+nooutlier_mac2_SNPs_aligned_K2 <- readQ("../../STRUCTURE_Output/nooutliers_results/nooutliers_mac2_strict/nooutliers_mac2_CLUMPP/K2/pop_K2-combined-aligned.txt")
+nooutlier_mac2_SNPs_aligned_K3 <- readQ("../../STRUCTURE_Output/nooutliers_results/nooutliers_mac2_strict/nooutliers_mac2_CLUMPP/K3/pop_K3-combined-aligned.txt")
+nooutlier_mac2_SNPs_aligned_K4 <- readQ("../../STRUCTURE_Output/nooutliers_results/nooutliers_mac2_strict/nooutliers_mac2_CLUMPP/K4/pop_K4-combined-aligned.txt")
+nooutlier_mac2_SNPs_aligned_K5 <- readQ("../../STRUCTURE_Output/nooutliers_results/nooutliers_mac2_strict/nooutliers_mac2_CLUMPP/K5/pop_K5-combined-aligned.txt")
+
+#create plots
+nooutlier_mac2_SNPs_K2 <- plotQ(nooutlier_mac2_SNPs_aligned_K2[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE, 
+                           clustercol = c("#2121D9", "#9999FF"),
+                           showsp = TRUE, spbgcol = "white", splab = "K = 2", splabsize = 6, 
+                           showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5, 
+                           grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1, 
+                           showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "no outlier SNPs included")
+
+nooutlier_mac2_SNPs_K3 <- plotQ(nooutlier_mac2_SNPs_aligned_K3[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE,  
+                           clustercol = c("#2121D9", "#9999FF", "#FF9329"),
+                           showsp = TRUE, spbgcol = "white", splab = "K = 3", splabsize = 6,
+                           showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5,
+                           grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1,
+                           showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "no outlier SNPs included")
+
+nooutlier_mac2_SNPs_K4 <- plotQ(nooutlier_mac2_SNPs_aligned_K4[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE,  
+                           clustercol = c("#2121D9", "#9999FF", "#FF9329", "#FFFB23"),
+                           showsp = TRUE, spbgcol = "white", splab = "K = 4", splabsize = 6,
+                           showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5,
+                           grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1,
+                           showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "no outlier SNPs included")
+
+nooutlier_mac2_SNPs_K5 <- plotQ(nooutlier_mac2_SNPs_aligned_K5[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE,  
+                           clustercol = c("#2121D9", "#9999FF", "#FF9329", "#FFFB23", "#610B5E"),
+                           showsp = TRUE, spbgcol = "white", splab = "K = 5", splabsize = 6,
+                           showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5,
+                           grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1,
+                           showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "no outlier SNPs included")
