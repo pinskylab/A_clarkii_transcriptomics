@@ -109,13 +109,40 @@ SSTmax_XtX_annotated_plot <- SSTmax_XtX_plot + ggtitle("SST Max BF v. XtX") + la
 SSTmax_XtX_annotated_plot
 
 #SSTmean v. fst plot
-#SSTmean_fst_plot <- ggplot(data=BFs, aes(x=SST_Mean, y=fst)) + geom_point() + geom_hline(yintercept=0.15) + geom_vline(xintercept=20) + geom_vline(xintercept=15, linetype="dashed") + theme(text = element_text(size=20))
-#SSTmean_fst_plot
+SSTmean_Fst_plot <- ggplot(data = BFs, aes(x = SST_Mean, y = fst)) + 
+  geom_hline(yintercept = 0.15, size = 3, color = "#666666", linetype = "dashed") + 
+  geom_vline(xintercept = 15, size = 3, color = "#666666", linetype = "dashed") + 
+  geom_point(size = 8)
+SSTmean_Fst_plot_annotated <- SSTmean_Fst_plot + labs(x = "SST Mean Bayes Factor", y = "Fst") + theme_bw() + 
+  scale_y_continuous(limits = c(0, 0.45)) + scale_x_continuous(limits = c(0, 27)) + 
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        axis.line = element_line(size = 1), plot.title = element_blank(), 
+        axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 35, color = "black"), 
+        axis.title.x = element_text(size = 35, color = "black", face = "bold"), axis.title.y = element_text(size = 35, color = "black", face = "bold.italic"))
+SSTmean_Fst_plot_annotated
 
 #SSTmin v. fst plot
-#SSTmin_fst_plot <- ggplot(data=BFs, aes(x=SST_Min, y=fst)) + geom_point() + geom_hline(yintercept=0.15) + geom_vline(xintercept=20) + geom_vline(xintercept=15, linetype="dashed") + theme(text = element_text(size=20))
-#SSTmin_fst_plot
+SSTmin_Fst_plot <- ggplot(data = BFs, aes(x = SST_Min, y = fst)) + 
+  geom_hline(yintercept = 0.15, size = 3, color = "#666666", linetype = "dashed") + 
+  geom_vline(xintercept = 15, size = 3, color = "#666666", linetype = "dashed") + 
+  geom_point(size = 8)
+SSTmin_Fst_plot_annotated <- SSTmin_Fst_plot + labs(x = "SST Min Bayes Factor", y = "Fst") + theme_bw() + 
+  scale_y_continuous(limits = c(0, 0.45)) + scale_x_continuous(limits = c(0, 27)) + 
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        axis.line = element_line(size = 1), plot.title = element_blank(), 
+        axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 35, color = "black"), 
+        axis.title.x = element_text(size = 35, color = "dodgerblue4", face = "bold"), axis.title.y = element_text(size = 35, color = "black", face = "bold.italic"))
+SSTmin_Fst_plot_annotated
 
 #SSTmax v. fst plot
-#SSTmax_fst_plot <- ggplot(data=BFs, aes(x=SST_Max, y=fst)) + geom_point() + geom_hline(yintercept=0.15) + geom_vline(xintercept=20) + geom_vline(xintercept=15, linetype="dashed") + theme(text = element_text(size=20))
-#SSTmax_fst_plot
+SSTmax_Fst_plot <- ggplot(data = BFs, aes(x = SST_Max, y = fst)) + 
+  geom_hline(yintercept = 0.15, size = 3, color = "#666666", linetype = "dashed") + 
+  geom_vline(xintercept = 15, size = 3, color = "#666666", linetype = "dashed") + 
+  geom_point(size = 8)
+SSTmax_Fst_plot_annotated <- SSTmax_Fst_plot + labs(x = "SST Max Bayes Factor", y = "Fst") + theme_bw() + 
+  scale_y_continuous(limits = c(0, 0.45)) + scale_x_continuous(limits = c(0, 27)) + 
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        axis.line = element_line(size = 1), plot.title = element_blank(), 
+        axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 35, color = "black"), 
+        axis.title.x = element_text(size = 35, color = "firebrick4", face = "bold"), axis.title.y = element_text(size = 35, color = "black", face = "bold.italic"))
+SSTmax_Fst_plot_annotated

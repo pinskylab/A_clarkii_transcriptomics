@@ -53,7 +53,7 @@ SST_line_plot_2 <- ggplot(data = temp_data, aes(x = Temp, y = Temperature, group
   scale_color_manual(values = c("#0066CC", "#666666", "#990000"), labels = c("Japan", "Philippines", "Indonesia")) + 
   scale_linetype_manual(values = c("solid", "dashed", "dotted"), labels = c("Japan", "Philippines", "Indonesia")) + 
   scale_shape_manual(values = c(15, 16, 17), labels = c("Japan", "Philippines", "Indonesia")) 
-SST_line_plot_2_annotated <- SST_line_plot_2 + ylim(0,30) + 
+SST_line_plot_2_annotated <- SST_line_plot_2 + 
   ggtitle("Sea Surface Temperature Across Sites") + ylab("Temperature (C)") + theme_minimal() + 
   theme(panel.border = element_blank(), panel.grid.major = element_line(size = 1.5), 
         legend.justification = c(1, 0), axis.line = element_blank(), plot.title = element_text(face = "bold"),
@@ -61,7 +61,9 @@ SST_line_plot_2_annotated <- SST_line_plot_2 + ylim(0,30) +
         axis.ticks = element_line(size = 2), axis.ticks.length = unit(2, units = "mm"),
         axis.text = element_text(size = 14, color = "black"), axis.title.y = element_text(size = 18, face = "bold"), 
         axis.title.x = element_blank())
-  
+
+SST_bar_mean <- ggplot(data = temp_data, aes(x = Population, y = Temperature, group = Temp)) +
+  geom_line()
 
 #################################################################################################################################################
 
@@ -134,15 +136,15 @@ PCA_mac2_annotated
 
 #PCA with loci w/ mac >2 and in HWE
 PCA_mac2_inhwe <- ggplot(data = data_PC_mac2_inhwe, aes(x = PC1, y = PC2, color = Location)) + 
-  geom_point(aes(size = 1)) + ggtitle("PCA with loci with mac > 2 and in HWE") + 
-  scale_color_manual(values = c("#999999", "#E69F00", "#0072B2")) + 
+  geom_point(size = 10) + ggtitle("PCA with loci with mac > 2 and in HWE") + 
+  scale_color_manual(values = c("dodgerblue4", "goldenrod1", "darkorange2"), labels = c("Japan", "Philippines", "Indonesia")) + 
   labs(x = "PC1 (explains 12.73% of total variance)", y = "PC2 (explains 9.17% of total variance)")
 PCA_mac2_inhwe_annotated <- PCA_mac2_inhwe + scale_size(guide = "none") + theme_bw() + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        legend.justification = c(1, 0), axis.line = element_line(size = 1), plot.title = element_text(size = 14, face = "bold"), 
-        legend.position = c(1, 0.75), legend.text = element_text(size = 20), legend.title = element_text(size = 20), 
-        axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 14, color = "black"), 
-        axis.title = element_text(size = 18, face = "bold")) + guides(color = guide_legend(override.aes = list(size = 4)))
+        legend.justification = c(1, 0), axis.line = element_line(size = 1), plot.title = element_blank(), 
+        legend.position = c(1, 0.7), legend.text = element_text(size = 40), legend.title = element_text(size = 40), 
+        axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 40, color = "black"), 
+        axis.title = element_text(size = 38, face = "bold")) + guides(color = guide_legend(override.aes = list(size = 10)))
 PCA_mac2_inhwe_annotated
 
 #PCA with loci w/ mac >2 and no outliers
