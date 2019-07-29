@@ -21,7 +21,7 @@ library(ggsci)
 
 #build dataframe
 gene_function <- c("cell death", "cell structure", "metabolism", "protein folding", "protein targeting", "protein degradation", 
-                   "response to stress", "transcription", "translation", "signal trausnduction")
+                   "response to stress", "transcription", "translation", "signal transduction")
 number_involved <- c(2, 3, 3, 5, 4, 4, 1, 2, 6, 3)
 function_prop <- c("6%", "9%", "9%", "15%", "12%", "12%", "4%", "6%", "18%", "9%")
 annotation_df <- data.frame(gene_function, number_involved, function_prop)
@@ -38,5 +38,5 @@ function_pie_annotated <- function_pie + theme_minimal() +
   scale_fill_brewer(palette = "RdYlBu", name = "Function") + 
   theme(axis.title = element_blank(), panel.border = element_blank(), panel.grid = element_blank(),
         axis.ticks = element_blank(), plot.title = element_blank(), axis.text = element_blank(),
-        legend.justification = c(1, 0), legend.text = element_text(size = 30), legend.title = element_text(size = 35, face = "bold"))
+        legend.justification = c(1, 0), legend.text = element_text(size = 35), legend.title = element_text(size = 40, face = "bold"))
 function_pie_annotated
