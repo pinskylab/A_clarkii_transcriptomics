@@ -40,8 +40,8 @@ allele_counts <- allele_counts[,2:8] #remove snp_id index
 #calculate Ho per locus in each pop
 sum_stats_mac2 <- basic.stats(SNPs_mac2) #hierfstat function --> gives Ho, Hs, Fis on locus basis/pop as well as some pop-wide summary stats (Hs from Nei & Chesser 1983)
 J_Ho <- data.frame(sum_stats_mac2$Ho[,1]) #pull out Ho for J pop
-P_Ho <- data.frame(sum_stats_mac2$Ho[,2])
-I_Ho <- data.frame(sum_stats_mac2$Ho[,3])
+I_Ho <- data.frame(sum_stats_mac2$Ho[,2])
+P_Ho <- data.frame(sum_stats_mac2$Ho[,3])
 
 #calculate Hs (~He) per locus in each pop
 J_Hs <- apply(allele_counts[,1:2], 1, heterozygosity) #pegas heterozygosity function to calculate Nei's average gene diversity w/correction for small sample sizes
@@ -76,14 +76,14 @@ write.csv(diversity_tot, file = "mac2_diversity.csv")
 ######## (Optional) inbreeding measure (Fis) with adegenet ########
 
 #set population names
-popNames(SNPs_mac2) <- c("Japan", "Philippines", "Indonesia")
+popNames(SNPs_mac2) <- c("Japan", "Indonesia", "Philippines")
 popNames(SNPs_mac2) #check to make sure popnames are right
 
 #subset dataframe to each population
 J_inds <- SNPs_mac2[1:8, ]
 J_sum <- summary(J_inds) #get summary to make sure subsetting correctly
-P_inds <- SNPs_mac2[9:18, ]
-I_inds <- SNPs_mac2[19:25, ]
+I_inds <- SNPs_mac2[9:15, ]
+I_inds <- SNPs_mac2[16:25, ]
 
 #inbreeding measure
 J_inbred <- inbreeding(J_inds) #creates likelihood distribution for Fis of each locus
