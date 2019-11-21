@@ -15,7 +15,7 @@ getwd()
 library(readr)
 
 #read in BFs
-BFs <- read_table2("aux1_all_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs <- read_table2("../../BayPass_Output/5729_SNPs/aux_output_all/aux1_all_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
 
 ################################################################################################################################################
 

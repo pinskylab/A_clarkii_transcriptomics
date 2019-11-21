@@ -18,13 +18,12 @@ library(tidyverse)
 
 #read in data
 temp_data <- read_csv("SST_Lat_Data.csv", col_names = TRUE) #temp data for SST line plot
-data_PC_all <- read_csv("output.hicov2.snps.only eigenvectors.csv") #eigenvector for PCA w/all loci 
-data_PC_inhwe <- read_csv("output.hicov2.snps.only.inhwe_eigenvec.csv") #eigenvector for PCA w/loci only in HWE
-data_PC_nooutliers <- read_csv("output.hicov2.snps.only.nooutliers.strict_eigenvec.csv") #eigenvector for PCA w/no outlier loci
-data_PC_outliersonly <- read_csv("output.hicov2.snps.only.outliersonly.strict_eigenvec.csv") #eigenvector for PCA w/only outlier loci
-data_PC_mac2 <- read_csv("output.hicov2.snps.only.mac2_eigenvec.csv") #eigenvector for PCA w/mac >2 loci
-data_PC_mac2_inhwe <- read_csv("output.hicov2.snps.only.mac2.inhwe_eigenvec.csv") #eigenvector for PCA w/mac >2 and in HWE loci
-data_PC_mac2_nooutliers <- read_csv("output.hicov2.snps.only.mac2.nooutliers.strict_eigenvec.csv") #eigenvector for PCA w/mac >2 w/no outlier loci
+data_PC_all <- read_csv("../../VCFs_and_PLINK/PCA_stuff/output.hicov2.snps.only eigenvectors.csv") #eigenvector for PCA w/all loci 
+data_PC_inhwe <- read_csv("../../VCFs_and_PLINK/PCA_stuff/output.hicov2.snps.only.inhwe_eigenvec.csv") #eigenvector for PCA w/loci only in HWE
+data_PC_outliersonly <- read_csv("../../VCFs_and_PLINK/PCA_stuff/output.hicov2.snps.only.outliersonly.strict_eigenvec.csv") #eigenvector for PCA w/only outlier loci
+data_PC_mac2 <- read_csv("../../VCFs_and_PLINK/PCA_stuff/output.hicov2.snps.only.mac2_eigenvec.csv") #eigenvector for PCA w/mac >2 loci
+data_PC_mac2_inhwe <- read_csv("../../VCFs_and_PLINK/PCA_stuff/output.hicov2.snps.only.mac2.inhwe_eigenvec.csv") #eigenvector for PCA w/mac >2 and in HWE loci
+data_PC_mac2_nooutliers <- read_csv("../../VCFs_and_PLINK/PCA_stuff/output.hicov2.snps.only.mac2.nooutliers.strict_eigenvec.csv") #eigenvector for PCA w/mac >2 w/no outlier loci
 
 #################################################################################################################################################
 
@@ -94,19 +93,6 @@ PCA_inhwe_annotated <- PCA_inhwe + scale_size(guide = "none") + theme_bw() +
         axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 14, color = "black"), 
         axis.title = element_text(size = 18, face = "bold")) + guides(color = guide_legend(override.aes = list(size = 4)))
 PCA_inhwe_annotated
-
-#PCA without outlier loci
-PCA_nooutliers <- ggplot(data = data_PC_nooutliers, aes(x = PC1, y = PC2, color = Location)) + 
-  geom_point(aes(size = 1)) + ggtitle("PCA without outlier loci") + 
-  scale_color_manual(values = c("#999999", "#E69F00", "#0072B2")) + 
-  labs(x = "PC1 (explains 11.5% of total variance)", y = "PC2 (explains 7.51% of total variance)")
-PCA_nooutliers_annotated <- PCA_nooutliers + scale_size(guide = "none") + theme_bw() + 
-  theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        legend.justification = c(1, 0), axis.line = element_line(size = 1), plot.title = element_text(size = 14, face = "bold"), 
-        legend.position = c(1, 0.75), legend.text = element_text(size = 20), legend.title = element_text(size = 20), 
-        axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 14, color = "black"), 
-        axis.title = element_text(size = 18, face = "bold")) + guides(color = guide_legend(override.aes = list(size = 4)))
-PCA_nooutliers_annotated
 
 #PCA with only outlier loci
 PCA_outliersonly <- ggplot(data = data_PC_outliersonly, aes(x = PC1, y = PC2, color = Location)) + 
