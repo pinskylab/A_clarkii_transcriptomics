@@ -16,6 +16,7 @@ remove(list = ls())
 #load libraries
 library(readr)
 library(tidyverse)
+library(gridExtra)
 
 #read in data
 BFs <- read_csv("BF_total.csv", col_names = TRUE)
@@ -75,8 +76,9 @@ SSTmin_SSTmax_annotated_plot
 #SSTmean v. XtX plot
 SSTmean_XtX_plot <- ggplot(data = BFs, aes(x = SST_Mean, y = M_XtX)) + geom_point(aes(size = 0.5)) + 
   geom_hline(yintercept = 5.78, size = 2, color = "#666666", linetype = "dashed") + 
-  geom_vline(xintercept = 15, size = 2, color = "#666666", linetype = "dashed")
-SSTmean_XtX_annotated_plot <- SSTmean_XtX_plot + ggtitle("SST Mean BF v. XtX") + labs(x = "SST Mean BF", y = "XtX") + 
+  geom_vline(xintercept = 15, size = 2, color = "#666666", linetype = "dashed") + 
+  annotate("text", x = 3, y = 10, label = "A", size = 15)
+SSTmean_XtX_annotated_plot <- SSTmean_XtX_plot + labs(x = "SST Mean BF", y = "XtX") + 
   theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
                      axis.line = element_line(size = 1), plot.title = element_text(size = 14, face = "bold"), 
                      axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 30, color = "black"), 
@@ -87,8 +89,9 @@ SSTmean_XtX_annotated_plot
 #SSTmin v. XtX plot
 SSTmin_XtX_plot <- ggplot(data = BFs, aes(x = SST_Min, y = M_XtX)) + geom_point(aes(size = 0.5)) + 
   geom_hline(yintercept = 5.78, size = 2, color = "#666666", linetype = "dashed") + 
-  geom_vline(xintercept = 15, size = 2, color = "#666666", linetype = "dashed")
-SSTmin_XtX_annotated_plot <- SSTmin_XtX_plot + ggtitle("SST Min BF v. XtX") + labs(x = "SST Min BF", y = "XtX") + 
+  geom_vline(xintercept = 15, size = 2, color = "#666666", linetype = "dashed") + 
+  annotate("text", x = 3, y = 10, label = "B", size = 15)
+SSTmin_XtX_annotated_plot <- SSTmin_XtX_plot + labs(x = "SST Min BF", y = "XtX") + 
   theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
                      axis.line = element_line(size = 1), plot.title = element_text(size = 14, face = "bold"), 
                      axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 30, color = "black"), 
@@ -99,14 +102,18 @@ SSTmin_XtX_annotated_plot
 #SSTmax v. XtX plot
 SSTmax_XtX_plot <- ggplot(data = BFs, aes(x = SST_Max, y = M_XtX)) + geom_point(aes(size = 0.5)) + 
   geom_hline(yintercept = 5.78, size = 2, color = "#666666", linetype = "dashed") + 
-  geom_vline(xintercept = 15, size = 2, color = "#666666", linetype = "dashed")
-SSTmax_XtX_annotated_plot <- SSTmax_XtX_plot + ggtitle("SST Max BF v. XtX") + labs(x = "SST Max BF", y = "XtX") + 
+  geom_vline(xintercept = 15, size = 2, color = "#666666", linetype = "dashed") + 
+  annotate("text", x = 3, y = 10, label = "C", size = 15)
+SSTmax_XtX_annotated_plot <- SSTmax_XtX_plot + labs(x = "SST Max BF", y = "XtX") + 
   theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
                      axis.line = element_line(size = 1), plot.title = element_text(size = 14, face = "bold"), 
                      axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 30, color = "black"), 
                      axis.title = element_text(size = 18, face = "bold"), legend.justification = c(1, 0), legend.position = c(0.85,0.1), 
                      legend.text = element_text(size = 20), legend.title = element_text(size = 20)) + scale_y_continuous(limits = c(0, 10)) + scale_x_continuous(limits = c(0, 30)) + scale_color_manual(values = c("#CCCCCC", "#000000"), name = "Outlier", breaks = c("No", "Yes"), labels = c("No", "Yes")) + scale_size(guide = "none") + guides(color = guide_legend(override.aes = list(size = 4)))
 SSTmax_XtX_annotated_plot
+
+BF_XtX_all_plot <- grid.arrange(SSTmean_XtX_annotated_plot, SSTmin_XtX_annotated_plot, SSTmax_XtX_annotated_plot, ncol = 3)
+BF_XtX_all_plot
 
 #SSTmean v. fst plot
 SSTmean_Fst_plot <- ggplot(data = BFs, aes(x = SST_Mean, y = fst)) + 

@@ -110,15 +110,16 @@ PCA_nooutliers_annotated
 
 #PCA with only outlier loci
 PCA_outliersonly <- ggplot(data = data_PC_outliersonly, aes(x = PC1, y = PC2, color = Location)) + 
-  geom_point(aes(size = 1)) + ggtitle("PCA with only outlier loci") + 
-  scale_color_manual(values = c("#999999", "#E69F00", "#0072B2")) + 
-  labs(x = "PC1 (explains 64.62% of total variance)", y = "PC2 (explains 7.72% of total variance)")
+  geom_point(size = 10) + ggtitle("PCA with only outlier loci") + 
+  scale_color_manual(values = c("darkorange2", "dodgerblue4", "goldenrod1")) + 
+  labs(x = "PC1 (explains 64.62% of total variance)", y = "PC2 (explains 7.72% of total variance)") + 
+  annotate("text", x = -0.2, y = 0.45, label = "A", size = 15)
 PCA_outliersonly_annotated <- PCA_outliersonly + scale_size(guide = "none") + theme_bw() + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
-        legend.justification = c(1, 0), axis.line = element_line(size = 1), plot.title = element_text(size = 14, face = "bold"), 
-        legend.position = c(1, 0.75), legend.text = element_text(size = 20), legend.title = element_text(size = 20), 
-        axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 14, color = "black"), 
-        axis.title = element_text(size = 18, face = "bold")) + guides(color = guide_legend(override.aes = list(size = 4)))
+        legend.justification = c(1, 0), axis.line = element_line(size = 1), plot.title = element_blank(), 
+        legend.position = c(1, 0.75), legend.text = element_text(size = 26), legend.title = element_text(size = 26), 
+        axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 30, color = "black"), 
+        axis.title = element_text(size = 30, face = "bold")) + guides(color = guide_legend(override.aes = list(size = 10)))
 PCA_outliersonly_annotated
 
 #PCA with loci w/ mac >2
@@ -136,15 +137,16 @@ PCA_mac2_annotated
 
 #PCA with loci w/ mac >2 and in HWE
 PCA_mac2_inhwe <- ggplot(data = data_PC_mac2_inhwe, aes(x = PC1, y = PC2, color = Location)) + 
-  geom_point(size = 10) + ggtitle("PCA with loci with mac > 2 and in HWE") + 
+  geom_point(size = 10) + 
   scale_color_manual(values = c("dodgerblue4", "goldenrod1", "darkorange2"), labels = c("Japan", "Philippines", "Indonesia")) + 
-  labs(x = "PC1 (explains 12.73% of total variance)", y = "PC2 (explains 9.17% of total variance)")
+  labs(x = "PC1 (explains 12.73% of total variance)", y = "PC2 (explains 9.17% of total variance)") + 
+  annotate("text", x = -0.15, y = 0.75, label = "A", size = 15)
 PCA_mac2_inhwe_annotated <- PCA_mac2_inhwe + scale_size(guide = "none") + theme_bw() + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         legend.justification = c(1, 0), axis.line = element_line(size = 1), plot.title = element_blank(), 
-        legend.position = c(1, 0.7), legend.text = element_text(size = 40), legend.title = element_text(size = 40), 
-        axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 40, color = "black"), 
-        axis.title = element_text(size = 38, face = "bold")) + guides(color = guide_legend(override.aes = list(size = 10)))
+        legend.position = c(1, 0.7), legend.text = element_text(size = 26), legend.title = element_text(size = 26), 
+        axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 30, color = "black"), 
+        axis.title = element_text(size = 30, face = "bold")) + guides(color = guide_legend(override.aes = list(size = 10)))
 PCA_mac2_inhwe_annotated
 
 #PCA with loci w/ mac >2 and no outliers
