@@ -18,11 +18,13 @@ remove(list = ls())
 library(readr)
 library(tidyverse)
 library(adegenet)
+library(hierfstat)
 library(purrr)
 
 #read in data
-#output_hicov2_snps_only <- read_csv("output.hicov2.snps.only.csv", col_names = FALSE)
 output_hicov2_snps_only_mac2 <- read_csv("../../VCFs_and_PLINK/output.hicov2.snps.only.mac2.csv", col_names = FALSE)
+#quantiles <- read.csv("diversity_bootstrapped_cis.csv", header = TRUE, row.names = 1) #only bc if run all the way through hit errors where Rstudio can't support that many files open at once so won't create plots
+#diversity_boot <- read.csv("diversity_bootstrapped.csv", header = TRUE, row.names = 1)
 
 #################################################################################################################################################
 
@@ -98,10 +100,9 @@ write.table(output_boot, file = "bootstrap_het.txt") #rename with subscript numb
 
 #################################################################################################################################################
 
-######## Calculate Ho & He 95% CIs ########
+######## Calculate Ho & He for each boostrapped sample ########
 
 #read in data from bootstrapping runs earlier
-
 bs_run_1 <- read.table(file = "bootstrap_het1.txt", colClasses = "character", header = TRUE, row.names = 1) #colClasses as character to keep leading zeros
 bs_run_2 <- read.table(file = "bootstrap_het2.txt", colClasses = "character", header = TRUE, row.names = 1)
 bs_run_3 <- read.table(file = "bootstrap_het3.txt", colClasses = "character", header = TRUE, row.names = 1)
@@ -188,129 +189,210 @@ Ho_I_1 <- colMeans(sum_stats_1$Ho[,101:200])
 Ho_P_1 <- colMeans(sum_stats_1$Ho[,201:300])
 Means_Ho_1 <- data.frame(Ho_J_1, Ho_I_1, Ho_P_1)
 rownames(Means_Ho_1) <- paste("S", 1:100, sep = '')
+colnames(Means_Ho_1) <- c("J", "I", "P")
 
 Ho_J_2 <- colMeans(sum_stats_2$Ho[,1:100])
 Ho_I_2 <- colMeans(sum_stats_2$Ho[,101:200])
 Ho_P_2 <- colMeans(sum_stats_2$Ho[,201:300])
 Means_Ho_2 <- data.frame(Ho_J_2, Ho_I_2, Ho_P_2)
 rownames(Means_Ho_2) <- paste("S", 101:200, sep = '')
+colnames(Means_Ho_2) <- c("J", "I", "P")
 
 Ho_J_3 <- colMeans(sum_stats_3$Ho[,1:100])
 Ho_I_3 <- colMeans(sum_stats_3$Ho[,101:200])
 Ho_P_3 <- colMeans(sum_stats_3$Ho[,201:300])
 Means_Ho_3 <- data.frame(Ho_J_3, Ho_I_3, Ho_P_3)
 rownames(Means_Ho_3) <- paste("S", 201:300, sep = '')
+colnames(Means_Ho_3) <- c("J", "I", "P")
 
 Ho_J_4 <- colMeans(sum_stats_4$Ho[,1:100])
 Ho_I_4 <- colMeans(sum_stats_4$Ho[,101:200])
 Ho_P_4 <- colMeans(sum_stats_4$Ho[,201:300])
 Means_Ho_4 <- data.frame(Ho_J_4, Ho_I_4, Ho_P_4)
 rownames(Means_Ho_4) <- paste("S", 301:400, sep = '')
+colnames(Means_Ho_4) <- c("J", "I", "P")
 
 Ho_J_5 <- colMeans(sum_stats_5$Ho[,1:100])
 Ho_I_5 <- colMeans(sum_stats_5$Ho[,101:200])
 Ho_P_5 <- colMeans(sum_stats_5$Ho[,201:300])
 Means_Ho_5 <- data.frame(Ho_J_5, Ho_I_5, Ho_P_5)
 rownames(Means_Ho_5) <- paste("S", 401:500, sep = '')
+colnames(Means_Ho_5) <- c("J", "I", "P")
 
 Ho_J_6 <- colMeans(sum_stats_6$Ho[,1:100])
 Ho_I_6 <- colMeans(sum_stats_6$Ho[,101:200])
 Ho_P_6 <- colMeans(sum_stats_6$Ho[,201:300])
 Means_Ho_6 <- data.frame(Ho_J_6, Ho_I_6, Ho_P_6)
 rownames(Means_Ho_6) <- paste("S", 501:600, sep = '')
+colnames(Means_Ho_6) <- c("J", "I", "P")
 
 Ho_J_7 <- colMeans(sum_stats_7$Ho[,1:100])
 Ho_I_7 <- colMeans(sum_stats_7$Ho[,101:200])
 Ho_P_7 <- colMeans(sum_stats_7$Ho[,201:300])
 Means_Ho_7 <- data.frame(Ho_J_7, Ho_I_7, Ho_P_7)
 rownames(Means_Ho_7) <- paste("S", 601:700, sep = '')
+colnames(Means_Ho_7) <- c("J", "I", "P")
 
 Ho_J_8 <- colMeans(sum_stats_8$Ho[,1:100])
 Ho_I_8 <- colMeans(sum_stats_8$Ho[,101:200])
 Ho_P_8 <- colMeans(sum_stats_8$Ho[,201:300])
 Means_Ho_8 <- data.frame(Ho_J_8, Ho_I_8, Ho_P_8)
 rownames(Means_Ho_8) <- paste("S", 701:800, sep = '')
+colnames(Means_Ho_8) <- c("J", "I", "P")
 
 Ho_J_9 <- colMeans(sum_stats_9$Ho[,1:100])
 Ho_I_9 <- colMeans(sum_stats_9$Ho[,101:200])
 Ho_P_9 <- colMeans(sum_stats_9$Ho[,201:300])
 Means_Ho_9 <- data.frame(Ho_J_9, Ho_I_9, Ho_P_9)
 rownames(Means_Ho_9) <- paste("S", 801:900, sep = '')
+colnames(Means_Ho_9) <- c("J", "I", "P")
 
 Ho_J_10 <- colMeans(sum_stats_10$Ho[,1:100])
 Ho_I_10 <- colMeans(sum_stats_10$Ho[,101:200])
 Ho_P_10 <- colMeans(sum_stats_10$Ho[,201:300])
 Means_Ho_10 <- data.frame(Ho_J_10, Ho_I_10, Ho_P_10)
 rownames(Means_Ho_10) <- paste("S", 901:1000, sep = '')
+colnames(Means_Ho_10) <- c("J", "I", "P")
 
 #merge all Ho dataframes together
 Ho_means_all <- rbind(Means_Ho_1, Means_Ho_2, Means_Ho_3, Means_Ho_4, Means_Ho_5, Means_Ho_6, Means_Ho_7, Means_Ho_8,
                       Means_Ho_9, Means_Ho_10)
+colnames(Ho_means_all) <- c("J_Ho", "I_Ho", "P_Ho")
+#write.csv(Ho_means_all, "Ho_bootstrapped_all.csv") #to write out along the way
 
 #pull out He for each run
-He_J_1 <- colMeans(sum_stats_1$He[,1:100])
-He_I_1 <- colMeans(sum_stats_1$He[,101:200])
-He_P_1 <- colMeans(sum_stats_1$He[,201:300])
+He_J_1 <- colMeans(sum_stats_1$Hs[,1:100])
+He_I_1 <- colMeans(sum_stats_1$Hs[,101:200])
+He_P_1 <- colMeans(sum_stats_1$Hs[,201:300])
 Means_He_1 <- data.frame(He_J_1, He_I_1, He_P_1)
 rownames(Means_He_1) <- paste("S", 1:100, sep = '')
+colnames(Means_He_1) <- c("J", "I", "P")
 
-He_J_2 <- colMeans(sum_stats_2$He[,1:100])
-He_I_2 <- colMeans(sum_stats_2$He[,101:200])
-He_P_2 <- colMeans(sum_stats_2$He[,201:300])
+He_J_2 <- colMeans(sum_stats_2$Hs[,1:100])
+He_I_2 <- colMeans(sum_stats_2$Hs[,101:200])
+He_P_2 <- colMeans(sum_stats_2$Hs[,201:300])
 Means_He_2 <- data.frame(He_J_2, He_I_2, He_P_2)
 rownames(Means_He_2) <- paste("S", 101:200, sep = '')
+colnames(Means_He_2) <- c("J", "I", "P")
 
-He_J_3 <- colMeans(sum_stats_3$He[,1:100])
-He_I_3 <- colMeans(sum_stats_3$He[,101:200])
-He_P_3 <- colMeans(sum_stats_3$He[,201:300])
+He_J_3 <- colMeans(sum_stats_3$Hs[,1:100])
+He_I_3 <- colMeans(sum_stats_3$Hs[,101:200])
+He_P_3 <- colMeans(sum_stats_3$Hs[,201:300])
 Means_He_3 <- data.frame(He_J_3, He_I_3, He_P_3)
 rownames(Means_He_3) <- paste("S", 201:300, sep = '')
+colnames(Means_He_3) <- c("J", "I", "P")
 
-He_J_4 <- colMeans(sum_stats_4$He[,1:100])
-He_I_4 <- colMeans(sum_stats_4$He[,101:200])
-He_P_4 <- colMeans(sum_stats_4$He[,201:300])
+He_J_4 <- colMeans(sum_stats_4$Hs[,1:100])
+He_I_4 <- colMeans(sum_stats_4$Hs[,101:200])
+He_P_4 <- colMeans(sum_stats_4$Hs[,201:300])
 Means_He_4 <- data.frame(He_J_4, He_I_4, He_P_4)
 rownames(Means_He_4) <- paste("S", 301:400, sep = '')
+colnames(Means_He_4) <- c("J", "I", "P")
 
-He_J_5 <- colMeans(sum_stats_5$He[,1:100])
-He_I_5 <- colMeans(sum_stats_5$He[,101:200])
-He_P_5 <- colMeans(sum_stats_5$He[,201:300])
+He_J_5 <- colMeans(sum_stats_5$Hs[,1:100])
+He_I_5 <- colMeans(sum_stats_5$Hs[,101:200])
+He_P_5 <- colMeans(sum_stats_5$Hs[,201:300])
 Means_He_5 <- data.frame(He_J_5, He_I_5, He_P_5)
 rownames(Means_He_5) <- paste("S", 401:500, sep = '')
+colnames(Means_He_5) <- c("J", "I", "P")
 
-He_J_6 <- colMeans(sum_stats_6$He[,1:100])
-He_I_6 <- colMeans(sum_stats_6$He[,101:200])
-He_P_6 <- colMeans(sum_stats_6$He[,201:300])
+He_J_6 <- colMeans(sum_stats_6$Hs[,1:100])
+He_I_6 <- colMeans(sum_stats_6$Hs[,101:200])
+He_P_6 <- colMeans(sum_stats_6$Hs[,201:300])
 Means_He_6 <- data.frame(He_J_6, He_I_6, He_P_6)
 rownames(Means_He_6) <- paste("S", 501:600, sep = '')
+colnames(Means_He_6) <- c("J", "I", "P")
 
-He_J_7 <- colMeans(sum_stats_7$He[,1:100])
-He_I_7 <- colMeans(sum_stats_7$He[,101:200])
-He_P_7 <- colMeans(sum_stats_7$He[,201:300])
+He_J_7 <- colMeans(sum_stats_7$Hs[,1:100])
+He_I_7 <- colMeans(sum_stats_7$Hs[,101:200])
+He_P_7 <- colMeans(sum_stats_7$Hs[,201:300])
 Means_He_7 <- data.frame(He_J_7, He_I_7, He_P_7)
 rownames(Means_He_7) <- paste("S", 601:700, sep = '')
+colnames(Means_He_7) <- c("J", "I", "P")
 
-He_J_8 <- colMeans(sum_stats_8$He[,1:100])
-He_I_8 <- colMeans(sum_stats_8$He[,101:200])
-He_P_8 <- colMeans(sum_stats_8$He[,201:300])
+He_J_8 <- colMeans(sum_stats_8$Hs[,1:100])
+He_I_8 <- colMeans(sum_stats_8$Hs[,101:200])
+He_P_8 <- colMeans(sum_stats_8$Hs[,201:300])
 Means_He_8 <- data.frame(He_J_8, He_I_8, He_P_8)
 rownames(Means_He_8) <- paste("S", 701:800, sep = '')
+colnames(Means_He_8) <- c("J", "I", "P")
 
-He_J_9 <- colMeans(sum_stats_9$He[,1:100])
-He_I_9 <- colMeans(sum_stats_9$He[,101:200])
-He_P_9 <- colMeans(sum_stats_9$He[,201:300])
+He_J_9 <- colMeans(sum_stats_9$Hs[,1:100])
+He_I_9 <- colMeans(sum_stats_9$Hs[,101:200])
+He_P_9 <- colMeans(sum_stats_9$Hs[,201:300])
 Means_He_9 <- data.frame(He_J_9, He_I_9, He_P_9)
 rownames(Means_He_9) <- paste("S", 801:900, sep = '')
+colnames(Means_He_9) <- c("J", "I", "P")
 
-He_J_10 <- colMeans(sum_stats_10$He[,1:100])
-He_I_10 <- colMeans(sum_stats_10$He[,101:200])
-He_P_10 <- colMeans(sum_stats_10$He[,201:300])
+He_J_10 <- colMeans(sum_stats_10$Hs[,1:100])
+He_I_10 <- colMeans(sum_stats_10$Hs[,101:200])
+He_P_10 <- colMeans(sum_stats_10$Hs[,201:300])
 Means_He_10 <- data.frame(He_J_10, He_I_10, He_P_10)
 rownames(Means_He_10) <- paste("S", 901:1000, sep = '')
+colnames(Means_He_10) <- c("J", "I", "P")
 
 #merge all Ho dataframes together
 He_means_all <- rbind(Means_He_1, Means_He_2, Means_He_3, Means_He_4, Means_He_5, Means_He_6, Means_He_7, Means_He_8,
                       Means_He_9, Means_He_10)
+colnames(He_means_all) <- c("J_He", "I_He", "P_He")
+#write.csv(He_means_all, "He_bootstrapped_all.csv") #to write out along the way
+
+#combine He & Ho into one df
+diversity_boot <- cbind(Ho_means_all, He_means_all)
+
+######## Calculate Fis for bootstrapped samples########
+
+#calculate Fis as (1- Ho/He)
+diversity_boot$J_Fis <- 1 - (diversity_boot$J_Ho/diversity_boot$J_He)
+diversity_boot$I_Fis <- 1 - (diversity_boot$I_Ho/diversity_boot$I_He)
+diversity_boot$P_Fis <- 1 - (diversity_boot$P_Ho/diversity_boot$P_He)
+
+######## Calculate quantiles for all metrics ########
+
+#calculate 2.5 & 97.5 quantiles
+quantiles <- data.frame(t(apply(diversity_boot, MARGIN = 2, FUN = quantile, c(0.025, 0.50, 0.975)))) #calculates quantiles for each column in diversity_boot and transform df so in tidy format
+colnames(quantiles) <- c("2.5_per", "median", "97.5_per")
+quantiles$pop <- c(rep(c("Japan", "Indonesia", "Philippines"), 3)) #add pop column for CI visualization
+quantiles$pop <- factor(quantiles$pop, levels = c("Japan", "Philippines", "Indonesia")) #add levels for CI visualization
+quantiles$metric <- c(rep("Ho", 3), rep("He", 3), rep("Fis", 3)) #add metric column for CI visualization
+quantiles$diff_lower <- quantiles$median - quantiles$`2.5_per` #calculate diff btwn median and 2.5 percentile for CI visualization
+quantiles$diff_upper <- quantiles$`97.5_per` - quantiles$median # calculate diff btwn median and 97.5 percentile for CI visualization
+
+#write out data
+write.csv(diversity_boot, "diversity_bootstrapped.csv")
+write.csv(quantiles, "diversity_bootstrapped_cis.csv")
+
+################################################################################################################################################
+
+######## Visualize results ########
+
+#plot of median Ho w/95% CI error bars
+Ho_plot <- ggplot(data = quantiles[which(quantiles$metric == "Ho"), ], aes(x = pop, y = median)) + 
+  geom_point(aes(size = 1), show.legend = FALSE) + 
+  geom_errorbar(aes(ymin = median - diff_lower, ymax = median + diff_upper, width = 0.5, size = 0.5), show.legend = FALSE) + 
+  ylim(0.19, 0.26) + ggtitle("Ho w/95% CI") + theme_bw() + 
+  theme(panel.border = element_rect(size = 1), axis.title = element_text(size = 14, face = "bold"), 
+        axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 12, color = "black"))
+Ho_plot
+
+#plot of median He w/95% CI error bars
+He_plot <- ggplot(data = quantiles[which(quantiles$metric == "He"), ], aes(x = pop, y = median)) + 
+  geom_point(aes(size = 1), show.legend = FALSE) + 
+  geom_errorbar(aes(ymin = median - diff_lower, ymax = median + diff_upper, width = 0.5, size = 0.5), show.legend = FALSE) + 
+  ylim(0.19, 0.26) + ggtitle("He w/95% CI") + theme_bw() + 
+  theme(panel.border = element_rect(size = 1), axis.title = element_text(size = 14, face = "bold"), 
+        axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 12, color = "black"))
+He_plot
+
+#plot of median Fis w/95% CI error bars
+Fis_plot <- ggplot(data = quantiles[which(quantiles$metric == "Fis"), ], aes(x = pop, y = median)) + 
+  geom_point(aes(size = 1), show.legend = FALSE) + 
+  geom_errorbar(aes(ymin = median - diff_lower, ymax = median + diff_upper, width = 0.5, size = 0.5), show.legend = FALSE) + 
+  ggtitle("Fis w/95% CI") + theme_bw() + 
+  theme(panel.border = element_rect(size = 1), axis.title = element_text(size = 14, face = "bold"), 
+        axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 12, color = "black"))
+Fis_plot
+
 
 ######## Optional: turn genotypes into separate columns (1 per allele) ########
 #ideally split this way, randomly sample from alleles and then merge back together two columns at a time
