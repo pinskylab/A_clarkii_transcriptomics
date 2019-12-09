@@ -274,14 +274,14 @@ mac2_SNPs_aligned_K5 <- readQ("../../STRUCTURE_Output/allSNPs_results/mac2/mac2S
 
 #create plots
 mac2_SNPs_K2 <- plotQ(mac2_SNPs_aligned_K2[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE, 
-                           clustercol = c("#2121D9", "#9999FF"),
+                           clustercol = c("#2121D9", "#FF9329"),
                            showsp = TRUE, spbgcol = "white", splab = "K = 2", splabsize = 6, 
                            showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5, 
                            grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1, 
                            showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "SNPs w/mac > 2 included")
 
 mac2_SNPs_K3 <- plotQ(mac2_SNPs_aligned_K3[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE,  
-                           clustercol = c("#2121D9", "#9999FF", "#FF9329"),
+                           clustercol = c("#9999FF", "#2121D9", "#FF9329"),
                            showsp = TRUE, spbgcol = "white", splab = "K = 3", splabsize = 6,
                            showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5,
                            grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1,
@@ -333,7 +333,7 @@ mac2_HWE_SNPs_K2 <- plotQ(mac2_HWE_SNPs_aligned_K2[1], imgoutput = "sep", return
                       showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "HWE SNPs w/mac > 2 included")
 
 mac2_HWE_SNPs_K3 <- plotQ(mac2_HWE_SNPs_aligned_K3[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE,  
-                      clustercol = c("#2121D9", "#9999FF", "#FF9329"),
+                      clustercol = c("#FF9329", "#9999FF", "#2121D9"),
                       showsp = TRUE, spbgcol = "white", splab = "K = 3", splabsize = 6,
                       showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5,
                       grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1,
@@ -385,7 +385,7 @@ nooutlier_mac2_SNPs_K2 <- plotQ(nooutlier_mac2_SNPs_aligned_K2[1], imgoutput = "
                            showtitle = TRUE, titlelab = "STRUCTURE plot", showsubtitle = TRUE, subtitlelab = "no outlier SNPs included")
 
 nooutlier_mac2_SNPs_K3 <- plotQ(nooutlier_mac2_SNPs_aligned_K3[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE,  
-                           clustercol = c("#2121D9", "#9999FF", "#FF9329"),
+                           clustercol = c("#9999FF", "#2121D9", "#FF9329"),
                            showsp = TRUE, spbgcol = "white", splab = "K = 3", splabsize = 6,
                            showyaxis = TRUE, showticks = FALSE, indlabsize = 4, ticksize = 0.5,
                            grplab = meta.data, linesize = 0.2, pointsize = 2, showgrplab = TRUE, grplabspacer = 0.1,
