@@ -119,8 +119,8 @@ I_95ci_lynchli <- boot.ci(boot_I_lynchli, conf = 0.95, type = "all")
 ######## Create summary tables ########
 
 #dataframe for wang estimator w/sample mean, and 95% CI
-t_rel_mean_df <- t(rel_mean_df) #transpose mean df
-wang_mean_rel <- df[, 1] #pull out wang mean relatedness
+t_rel_mean_df <- data.frame(t(rel_mean_df)) #transpose mean df
+wang_mean_rel <- t_rel_mean_df[, 1] #pull out wang mean relatedness
 estimator_vector <- c("wang", "wang", "wang") #create column with estimator name
 wang_mean_rel <- data.frame(wang_mean_rel, estimator_vector) #combine means & estimator vector
 colnames(wang_mean_rel) <- c("mean", "estimator")
@@ -137,7 +137,7 @@ rownames(wang_norm_ci) <- c("Japan", "Philippines", "Indonesia")
 mean_rel <- cbind(wang_mean_rel, wang_norm_ci) #combine wang ci info and sample mean info into one dataframe
 
 #dataframe for lynchli estimator w/sample mean, and 95% CI
-lynchli_mean_rel <- df[, 2] #pull out lynchli mean relatedness
+lynchli_mean_rel <- t_rel_mean_df[, 2] #pull out lynchli mean relatedness
 estimator_vector <- c("lynchli", "lynchli", "lynchli")
 lynchli_mean_rel <- data.frame(lynchli_mean_rel, estimator_vector)
 colnames(lynchli_mean_rel) <- c("mean", "estimator")
@@ -161,6 +161,9 @@ mean_rel <- cbind(mean_rel, pop_vector)
 colnames(mean_rel) <- c("mean", "estimator", "CI", "2.5_per", "97.5_per", "Pop")
 mean_rel$diff_lower <- mean_rel$mean - mean_rel$`2.5_per` #calculate diff btwn sample mean and 2.5 percentile for CI visualization
 mean_rel$diff_upper <- mean_rel$`97.5_per` - mean_rel$mean # calculate diff btwn sample mean and 97.5 percentile for CI visualization
+
+#write out
+write.csv(mean_rel, "wang_lynchli_relatedness_cis.csv")
 
 #################################################################################################################################################
 

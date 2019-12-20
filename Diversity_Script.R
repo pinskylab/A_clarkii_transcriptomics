@@ -21,7 +21,7 @@ library(diveRsity)
 library(tidyverse)
 
 #read in data
-SNPs_mac2 <- read.genetix("output.hicov2.snps.only.mac2_genetix.gtx") #convert genetix file to genind object for use in R (filtered SNPs for those with mac >/= 2) (maf >/= 0.05))
+SNPs_mac2 <- read.genetix("../../VCFs_and_PLINK/output.hicov2.snps.only.mac2_genetix.gtx") #convert genetix file to genind object for use in R (filtered SNPs for those with mac >/= 2) (maf >/= 0.05))
 allele_counts <- read_table2("clownfish_mac2_geno.txt", col_names = TRUE) #read in allele count input data for BayPass
 locnames <- read_table2("Loc_Names_mac2.txt", col_names = TRUE) #read in contig & bp for loci passing mac2 filter
 dim(locnames) #800 x 2 (Name & Position)

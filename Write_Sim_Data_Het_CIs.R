@@ -338,6 +338,9 @@ colnames(He_means_all) <- c("J_He", "I_He", "P_He")
 #write.csv(He_means_all, "He_bootstrapped_all.csv") #to write out along the way
 
 #combine He & Ho into one df
+He_means_all <- read.csv("He_bootstrapped_all.csv", header = TRUE, row.names = 1)
+colnames(He_means_all) <- c("J_He", "I_He", "P_He")
+
 diversity_boot <- cbind(Ho_means_all, He_means_all)
 
 ######## Calculate Fis for bootstrapped samples########
@@ -365,6 +368,9 @@ write.csv(quantiles, "diversity_bootstrapped_cis.csv")
 ################################################################################################################################################
 
 ######## Visualize results ########
+
+quantiles <- read.csv("diversity_bootstrapped_cis.csv", header = TRUE, row.names = 1)
+quantiles$pop <- factor(quantiles$pop, levels = c("Japan", "Philippines", "Indonesia"))
 
 #plot of median Ho w/95% CI error bars
 Ho_plot <- ggplot(data = quantiles[which(quantiles$metric == "Ho"), ], aes(x = pop, y = median)) + 
