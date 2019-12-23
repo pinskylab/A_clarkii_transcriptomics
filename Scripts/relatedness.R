@@ -19,7 +19,7 @@ library(boot)
 
 #read in data
 rel <- read.csv("../../HWE_Het/relationship2_mac2.csv", header =TRUE) #read in data from vcftools
-rel_info <- readgenotypedata("relatedness_input_mac2.txt") #read in data formatted for relatedness r package
+rel_info <- readgenotypedata("Data/relatedness_input_mac2.txt") #read in data formatted for relatedness r package
 
 #################################################################################################################################################
 
@@ -163,7 +163,7 @@ mean_rel$diff_lower <- mean_rel$mean - mean_rel$`2.5_per` #calculate diff btwn s
 mean_rel$diff_upper <- mean_rel$`97.5_per` - mean_rel$mean # calculate diff btwn sample mean and 97.5 percentile for CI visualization
 
 #write out
-write.csv(mean_rel, "wang_lynchli_relatedness_cis.csv")
+write.csv(mean_rel, "Data/wang_lynchli_relatedness_cis.csv")
 
 #################################################################################################################################################
 

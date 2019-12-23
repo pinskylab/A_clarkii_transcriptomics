@@ -23,8 +23,8 @@ library(purrr)
 
 #read in data
 output_hicov2_snps_only_mac2 <- read_csv("../../VCFs_and_PLINK/output.hicov2.snps.only.mac2.csv", col_names = FALSE)
-#quantiles <- read.csv("diversity_bootstrapped_cis.csv", header = TRUE, row.names = 1) #only bc if run all the way through hit errors where Rstudio can't support that many files open at once so won't create plots
-#diversity_boot <- read.csv("diversity_bootstrapped.csv", header = TRUE, row.names = 1)
+#quantiles <- read.csv("Data/diversity_bootstrapped_cis.csv", header = TRUE, row.names = 1) #only bc if run all the way through hit errors where Rstudio can't support that many files open at once so won't create plots
+#diversity_boot <- read.csv("Data/diversity_bootstrapped.csv", header = TRUE, row.names = 1)
 
 #################################################################################################################################################
 
@@ -96,23 +96,23 @@ output_boot <- as.data.frame(output_boot) #turn matrix from apply into datframe
 colnames(output_boot) <- contig_bp #create header row w/contig_bp notation
 
 #write out dataframe as table
-write.table(output_boot, file = "bootstrap_het.txt") #rename with subscript numbers so don't overwrite as run 10x
+write.table(output_boot, file = "Data/bootstrap_het.txt") #rename with subscript numbers so don't overwrite as run 10x
 
 #################################################################################################################################################
 
 ######## Calculate Ho & He for each boostrapped sample ########
 
 #read in data from bootstrapping runs earlier
-bs_run_1 <- read.table(file = "bootstrap_het1.txt", colClasses = "character", header = TRUE, row.names = 1) #colClasses as character to keep leading zeros
-bs_run_2 <- read.table(file = "bootstrap_het2.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_3 <- read.table(file = "bootstrap_het3.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_4 <- read.table(file = "bootstrap_het4.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_5 <- read.table(file = "bootstrap_het5.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_6 <- read.table(file = "bootstrap_het6.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_7 <- read.table(file = "bootstrap_het7.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_8 <- read.table(file = "bootstrap_het8.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_9 <- read.table(file = "bootstrap_het9.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_10 <- read.table(file = "bootstrap_het10.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_1 <- read.table(file = "Data/bootstrap_het1.txt", colClasses = "character", header = TRUE, row.names = 1) #colClasses as character to keep leading zeros
+bs_run_2 <- read.table(file = "Data/bootstrap_het2.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_3 <- read.table(file = "Data/bootstrap_het3.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_4 <- read.table(file = "Data/bootstrap_het4.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_5 <- read.table(file = "Data/bootstrap_het5.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_6 <- read.table(file = "Data/bootstrap_het6.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_7 <- read.table(file = "Data/bootstrap_het7.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_8 <- read.table(file = "Data/bootstrap_het8.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_9 <- read.table(file = "Data/bootstrap_het9.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_10 <- read.table(file = "Data/bootstrap_het10.txt", colClasses = "character", header = TRUE, row.names = 1)
 
 #set population vector to assign individuals to discrete bootstrap sample
 pop <- c(rep("J1", 8), rep("J2", 8), rep("J3", 8), rep("J4", 8), rep("J5", 8), rep("J6", 8), rep("J7", 8), rep("J8", 8), 
@@ -258,7 +258,7 @@ colnames(Means_Ho_10) <- c("J", "I", "P")
 Ho_means_all <- rbind(Means_Ho_1, Means_Ho_2, Means_Ho_3, Means_Ho_4, Means_Ho_5, Means_Ho_6, Means_Ho_7, Means_Ho_8,
                       Means_Ho_9, Means_Ho_10)
 colnames(Ho_means_all) <- c("J_Ho", "I_Ho", "P_Ho")
-#write.csv(Ho_means_all, "Ho_bootstrapped_all.csv") #to write out along the way
+#write.csv(Ho_means_all, "Data/Ho_bootstrapped_all.csv") #to write out along the way
 
 #pull out He for each run
 He_J_1 <- colMeans(sum_stats_1$Hs[,1:100])
@@ -335,7 +335,7 @@ colnames(Means_He_10) <- c("J", "I", "P")
 He_means_all <- rbind(Means_He_1, Means_He_2, Means_He_3, Means_He_4, Means_He_5, Means_He_6, Means_He_7, Means_He_8,
                       Means_He_9, Means_He_10)
 colnames(He_means_all) <- c("J_He", "I_He", "P_He")
-#write.csv(He_means_all, "He_bootstrapped_all.csv") #to write out along the way
+#write.csv(He_means_all, "Data/He_bootstrapped_all.csv") #to write out along the way
 
 #combine He & Ho into one df
 He_means_all <- read.csv("He_bootstrapped_all.csv", header = TRUE, row.names = 1)
@@ -362,14 +362,14 @@ quantiles$diff_lower <- quantiles$median - quantiles$`2.5_per` #calculate diff b
 quantiles$diff_upper <- quantiles$`97.5_per` - quantiles$median # calculate diff btwn median and 97.5 percentile for CI visualization
 
 #write out data
-write.csv(diversity_boot, "diversity_bootstrapped.csv")
-write.csv(quantiles, "diversity_bootstrapped_cis.csv")
+write.csv(diversity_boot, "Data/diversity_bootstrapped.csv")
+write.csv(quantiles, "Data/diversity_bootstrapped_cis.csv")
 
 ################################################################################################################################################
 
 ######## Visualize results ########
 
-quantiles <- read.csv("diversity_bootstrapped_cis.csv", header = TRUE, row.names = 1)
+quantiles <- read.csv("Data/diversity_bootstrapped_cis.csv", header = TRUE, row.names = 1)
 quantiles$pop <- factor(quantiles$pop, levels = c("Japan", "Philippines", "Indonesia"))
 
 #plot of median Ho w/95% CI error bars

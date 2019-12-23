@@ -22,8 +22,8 @@ library(tidyverse)
 
 #read in data
 SNPs_mac2 <- read.genetix("../../VCFs_and_PLINK/output.hicov2.snps.only.mac2_genetix.gtx") #convert genetix file to genind object for use in R (filtered SNPs for those with mac >/= 2) (maf >/= 0.05))
-allele_counts <- read_table2("clownfish_mac2_geno.txt", col_names = TRUE) #read in allele count input data for BayPass
-locnames <- read_table2("Loc_Names_mac2.txt", col_names = TRUE) #read in contig & bp for loci passing mac2 filter
+allele_counts <- read_table2("Data/clownfish_mac2_geno.txt", col_names = TRUE) #read in allele count input data for BayPass
+locnames <- read_table2("Data/Loc_Names_mac2.txt", col_names = TRUE) #read in contig & bp for loci passing mac2 filter
 dim(locnames) #800 x 2 (Name & Position)
 
 ################################################################################################################################################
@@ -70,7 +70,7 @@ diversity_tot <- data.frame(J_diversity, P_diversity, I_diversity)
 diversity_tot$snp_id <- snps
 diversity_tot <- merge(diversity_tot, locnames, by="snp_id")
 diversity_tot <- diversity_tot[2:11]
-write.csv(diversity_tot, file = "mac2_diversity.csv")
+write.csv(diversity_tot, file = "Data/mac2_diversity.csv")
 
 ###############################################################################################################################################
 
@@ -99,7 +99,7 @@ I_inbred <- inbreeding(I_inds)
 I_inbred_mean <- sapply(I_inbred, mean)
 hist(I_inbred_mean)
 
-Genepop_mac2 <- readGenepop(infile = "output.hicov2.snps.only.mac2_genpop.gen", gp = 3, bootstrap = FALSE)
-basicstats <- divBasic(infile = "output.hicov2.snps.only.mac2_genpop.gen", outfile = NULL, gp = 3, bootstraps = 0)
+Genepop_mac2 <- readGenepop(infile = "Data/output.hicov2.snps.only.mac2_genpop.gen", gp = 3, bootstrap = FALSE)
+basicstats <- divBasic(infile = "Data/output.hicov2.snps.only.mac2_genpop.gen", outfile = NULL, gp = 3, bootstraps = 0)
 allele <- Genepop_mac2$all_alleles
 

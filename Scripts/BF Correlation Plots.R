@@ -19,8 +19,8 @@ library(tidyverse)
 library(gridExtra)
 
 #read in data
-BFs <- read_csv("BF_total_mac2.csv", col_names = TRUE)
-#BFs <- read_csv("BF_total_allsnps.csv", col_names = TRUE)
+BFs <- read_csv("Data/BF_total_mac2.csv", col_names = TRUE)
+#BFs <- read_csv("Data/BF_total_allsnps.csv", col_names = TRUE)
 
 ################################################################################################################################################
 

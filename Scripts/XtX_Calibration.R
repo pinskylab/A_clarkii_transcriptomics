@@ -19,7 +19,7 @@ library(corrplot)
 library(mvtnorm)
 
 #source functions
-source("baypass_utils.R") #script that comes with BayPass download with functions used below (Gautier 2015)
+source("Scripts/baypass_utils.R") #script that comes with BayPass download with functions used below (Gautier 2015)
 
 #read in data
 #read in output from BayPass runs with real dataset (4212 loci)

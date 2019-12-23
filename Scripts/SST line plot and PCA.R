@@ -17,7 +17,7 @@ getwd()
 library(tidyverse)
 
 #read in data
-temp_data <- read_csv("SST_Lat_Data.csv", col_names = TRUE) #temp data for SST line plot
+temp_data <- read_csv("Data/SST_Lat_Data.csv", col_names = TRUE) #temp data for SST line plot
 data_PC_all <- read_csv("../../VCFs_and_PLINK/PCA_stuff/output.hicov2.snps.only eigenvectors.csv") #eigenvector for PCA w/all loci 
 data_PC_inhwe <- read_csv("../../VCFs_and_PLINK/PCA_stuff/output.hicov2.snps.only.inhwe_eigenvec.csv") #eigenvector for PCA w/loci only in HWE
 data_PC_outliersonly <- read_csv("../../VCFs_and_PLINK/PCA_stuff/output.hicov2.snps.only.outliersonly.strict_eigenvec.csv") #eigenvector for PCA w/only outlier loci

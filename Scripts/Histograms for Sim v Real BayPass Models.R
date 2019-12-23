@@ -18,8 +18,8 @@ library(tidyverse)
 library(ggpubr)
 
 #read in data
-bfs_mean_all <- read_csv("sim_v_real_mean.csv", col_names = TRUE) #mean BF across 10 runs (sim and real)
-bfs_median_all <- read_csv("sim_v_real_median.csv", col_names = TRUE) #median BF across 10 runs (sim and real)
+bfs_mean_all <- read_csv("Data/sim_v_real_mean.csv", col_names = TRUE) #mean BF across 10 runs (sim and real)
+bfs_median_all <- read_csv("Data/sim_v_real_median.csv", col_names = TRUE) #median BF across 10 runs (sim and real)
 
 ################################################################################################################################################
 
