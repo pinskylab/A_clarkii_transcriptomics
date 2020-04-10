@@ -102,6 +102,3 @@ hist(I_inbred_mean)
 Genepop_mac2 <- readGenepop(infile = "Data/output.hicov2.snps.only.mac2_genpop.gen", gp = 3, bootstrap = FALSE)
 basicstats <- divBasic(infile = "Data/output.hicov2.snps.only.mac2_genpop.gen", outfile = NULL, gp = 3, bootstraps = 0)
 allele <- Genepop_mac2$all_alleles
-
-data(woodmouse)
-nuc.div(woodmouse)
