@@ -18,7 +18,7 @@ library(related)
 library(boot)
 
 #read in data
-rel <- read.csv("../../HWE_Het/relationship2_mac2.csv", header =TRUE) #read in data from vcftools
+rel <- read.csv("../../HWE_Het/relationship2_mac2.csv", header = TRUE) #read in data from vcftools
 rel_info <- readgenotypedata("Data/relatedness_input_mac2.txt") #read in data formatted for relatedness r package
 
 #################################################################################################################################################
@@ -45,7 +45,7 @@ mean_phi_I <- mean(rel_I_noself$RELATEDNESS_PHI)
 
 ######## Calculate point estimates of relatedness w/95% CIs ########
 
-rel_output <- coancestry("relatedness_input_mac2.txt", lynchli = 2, lynchrd = 2, quellergt = 2, ritland = 2, wang = 2, 
+rel_output <- coancestry("Data/relatedness_input_mac2.txt", lynchli = 2, lynchrd = 2, quellergt = 2, ritland = 2, wang = 2, 
                          ci95.num.bootstrap = 1000) #calculates point estimate & 95% CI for each pairwise relatedness
 
 #pull data

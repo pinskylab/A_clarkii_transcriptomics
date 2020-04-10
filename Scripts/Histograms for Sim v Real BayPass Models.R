@@ -18,8 +18,8 @@ library(tidyverse)
 library(ggpubr)
 
 #read in data
-bfs_mean_all <- read_csv("Data/sim_v_real_mean.csv", col_names = TRUE) #mean BF across 10 runs (sim and real)
-bfs_median_all <- read_csv("Data/sim_v_real_median.csv", col_names = TRUE) #median BF across 10 runs (sim and real)
+bfs_mean_all <- read_csv("../Data/sim_v_real_mean.csv", col_names = TRUE) #mean BF across 10 runs (sim and real)
+bfs_median_all <- read_csv("../Data/sim_v_real_median.csv", col_names = TRUE) #median BF across 10 runs (sim and real)
 
 ################################################################################################################################################
 
@@ -73,7 +73,7 @@ sss_mean_bfs_mean_plot <- ggplot(data = SSS_mean_bfs_mean) +
   geom_bar(mapping = aes(x = BF_Bin, y = Count, fill = Class), stat = "identity", position = "dodge") #specify that data are already counted (stat="identity") and want two bars for each value (position = "dodge") separated by Class (fill = Class)
 sss_mean_mean_plot_annotated <- sss_mean_bfs_mean_plot + theme(legend.position = "top") + 
   annotate("text", x = 5, y = c(4000, 3650, 3300), label = c("p < 0.01", "Odds Ratio = 0.0", "95% CI = (0.0, 0.0403)")) + 
-  geom_vline(xintercept = 3.5) + ggtitle("SSS mean") + 
+  geom_vline(xintercept = ) + ggtitle("SSS mean") + 
   scale_x_discrete(breaks = c("bf1", "bf2", "bf3", "bf4", "bf5", "bf6"), 
                    labels = c("BF<0", "0<BF<5", "5<BF<10", "10<BF<15", "15<BF<20", "BF>20")) #relabel X-axis, move legend to top of chart, add p-value and odds ratio, add vertical line dividing two categories and add title
 
@@ -81,8 +81,7 @@ sss_mean_mean_plot_annotated <- sss_mean_bfs_mean_plot + theme(legend.position =
 sst_mean_bfs_mean_plot <- ggplot(data = SST_mean_bfs_mean) + 
   geom_bar(mapping = aes(x= BF_Bin, y = Count, fill = Class), stat = "identity", position = "dodge")
 sst_mean_mean_plot_annotated <- sst_mean_bfs_mean_plot + theme(legend.position = "top") + 
-  annotate("text", x = 5, y = c(4000, 3750, 3500), label = c("p < 0.01", "Odds Ratio = 4.8558", "95% CI = (4.185, 5.651)")) + 
-  geom_vline(xintercept = 3.5) + ggtitle("SST mean") + 
+  geom_vline(xintercept = 4.5) + ggtitle("SST mean") + 
   scale_x_discrete(breaks = c("bf1", "bf2", "bf3", "bf4", "bf5", "bf6"), 
                    labels = c("BF<0", "0<BF<5", "5<BF<10", "10<BF<15", "15<BF<20", "BF>20"))
 
@@ -90,8 +89,7 @@ sst_mean_mean_plot_annotated <- sst_mean_bfs_mean_plot + theme(legend.position =
 sst_min_bfs_mean_plot <- ggplot(data = SST_min_bfs_mean) + 
   geom_bar(mapping = aes(x = BF_Bin, y = Count, fill = Class), stat = "identity", position = "dodge")
 sst_min_mean_plot_annotated <- sst_min_bfs_mean_plot + theme(legend.position = "top") + 
-  annotate("text", x = 5, y = c(4000, 3750, 3500), label = c("p < 0.01", "Odds Ratio = 4.0225", "95% CI = (3.3982, 4.7846)")) + 
-  geom_vline(xintercept = 3.5) + ggtitle("SST min") + 
+  geom_vline(xintercept = 4.5) + ggtitle("SST min") + 
   scale_x_discrete(breaks = c("bf1", "bf2", "bf3", "bf4", "bf5", "bf6"), 
                    labels = c("BF<0", "0<BF<5", "5<BF<10", "10<BF<15", "15<BF<20", "BF>20"))
 
@@ -99,8 +97,7 @@ sst_min_mean_plot_annotated <- sst_min_bfs_mean_plot + theme(legend.position = "
 sst_max_bfs_mean_plot <- ggplot(data = SST_max_bfs_mean) + 
   geom_bar(mapping = aes(x= BF_Bin, y = Count, fill = Class), stat = "identity", position = "dodge")
 sst_max_mean_plot_annotated <- sst_max_bfs_mean_plot + theme(legend.position = "top") + 
-  annotate("text", x = 5, y = c(4000, 3750, 3500), label = c("p < 0.01", "Odds Ratio = 1.5604", "95% CI = (1.4474, 1.6824)")) + 
-  geom_vline(xintercept = 3.5) + ggtitle("SST max") + 
+  geom_vline(xintercept = 4.5) + ggtitle("SST max") + 
   scale_x_discrete(breaks = c("bf1", "bf2", "bf3", "bf4", "bf5", "bf6"), 
                    labels = c("BF<0", "0<BF<5", "5<BF<10", "10<BF<15", "15<BF<20", "BF>20"))
 
@@ -115,6 +112,7 @@ lat_mean_plot_annotated <- lat_bfs_mean_plot + theme(legend.position = "top") +
 
 #arrange all histograms on same page
 ggarrange(sss_mean_mean_plot_annotated, sst_mean_mean_plot_annotated, sst_min_mean_plot_annotated, sst_max_mean_plot_annotated, lat_mean_plot_annotated, ncol = 2, nrow =3)
+ggarrange(sst_mean_mean_plot_annotated, sst_min_mean_plot_annotated, sst_max_mean_plot_annotated, ncol = 3, nrow = 1)
 
 ######## Histograms with median data ########
 
