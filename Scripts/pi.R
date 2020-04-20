@@ -48,6 +48,8 @@ contigs_needed_J$PI <- c(rep(0, times = 526)) #add PI column
 full_Jpi <- rbind(J_pi, contigs_needed_J)
 full_Jpi <- full_Jpi[order(full_Jpi$uniqseq), ] #reorder by contig
 nrow(full_Jpi) #check equals 2253 (# total sequences)
+full_Jpi$Pop <- c(rep("Japan", times = 2253))
+full_Jpi$NUM <- c(1:2253)
 
 ######## P pop calculations ########
 
@@ -70,6 +72,8 @@ contigs_needed_P$PI <- c(rep(0, times = 259))
 full_Ppi <- rbind(P_pi, contigs_needed_P)
 full_Ppi <- full_Ppi[order(full_Ppi$uniqseq), ]
 nrow(full_Ppi) #check equals 2253 (# total sequences)
+full_Ppi$Pop <- c(rep("Philippines", times = 2253))
+full_Ppi$NUM <- c(1:2253)
 
 ######## N pop calculations ########
 
@@ -92,18 +96,22 @@ contigs_needed_N$PI <- c(rep(0, times = 469))
 full_Npi <- rbind(N_pi, contigs_needed_N)
 full_Npi <- full_Npi[order(full_Npi$uniqseq), ]
 nrow(full_Npi) #check equals 2253 (# total sequences)
+full_Npi$Pop <- c(rep("Indonesia", times = 2253))
+full_Npi$NUM <- c(1:2253)
 
 ######## Combine pop data ########
 
-pi_only <- as.data.frame(full_Jpi$PI)
-pi_only$P_pi <- full_Ppi$PI
-pi_only$N_pi <- full_Npi$PI
-all_pi_subset <- all_pi[, 1:5]
-pi_only_all <- cbind(all_pi_subset, pi_only)
-colnames(pi_only_all) <- c("CHROM", "BIN_START", "BIN_END", "N_VARIANTS", "TOTAL_PI", "J_PI", "P_PI", "N_PI")
+#add needed columns to all_pi df
+all_pi <- all_pi[order(all_pi$uniqseq), ] #make sure ordered by uniqseq
+all_pi$Pop <- c(rep("All", times = 2253))
+all_pi$NUM <- c(1:2253)
+
+#merge dataframes
+pi_all <- rbind(full_Jpi, full_Ppi, full_Npi, all_pi)
+lapply(pi_all, class) #check character class for columns
 
 #write out combined data
-write.csv(pi_only_all, "Data/pi_combined_full.csv")
+write.csv(pi_all, "Data/pi_combined_full.csv")
 
 #################################################################################################################################################
 
@@ -160,6 +168,29 @@ write.csv(pi_sum, "Data/pi_cis.csv")
 #################################################################################################################################################
 
 ######## Visualize data ########
+#designed to be run separately from earlier sections
+
+remove(list = ls())
+
+#read in data
+pi_all <- read.csv("Data/pi_combined_full.csv", header = TRUE, row.names = 1)
+pi_sum <- read.csv("Data/pi_cis.csv", header = TRUE, row.names = 1)
+outlierseq <- read.csv("Data/outlier_sequences_pi.csv", header = TRUE)
+
+#add outlier status
+setdiff(outlierseq$CONTIG, pi_all$uniqseq) #should = 0, as all should be present in pi_all
+outliers <- pi_all[pi_all$uniqseq %in% outlierseq$CONTIG, ] #df with only outliers
+nonoutliers <- pi_all[!(pi_all$uniqseq %in% outlierseq$CONTIG), ] #df with all other loci
+
+#set seq status
+outliers$Status <- c(rep("Outlier", times = 292))
+nonoutliers$Status <- c(rep("Not_Outlier", times = 8720))
+pi_all$Status <- c(rep("All", times = 9012))
+
+#merge together
+pi_all <- rbind(outliers, nonoutliers, pi_all)
+
+######## Mean pi w/error bars plot ########
 
 #plot of mean w/in pop pi w/95% CI error bars
 mean_pi_plot <- ggplot(data = pi_sum, aes(x = Pop, y = mean)) + 
@@ -169,3 +200,31 @@ mean_pi_plot_annotated <- mean_pi_plot + ggtitle("Mean pi w/95% CI") + theme_bw(
   theme(panel.border = element_rect(size = 1), axis.title = element_text(size = 14, face = "bold"), 
         axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 12, color = "black"))
 mean_pi_plot_annotated
+
+######## Boxplots ########
+
+#ordering x-axis
+pi_all$Pop2 <- factor(pi_all$Pop, levels = c("Japan", "Philippines", "Indonesia", "All")) #ordering X-axis
+
+#boxplot
+pi_boxplot <- ggplot(data = pi_all, aes(x = Pop2, y = PI, color = Status)) + 
+  geom_boxplot()
+pi_boxplot_annotated <- pi_boxplot + theme_bw() + 
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), axis.line = element_line(size = 1), 
+        axis.ticks = element_line(color = "black", size = 1), 
+        axis.text = element_text(size = 14, color = "black"), 
+        axis.title = element_text(size = 14, face = "bold"), legend.position = "top", 
+        legend.text = element_text(size = 12), legend.title = element_text(size = 12))
+pi_boxplot_annotated
+
+TD_boxplot <- ggplot(data = TD_only_all, aes(x = Pop2, y = TajimaD, color = Status)) + 
+  geom_boxplot()
+TD_boxplot_annotated <- TD_boxplot + theme_bw() + 
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), axis.line = element_line(size = 1), 
+        axis.ticks = element_line(color = "black", size = 1), 
+        axis.text = element_text(size = 14, color = "black"),
+        axis.title = element_text(size = 14, face = "bold"), legend.position = "top",
+        legend.text = element_text(size = 12), legend.title = element_text(size = 12))
+TD_boxplot_annotated

@@ -80,9 +80,27 @@ nonoutlier_stats$status <- c(rep("Not_Outlier", times = 4123))
 stats_perloc <- rbind(outlier_stats, nonoutlier_stats)
 stats_perloc <-stats_perloc[order(stats_perloc$NUM), ]
 
+#write out
+write.csv(stats_perloc, "Data/Fst_perloc.csv")
+
 #################################################################################################################################################
 
 ######## Visualize data ########
+#designed to be run separately from earlier sections
+
+remove(list = ls())
+
+#read in data
+stats_perloc <- read.csv("Data/Fst_perloc.csv", header = TRUE, row.names = 1)
+
+#add rows with loci for all boxplot
+stats_perloc_all <- subset(stats_perloc, select = -c(status)) #duplicate df without status column
+stats_perloc_all$status <- c(rep("All", times = 4212)) #add status back in (set to "all")
+
+#merge together
+stats_perloc_boxplot <- rbind(stats_perloc, stats_perloc_all) #special df bc only want for boxplots (not pseudo-Manhattan plots)
+
+######## Scatter plot ########
 
 #plot with outliers highlighted
 fst_plot <- ggplot(data = stats_perloc, aes(x = NUM, y = Fst, color = status)) + 
@@ -94,3 +112,19 @@ fst_plot_annotated <- fst_plot + theme_bw() +
         axis.title = element_text(size = 14, face = "bold"), legend.position = "top", 
         legend.text = element_text(size = 12), legend.title = element_text(size = 12))
 fst_plot_annotated
+
+######## Boxplots ########
+
+#ordering x-axis
+stats_perloc_boxplot$status2 <- factor(stats_perloc_boxplot$status, levels = c("Outlier", "Not_Outlier", "All")) #ordering X-axis
+
+#boxplot
+Fst_boxplot <- ggplot(data = stats_perloc_boxplot, aes(x = status2, y = Fst)) + geom_boxplot()
+Fst_boxplot_annotated <- Fst_boxplot + theme_bw() + 
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), axis.line = element_line(size = 1), 
+        axis.ticks = element_line(color = "black", size = 1), 
+        axis.text = element_text(size = 14, color = "black"), 
+        axis.title = element_text(size = 14, face = "bold"), legend.position = "top", 
+        legend.text = element_text(size = 12), legend.title = element_text(size = 12))
+Fst_boxplot_annotated

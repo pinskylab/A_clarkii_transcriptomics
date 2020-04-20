@@ -21,7 +21,7 @@ J_TD <- read.csv("Data/JTajimasD.csv", header = TRUE) #read in data from vcftool
 P_TD <- read.csv("Data/PTajimasD.csv", header =TRUE)
 N_TD <- read.csv("Data/NTajimasD.csv", header = TRUE)
 All_TD <- read.csv("Data/allTajimasD.csv", header = TRUE)
-outlierseq <- read.csv("Data/outlier_sequences.csv", header = TRUE)
+outlierseq <- read.csv("Data/outlier_sequences_TD.csv", header = TRUE)
 
 #clean data
 JTD_data_clean <- J_TD[which(J_TD$TajimaD!='NA'),]
@@ -201,6 +201,28 @@ Tot_mean_TD_outlierseq <- mean(all_outlierseq_clean$TajimaD) #1.102
 #################################################################################################################################################
 
 ######## Visualize data ########
+#designed to be run separately from earlier sections
+
+remove(list = ls())
+
+#read in data
+TD_only_all <- read.csv("Data/TajimasD_combined_full.csv", header = TRUE, row.names = 1)
+TD_outlier_only_all <- read.csv("Data/TajimasD_outlier_combined_full.csv", header = TRUE, row.names = 1)
+outlierseq <- read.csv("Data/outlier_sequences_TD.csv", header = TRUE) #only if running separately to visualize data
+
+#add outlier status
+outliers <- TD_only_all[TD_only_all$uniqseq %in% outlierseq$CONTIG, ] #df with only outliers
+nonoutliers <- TD_only_all[!(TD_only_all$uniqseq %in% outlierseq$CONTIG), ] #df with all other loci
+
+#set seq status
+outliers$Status <- c(rep("Outlier", times = 292))
+nonoutliers$Status <- c(rep("Not_Outlier", times = 8728))
+TD_only_all$Status <- c(rep("All", times = 9020))
+
+#merge together
+TD_only_all <- rbind(outliers, nonoutliers, TD_only_all)
+
+######## Scatter plots ########
 
 #all seqs by pop
 all_plot <- ggplot(data = TD_only_all, aes(x = NUM, y = TajimaD, color = Pop)) + 
@@ -226,3 +248,19 @@ outliers_plot_annotated <- outliers_plot + theme_bw() +
         legend.text = element_text(size = 12), legend.title = element_text(size = 12))
 outliers_plot_annotated
 
+######## Boxplots ########
+
+#ordering x-axis
+TD_only_all$Pop2 <- factor(TD_only_all$Pop, levels = c("Japan", "Philippines", "Indonesia", "All")) #ordering X-axis
+
+#boxplot
+TD_boxplot <- ggplot(data = TD_only_all, aes(x = Pop2, y = TajimaD, color = Status)) + 
+  geom_boxplot()
+TD_boxplot_annotated <- TD_boxplot + theme_bw() + 
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), axis.line = element_line(size = 1), 
+        axis.ticks = element_line(color = "black", size = 1), 
+        axis.text = element_text(size = 14, color = "black"),
+        axis.title = element_text(size = 14, face = "bold"), legend.position = "top",
+        legend.text = element_text(size = 12), legend.title = element_text(size = 12))
+TD_boxplot_annotated
