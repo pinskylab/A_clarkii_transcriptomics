@@ -20,6 +20,8 @@ library(boot)
 #read in data
 rel <- read.csv("../../HWE_Het/relationship2_mac2.csv", header = TRUE) #read in data from vcftools
 rel_info <- readgenotypedata("Data/relatedness_input_mac2.txt") #read in data formatted for relatedness r package
+rel_info_mac1 <- readgenotypedata("Data/relatedness_input_mac1.txt")
+  #relatedness.txt files created by making genepop file with PGDSpider, pulling only genotype information, pasting all columns together, then separating by # characters (3) in excel
 
 #################################################################################################################################################
 
@@ -41,7 +43,7 @@ mean_phi_I <- mean(rel_I_noself$RELATEDNESS_PHI)
 
 #################################################################################################################################################
 
-######## With relatedness package ########
+######## With relatedness package --> mac>2 ########
 
 ######## Calculate point estimates of relatedness w/95% CIs ########
 
@@ -155,7 +157,7 @@ mean_rel_lynchli <- cbind(lynchli_mean_rel, lynchli_norm_ci) #combine lynchli ci
 
 #combine both dataframes
 mean_rel <- rbind(mean_rel_lynchli, mean_rel)
-rownames(mean_rel) <- c("Jw", "Pw", "Iw", "Jl", "Pl", "Il")
+rownames(mean_rel) <- c("Jl", "Pl", "Il", "Jw", "Pw", "Iw")
 pop_vector <- c("Japan", "Philippines", "Indonesia", "Japan", "Philippines", "Indonesia")
 mean_rel <- cbind(mean_rel, pop_vector)
 colnames(mean_rel) <- c("mean", "estimator", "CI", "2.5_per", "97.5_per", "Pop")
@@ -164,10 +166,147 @@ mean_rel$diff_upper <- mean_rel$`97.5_per` - mean_rel$mean # calculate diff btwn
 
 #write out
 write.csv(mean_rel, "Data/wang_lynchli_relatedness_cis.csv")
+write.csv(rel_inpop_df, "Data/all_relatedness_raw_mac2.csv")
+
+#################################################################################################################################################
+
+######## With relatedness package --> mac>1 ########
+
+######## Calculate point estimates of relatedness w/95% CIs ########
+
+rel_output_mac1 <- coancestry("Data/relatedness_input_mac1.txt", lynchli = 2, lynchrd = 2, quellergt = 2, ritland = 2, wang = 2, 
+                         ci95.num.bootstrap = 1000) #calculates point estimate & 95% CI for each pairwise relatedness
+
+#pull data
+relatedness_mac1 <- rel_output_mac1$relatedness
+inbreeding_mac1 <- rel_output_mac1$inbreeding
+ci95_mac1 <- rel_output_mac1$relatedness.ci95
+
+# subset w/in pops
+rel_J_mac1 <- subset(relatedness_mac1, grepl("^JJ_", ind1.id) & grepl("^JJ_", ind2.id))
+rel_P_mac1 <- subset(relatedness_mac1, grepl("^PP_", ind1.id) & grepl("^PP_", ind2.id))
+rel_I_mac1 <- subset(relatedness_mac1, grepl("^NN_", ind1.id) & grepl("^NN_", ind2.id))
+
+rel_inpop_mac1_df <- rbind(rel_J_mac1, rel_P_mac1, rel_I_mac1)
+
+######## Create null distributions of pairwise relatedness ########
+
+#use wang & lynchli estimator bc those seem to be least biased w/small sample sizes (Wang 2017) --> although if unmodified, may slightly underestimate relatedness
+grouprel(genotypes = rel_info_mac1$gdata, estimatorname = "wang", usedgroups = "all", iterations = 100) #calculate null distribution of pariwise relatedness w/in pops
+grouprel(genotypes = rel_info_mac1$gdata, estimatorname = "lynchli", usedgroups = "all", iterations = 100)
+
+######## Calculate mean pairwise relatedness w/in pop ########
+
+#again focusing on wang & lynchli estimators
+
+#calculate mean pairwise relatedness w/in pops
+J_rel_mac1_means <- colMeans(rel_J_mac1[, 6:10])
+P_rel_mac1_means <- colMeans(rel_P_mac1[, 6:10])
+I_rel_mac1_means <- colMeans(rel_I_mac1[, 6:10])
+
+rel_mean_mac1_df <- data.frame(J_rel_mac1_means, P_rel_mac1_means, I_rel_mac1_means)
+
+######## Bootstrap for 95% CIs ########
+
+#mean function for bootstrapping
+samp_mean <- function(x, i) {
+  mean(x[i])
+} #bc if use mean() in boot() throws trim error
+
+#bootstrap for wang estimator
+#J pop
+boot_J_wang_mac1 <- boot(data = rel_J_mac1$wang, statistic = samp_mean, R = 1000) #1000 permutations of wang mean pairwise relatedness
+plot(boot_J_wang_mac1) #plot histogram sample distribution
+J_95ci_wang_mac1 <- boot.ci(boot_J_wang_mac1, conf = 0.95, type = "all") #get 95% CI for wang pairwise relatedness
+
+#P pop
+boot_P_wang_mac1 <- boot(data = rel_P_mac1$wang, statistic = samp_mean, R = 1000)
+plot(boot_P_wang_mac1)
+P_95ci_wang_mac1 <- boot.ci(boot_P_wang_mac1, conf = 0.95, type = "all")
+
+#I pop
+boot_I_wang_mac1 <- boot(data = rel_I_mac1$wang, statistic = samp_mean, R = 1000)
+plot(boot_I_wang_mac1)
+I_95ci_wang_mac1 <- boot.ci(boot_I_wang_mac1, conf = 0.95, type = "all")
+
+#bootstrap for lynchli estimator
+#J pop
+boot_J_lynchli_mac1 <- boot(data = rel_J_mac1$lynchli, statistic = samp_mean, R = 1000) #1000 permutations of lynchli mean pairwise relatedness
+plot(boot_J_lynchli_mac1) #plot histogram sample distribution
+J_95ci_lynchli_mac1 <- boot.ci(boot_J_lynchli_mac1, conf = 0.95, type = "all") #get 95% CI for lynchli pairwise relatedness
+
+#P pop
+boot_P_lynchli_mac1 <- boot(data = rel_P_mac1$lynchli, statistic = samp_mean, R = 1000)
+plot(boot_P_lynchli_mac1)
+P_95ci_lynchli_mac1 <- boot.ci(boot_P_lynchli_mac1, conf = 0.95, type = "all")
+
+#I pop
+boot_I_lynchli_mac1 <- boot(data = rel_I_mac1$lynchli, statistic = samp_mean, R = 1000)
+plot(boot_I_lynchli_mac1)
+I_95ci_lynchli_mac1 <- boot.ci(boot_I_lynchli_mac1, conf = 0.95, type = "all")
+
+######## Create summary tables ########
+
+#dataframe for wang estimator w/sample mean, and 95% CI
+t_rel_mean_mac1_df <- data.frame(t(rel_mean_mac1_df)) #transpose mean df
+wang_mean_rel_mac1 <- t_rel_mean_mac1_df[, 1] #pull out wang mean relatedness
+estimator_vector <- c("wang", "wang", "wang") #create column with estimator name
+wang_mean_rel_mac1 <- data.frame(wang_mean_rel_mac1, estimator_vector) #combine means & estimator vector
+colnames(wang_mean_rel_mac1) <- c("mean", "estimator")
+rownames(wang_mean_rel_mac1) <- c("Japan", "Philippines", "Indonesia")
+
+I_95ci_wang_normal_mac1 <- I_95ci_wang_mac1$normal #pull out normal distribution  2.5 & 97.5 percentiles for wang ci
+J_95ci_wang_normal_mac1 <- J_95ci_wang_mac1$normal
+P_95ci_wang_normal_mac1 <- P_95ci_wang_mac1$normal
+
+wang_norm_ci_mac1 <- rbind(J_95ci_wang_normal_mac1, P_95ci_wang_normal_mac1, I_95ci_wang_normal_mac1) #combine df w/ci info for each pop into one dataframe
+colnames(wang_norm_ci_mac1) <- c("ci", "2.5_per", "97.5_per")
+rownames(wang_norm_ci_mac1) <- c("Japan", "Philippines", "Indonesia")
+
+mean_rel_mac1 <- cbind(wang_mean_rel_mac1, wang_norm_ci_mac1) #combine wang ci info and sample mean info into one dataframe
+
+#dataframe for lynchli estimator w/sample mean, and 95% CI
+lynchli_mean_rel_mac1 <- t_rel_mean_mac1_df[, 2] #pull out lynchli mean relatedness
+estimator_vector <- c("lynchli", "lynchli", "lynchli")
+lynchli_mean_rel_mac1 <- data.frame(lynchli_mean_rel_mac1, estimator_vector)
+colnames(lynchli_mean_rel_mac1) <- c("mean", "estimator")
+rownames(lynchli_mean_rel_mac1) <- c("Japan", "Philippines", "Indonesia")
+
+I_95ci_lynchli_normal_mac1 <- I_95ci_lynchli_mac1$normal #pull out normal distribution  2.5 & 97.5 percentiles for lynchli ci
+J_95ci_lynchli_normal_mac1 <- J_95ci_lynchli_mac1$normal
+P_95ci_lynchli_normal_mac1 <- P_95ci_lynchli_mac1$normal
+
+lynchli_norm_ci_mac1 <- rbind(J_95ci_wang_normal_mac1, P_95ci_lynchli_normal_mac1, I_95ci_lynchli_normal_mac1) #combine df w/ci info for each pop into one dataframe
+colnames(lynchli_norm_ci_mac1) <- c("ci", "2.5_per", "97.5_per")
+rownames(lynchli_norm_ci_mac1) <- c("Japan", "Philippines", "Indonesia")
+
+mean_rel_lynchli_mac1 <- cbind(lynchli_mean_rel_mac1, lynchli_norm_ci_mac1) #combine lynchli ci info and sample mean info into one dataframe
+
+#combine both dataframes
+mean_rel_mac1 <- rbind(mean_rel_lynchli_mac1, mean_rel_mac1)
+rownames(mean_rel_mac1) <- c("Jl", "Pl", "Il", "Jw", "Pw", "Iw")
+pop_vector <- c("Japan", "Philippines", "Indonesia", "Japan", "Philippines", "Indonesia")
+mean_rel_mac1 <- cbind(mean_rel_mac1, pop_vector)
+colnames(mean_rel_mac1) <- c("mean", "estimator", "CI", "2.5_per", "97.5_per", "Pop")
+mean_rel_mac1$diff_lower <- mean_rel_mac1$mean - mean_rel_mac1$`2.5_per` #calculate diff btwn sample mean and 2.5 percentile for CI visualization
+mean_rel_mac1$diff_upper <- mean_rel_mac1$`97.5_per` - mean_rel_mac1$mean # calculate diff btwn sample mean and 97.5 percentile for CI visualization
+
+#write out
+write.csv(mean_rel_mac1, "Data/wang_lynchli_relatedness_cis_mac1.csv")
+write.csv(rel_inpop_mac1_df, "Data/all_relatedness_raw_mac1.csv")
 
 #################################################################################################################################################
 
 ######## Visualize data ########
+#relatedness package portions designed to be run separately from earlier sections
+
+remove(list = ls())
+
+#read in data
+rel_inpop_df <- read.csv("Data/all_relatedness_raw_mac2.csv", header = TRUE, row.names = 1)
+mean_rel <- read.csv("Data/wang_lynchli_relatedness_cis.csv", header = TRUE, row.names = 1)
+rel_inpop_mac1_df <- read.csv("Data/all_relatedness_raw_mac1.csv", header = TRUE, row.names = 1)
+mean_rel_mac1 <- read.csv("Data/wang_lynchli_relatedness_cis_mac1.csv", header = TRUE, row.names = 1)
 
 ######## Visualize data from vcftools ########
 
@@ -178,19 +317,24 @@ phi_plot <- ggplot(data = phi_inpop_noself, aes(x = Pop, y = RELATEDNESS_PHI)) +
   annotate("text", x = 2, y = 0.26, label = "N mean r = 0.0094")
 phi_plot
 
-######## Visualize data from relatedness ########
+######## Visualize data from relatedness --> mac/2 ########
+
+#ordering x-axis
+rel_inpop_df$Pop <- c(rep("Japan", times = 28), rep("Philippines", times = 45), rep("Indonesia", times = 21)) #add row to make factor
+rel_inpop_df$Pop <- factor(rel_inpop_df$Pop, levels = c("Japan", "Philippines", "Indonesia"))
+mean_rel$Pop <- factor(mean_rel$Pop, levels = c("Japan", "Philippines", "Indonesia"))
 
 #annotated scatter plot of data per relatedness metric
-wang_rel_plot <- ggplot(data = rel_inpop_df, aes(x = group, y = wang)) + geom_point() + 
-  annotate("text", x = 2, y = 0.32, label = "J mean r = 0.2222") + 
-  annotate("text", x = 2, y = 0.28, label = "P mean r = -0.0108") + 
-  annotate("text", x = 2, y = 0.24, label = "N mean r = 0.0181")
+wang_rel_plot <- ggplot(data = rel_inpop_df, aes(x = Pop, y = wang)) + geom_point() + 
+  annotate("text", x = 2, y = 0.52, label = "J mean r = 0.2222") + 
+  annotate("text", x = 2, y = 0.48, label = "P mean r = -0.0108") + 
+  annotate("text", x = 2, y = 0.44, label = "N mean r = 0.0181")
 wang_rel_plot
 
-lynchli_rel_plot <- ggplot(data = rel_inpop_df, aes(x = group, y = lynchli)) + geom_point() + 
-  annotate("text", x = 2, y = 0.32, label = "J mean r = 0.2163") + 
-  annotate("text", x = 2, y = 0.28, label = "P mean r = -0.0246") + 
-  annotate("text", x = 2, y = 0.24, label = "N mean r = 0.0087")
+lynchli_rel_plot <- ggplot(data = rel_inpop_df, aes(x = Pop, y = lynchli)) + geom_point() + 
+  annotate("text", x = 2, y = 0.52, label = "J mean r = 0.2163") + 
+  annotate("text", x = 2, y = 0.48, label = "P mean r = -0.0246") + 
+  annotate("text", x = 2, y = 0.44, label = "N mean r = 0.0087")
 lynchli_rel_plot
 
 #plot of mean w/in pop pairwise relatedness w/95% CI error bars per relatedness metric
@@ -209,3 +353,40 @@ mean_rel_plot_lynchli <- ggplot(data = mean_rel[which(mean_rel$estimator == "lyn
   theme(panel.border = element_rect(size = 1), axis.title = element_text(size = 14, face = "bold"), 
         axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 12, color = "black"))
 mean_rel_plot_lynchli
+
+######## Visualize data from relatedness --> mac/1 ########
+
+#ordering x-axis
+rel_inpop_mac1_df$Pop <- c(rep("Japan", times = 28), rep("Philippines", times = 45), rep("Indonesia", times = 21)) #add row to make factor
+rel_inpop_mac1_df$Pop <- factor(rel_inpop_mac1_df$Pop, levels = c("Japan", "Philippines", "Indonesia"))
+mean_rel_mac1$Pop <- factor(mean_rel_mac1$Pop, levels = c("Japan", "Philippines", "Indonesia"))
+
+#annotated scatter plot of data per relatedness metric
+wang_rel_mac1_plot <- ggplot(data = rel_inpop_mac1_df, aes(x = Pop, y = wang)) + geom_point() + 
+  annotate("text", x = 2, y = 0.52, label = "J mean r = 0.2079") + 
+  annotate("text", x = 2, y = 0.48, label = "P mean r = -0.0134") + 
+  annotate("text", x = 2, y = 0.44, label = "N mean r = 0.0224")
+wang_rel_mac1_plot
+
+lynchli_rel_mac1_plot <- ggplot(data = rel_inpop_mac1_df, aes(x = Pop, y = lynchli)) + geom_point() + 
+  annotate("text", x = 2, y = 0.52, label = "J mean r = 0.1999") + 
+  annotate("text", x = 2, y = 0.48, label = "P mean r = -0.0269") + 
+  annotate("text", x = 2, y = 0.44, label = "N mean r = 0.0143")
+lynchli_rel_mac1_plot
+
+#plot of mean w/in pop pairwise relatedness w/95% CI error bars per relatedness metric
+mean_rel_mac1_plot_wang <- ggplot(data = mean_rel_mac1[which(mean_rel_mac1$estimator == "wang"), ], aes(x = Pop, y = mean)) + 
+  geom_point(aes(size = 1), show.legend = FALSE) + 
+  geom_errorbar(aes(ymin = mean - diff_lower, ymax = mean + diff_upper, width = 0.5, size = 0.5), show.legend = FALSE) + 
+  ggtitle("Mean pairwise relatedness (Wang) w/95% CI (mac > 1)") + theme_bw() + 
+  theme(panel.border = element_rect(size = 1), axis.title = element_text(size = 14, face = "bold"), 
+        axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 12, color = "black"))
+mean_rel_mac1_plot_wang
+
+mean_rel_mac1_plot_lynchli <- ggplot(data = mean_rel_mac1[which(mean_rel_mac1$estimator == "lynchli"), ], aes(x = Pop, y = mean)) + 
+  geom_point(aes(size = 1), show.legend = FALSE) + 
+  geom_errorbar(aes(ymin = mean - diff_lower, ymax = mean + diff_upper, width = 0.5, size = 0.5), show.legend = FALSE) + 
+  ggtitle("Mean pairwise relatedness (Lynchli) w/95% CI (mac >1)") + theme_bw() + 
+  theme(panel.border = element_rect(size = 1), axis.title = element_text(size = 14, face = "bold"), 
+        axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 12, color = "black"))
+mean_rel_mac1_plot_lynchli

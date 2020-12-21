@@ -15,21 +15,26 @@ getwd()
 library(readr)
 
 #read in BFs
-BFs <- read_table2("../../BayPass_Output/5729_SNPs/aux_output_all/aux1_all_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs_ssmean <- read_table2("../../BayPass_Output/mac1_SNPs/sim_stuff/summary_betai/mac1sim10_ssmean_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs_sstmean <- read_table2("../../BayPass_Output/mac1_SNPs/sim_stuff/summary_betai/mac1sim10_sstmean_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs_sstmin <- read_table2("../../BayPass_Output/mac1_SNPs/sim_stuff/summary_betai/mac1sim10_sstmin_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs_sstmax <- read_table2("../../BayPass_Output/mac1_SNPs/sim_stuff/summary_betai/mac1sim10_sstmax_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs_lat <- read_table2("../../BayPass_Output/mac1_SNPs/sim_stuff/summary_betai/mac1sim10_lat_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
 
 ################################################################################################################################################
 
 ######## Pull info out from BF dataframe ########
 
 #pull BFs for each covariable
-BFs_SSSmean <- c(BFs[1:5729, 'BF(dB)'])
-BFs_SSTmean <- c(BFs[5730:11458, 'BF(dB)'])
-BFs_SSTmin <- c(BFs[11459:17187, 'BF(dB)'])
-BFs_SSTmax <- c(BFs[17188:22916, 'BF(dB)'])
-BFs_lat <- c(BFs[22917:28645, 'BF(dB)'])
+BFs_SSSmean <- c(BFs_ssmean[1:5718, 'BF(dB)'])
+BFs_SSTmean <- c(BFs_sstmean[1:5718, 'BF(dB)'])
+BFs_SSTmin <- c(BFs_sstmin[1:5718, 'BF(dB)'])
+BFs_SSTmax <- c(BFs_sstmax[1:5718, 'BF(dB)'])
+BFs_lat <- c(BFs_lat[1:5718, 'BF(dB)'])
 
 #pull marker numbers
-markers <- c(BFs[1:5729, 'MRK'])
+#markers <- c(BFs[1:5729, 'MRK'])
+markers <- c(BFs_ssmean[1:5718, 'MRK'])
 
 #Create data frame with markers & BFs for each covariable as rows
 BFs_ALL <- data.frame(markers, BFs_SSSmean, BFs_SSTmean, BFs_SSTmin, BFs_SSTmax, BFs_lat)
@@ -67,10 +72,12 @@ potential_loci_list <- append(potential_loci_list, BFs_greater_than15_Latitude)
 ######## Grab ID names of the contigs containing candidate SNPs ########
 
 #read in loc names
-locnames <- read_table2("Loc_Names_All.txt", col_names = TRUE)
-dim(locnames) #800 x 2 (Name & Position)
+#locnames <- read_table2("Data/Loc_Names_All.txt", col_names = TRUE)
+locnames <- read_table2("Data/Loc_Names_mac1.txt", col_names = FALSE)
+dim(locnames) #5718
 
-snps <- c(1:5729) #create column to match "marker" column pulled earlier from aux1_summary_betai.txt
+#snps <- c(1:5729) #create column to match "marker" column pulled earlier from aux1_summary_betai.txt
+snps <- c(1:5718)
 locnames$snp_id <- snps
 
 #filter potential_loci_list so only one instance of each potential can loci
@@ -83,7 +90,5 @@ can_all <- merge(can_names, can_BFs, by = "snp_id")
 all <- merge(locnames, BFs_ALL, by = "snp_id")
 
 #write out
-write.table(can_loci, file = "Data/aux1_all_candidate_loci.txt", sep = "\t", row.names = FALSE, col.names = TRUE)
-write.table(all, file = "Data/aux1_all_BFs.txt", sep = "\t", row.names = FALSE, col.names = TRUE)
-
-
+#write.table(can_loci, file = "Data/mac2aux1_original_all_candidate_loci.txt", sep = "\t", row.names = FALSE, col.names = TRUE)
+write.table(all, file = "Data/mac1sim10_all_BFs.txt", sep = "\t", row.names = FALSE, col.names = TRUE)
