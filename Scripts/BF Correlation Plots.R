@@ -42,15 +42,15 @@ SSSmean_SSTmean_plot <- ggplot(data = BFs, aes(x = SSS_Mean, y = SST_Mean)) + ge
   geom_hline(yintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_vline(xintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_abline(intercept = 0, slope = 1, size = 2, color = "#999999") + 
-  annotate("text", x = 15, y = 42, label = "r = 0.457", size = 10) + 
+  annotate("text", x = 10, y = 42, label = "r = 0.457", size = 8) + 
   annotate("text", x = 3, y = 50, label = "A", size = 15)
 SSSmean_SSTmean_annotated_plot <- SSSmean_SSTmean_plot + labs(x = "SSS Mean BF", y = "SST Mean BF") + 
   theme_bw() + scale_y_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   scale_x_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 26, color = "black"), axis.title = element_text(size = 26, face = "bold"), 
-        legend.position = "none")
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.5,.5), "cm"))
 SSSmean_SSTmean_annotated_plot
 
 #SSSmean v. SSTmin plot
@@ -58,15 +58,15 @@ SSSmean_SSTmin_plot <- ggplot(data = BFs, aes(x = SSS_Mean, y = SST_Min)) + geom
   geom_hline(yintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_vline(xintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_abline(intercept = 0, slope = 1, size = 2, color = "#999999") + 
-  annotate("text", x = 15, y = 42, label = "r = 0.509", size = 10) + 
+  annotate("text", x = 10, y = 42, label = "r = 0.509", size = 8) + 
   annotate("text", x = 3, y = 50, label = "B", size = 15)
-SSSmean_SSTmin_annotated_plot <- SSSmean_SSTmin_plot + labs(x = "SSS Mean BF", y = "SST Min BF") + 
+SSSmean_SSTmin_annotated_plot <- SSSmean_SSTmin_plot + labs(x = "SSS Mean BF", y = "SST Minimum BF") + 
   theme_bw() + scale_y_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   scale_x_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 26, color = "black"), axis.title = element_text(size = 26, face = "bold"), 
-        legend.position = "none")
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.5,.5), "cm"))
 SSSmean_SSTmin_annotated_plot
 
 #SSSmean v. SSTmax plot
@@ -74,15 +74,15 @@ SSSmean_SSTmax_plot <- ggplot(data = BFs, aes(x = SSS_Mean, y = SST_Max)) + geom
   geom_hline(yintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_vline(xintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_abline(intercept = 0, slope = 1, size = 2, color = "#999999") + 
-  annotate("text", x = 15, y = 42, label = "r = 0.179", size = 10) + 
+  annotate("text", x = 10, y = 42, label = "r = 0.179", size = 8) + 
   annotate("text", x = 3, y = 50, label = "C", size = 15)
-SSSmean_SSTmax_annotated_plot <- SSSmean_SSTmax_plot + labs(x = "SSS Mean BF", y = "SST Max BF") + 
+SSSmean_SSTmax_annotated_plot <- SSSmean_SSTmax_plot + labs(x = "SSS Mean BF", y = "SST Maximum BF") + 
   theme_bw() + scale_y_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   scale_x_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 26, color = "black"), axis.title = element_text(size = 26, face = "bold"), 
-        legend.position = "none")
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.5,.5), "cm"))
 SSSmean_SSTmax_annotated_plot
 
 #SSSmean v. Lat plot
@@ -90,15 +90,15 @@ SSSmean_Lat_plot <- ggplot(data = BFs, aes(x = SSS_Mean, y = Lat)) + geom_point(
   geom_hline(yintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_vline(xintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_abline(intercept = 0, slope = 1, size = 2, color = "#999999") + 
-  annotate("text", x = 15, y = 42, label = "r = 0.794", size = 10) + 
+  annotate("text", x = 10, y = 42, label = "r = 0.794", size = 8) + 
   annotate("text", x = 3, y = 50, label = "D", size = 15)
-SSSmean_Lat_annotated_plot <- SSSmean_Lat_plot + labs(x = "SSS Mean BF", y = "Lat BF") + 
+SSSmean_Lat_annotated_plot <- SSSmean_Lat_plot + labs(x = "SSS Mean BF", y = "Latitude BF") + 
   theme_bw() + scale_y_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   scale_x_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 26, color = "black"), axis.title = element_text(size = 26, face = "bold"), 
-        legend.position = "none")
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.5,.5), "cm"))
 SSSmean_Lat_annotated_plot
 
 #SSTmean v. SSTmin plot
@@ -106,15 +106,15 @@ SSTmean_SSTmin_plot <- ggplot(data = BFs, aes(x = SST_Mean, y = SST_Min)) + geom
   geom_hline(yintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_vline(xintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_abline(intercept = 0, slope = 1, size = 2, color = "#999999") + 
-  annotate("text", x = 15, y = 42, label = "r = 0.880", size = 10) + 
+  annotate("text", x = 10, y = 42, label = "r = 0.880", size = 8) + 
   annotate("text", x = 3, y = 50, label = "E", size = 15)
-SSTmean_SSTmin_annotated_plot <- SSTmean_SSTmin_plot + labs(x = "SST Mean BF", y = "SST Min BF") + 
+SSTmean_SSTmin_annotated_plot <- SSTmean_SSTmin_plot + labs(x = "SST Mean BF", y = "SST Minimum BF") + 
   theme_bw() + scale_y_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   scale_x_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 26, color = "black"), axis.title = element_text(size = 26, face = "bold"), 
-        legend.position = "none")
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.5,.5), "cm"))
 SSTmean_SSTmin_annotated_plot
 
 #SSTmean v. SSTmax plot
@@ -122,15 +122,15 @@ SSTmean_SSTmax_plot <- ggplot(data = BFs, aes(x = SST_Mean, y = SST_Max)) + geom
   geom_hline(yintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_vline(xintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_abline(intercept = 0, slope = 1, size = 2, color = "#999999") + 
-  annotate("text", x = 15, y = 42, label = "r = 0.317", size = 10) + 
+  annotate("text", x = 10, y = 42, label = "r = 0.317", size = 8) + 
   annotate("text", x = 3, y = 50, label = "F", size = 15)
-SSTmean_SSTmax_annotated_plot <- SSTmean_SSTmax_plot + labs(x = "SST Mean BF", y = "SST Max BF") + 
+SSTmean_SSTmax_annotated_plot <- SSTmean_SSTmax_plot + labs(x = "SST Mean BF", y = "SST Maximum BF") + 
   theme_bw() + scale_y_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   scale_x_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 26, color = "black"), axis.title = element_text(size = 26, face = "bold"), 
-        legend.position = "none")
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.5,.5), "cm"))
 SSTmean_SSTmax_annotated_plot
 
 #SSTmean v. Lat plot
@@ -138,15 +138,15 @@ SSTmean_Lat_plot <- ggplot(data = BFs, aes(x = SST_Mean, y = Lat)) + geom_point(
   geom_hline(yintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_vline(xintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_abline(intercept = 0, slope = 1, size = 2, color = "#999999") + 
-  annotate("text", x = 15, y = 42, label = "r = 0.839", size = 10) + 
+  annotate("text", x = 10, y = 42, label = "r = 0.839", size = 8) + 
   annotate("text", x = 3, y = 50, label = "G", size = 15)
-SSTmean_Lat_annotated_plot <- SSTmean_Lat_plot + labs(x = "SST Mean BF", y = "Lat BF") + 
+SSTmean_Lat_annotated_plot <- SSTmean_Lat_plot + labs(x = "SST Mean BF", y = "Latitude BF") + 
   theme_bw() + scale_y_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   scale_x_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 26, color = "black"), axis.title = element_text(size = 26, face = "bold"), 
-        legend.position = "none")
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.5,.5), "cm"))
 SSTmean_Lat_annotated_plot
 
 #SSTmin v. SSTmax plot
@@ -154,15 +154,15 @@ SSTmin_SSTmax_plot <- ggplot(data = BFs, aes(x = SST_Min, y = SST_Max)) + geom_p
   geom_hline(yintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_vline(xintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_abline(intercept = 0, slope = 1, size = 2, color = "#999999") + 
-  annotate("text", x = 15, y = 42, label = "r = 0.085", size = 10) + 
+  annotate("text", x = 10, y = 42, label = "r = 0.085", size = 8) + 
   annotate("text", x = 3, y = 50, label = "H", size = 15)
-SSTmin_SSTmax_annotated_plot <- SSTmin_SSTmax_plot + labs(x = "SST Min BF", y = "SST Max BF") + 
+SSTmin_SSTmax_annotated_plot <- SSTmin_SSTmax_plot + labs(x = "SST Minimum BF", y = "SST Maximum BF") + 
   theme_bw() + scale_y_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   scale_x_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 26, color = "black"), axis.title = element_text(size = 26, face = "bold"), 
-        legend.position = "none")
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.5,.5), "cm"))
 SSTmin_SSTmax_annotated_plot
 
 #SSTmin v. Lat plot
@@ -170,15 +170,15 @@ SSTmin_Lat_plot <- ggplot(data = BFs, aes(x = SST_Min, y = Lat)) + geom_point(ae
   geom_hline(yintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_vline(xintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_abline(intercept = 0, slope = 1, size = 2, color = "#999999") + 
-  annotate("text", x = 15, y = 42, label = "r = 0.822", size = 10) + 
+  annotate("text", x = 10, y = 42, label = "r = 0.822", size = 8) + 
   annotate("text", x = 3, y = 50, label = "I", size = 15)
-SSTmin_Lat_annotated_plot <- SSTmin_Lat_plot + labs(x = "SST Min BF", y = "Lat BF") + 
+SSTmin_Lat_annotated_plot <- SSTmin_Lat_plot + labs(x = "SST Minimum BF", y = "Latitude BF") + 
   theme_bw() + scale_y_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   scale_x_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 26, color = "black"), axis.title = element_text(size = 26, face = "bold"), 
-        legend.position = "none")
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.5,.5), "cm"))
 SSTmin_Lat_annotated_plot
 
 #SSTmax v. Lat plot
@@ -186,22 +186,22 @@ SSTmax_Lat_plot <- ggplot(data = BFs, aes(x = SST_Max, y = Lat)) + geom_point(ae
   geom_hline(yintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_vline(xintercept = 20, size = 2, linetype = "dashed", color = "#666666") + 
   geom_abline(intercept = 0, slope = 1, size = 2, color = "#999999") + 
-  annotate("text", x = 15, y = 42, label = "r = 0.281", size = 10) + 
+  annotate("text", x = 10, y = 42, label = "r = 0.281", size = 8) + 
   annotate("text", x = 3, y = 50, label = "J", size = 15)
-SSTmax_Lat_annotated_plot <- SSTmax_Lat_plot + labs(x = "SST Max BF", y = "Lat BF") + 
+SSTmax_Lat_annotated_plot <- SSTmax_Lat_plot + labs(x = "SST Maximum BF", y = "Latitude BF") + 
   theme_bw() + scale_y_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   scale_x_continuous(limits = c(0, 55), breaks = c(10, 20, 30, 40)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 26, color = "black"), axis.title = element_text(size = 26, face = "bold"), 
-        legend.position = "none")
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.5,.5), "cm"))
 SSTmax_Lat_annotated_plot
 
 BF_correlation_all_plot <- grid.arrange(SSSmean_SSTmean_annotated_plot, SSSmean_SSTmin_annotated_plot, 
                                        SSSmean_SSTmax_annotated_plot, SSSmean_Lat_annotated_plot, 
                                        SSTmean_SSTmin_annotated_plot, SSTmean_SSTmax_annotated_plot, 
                                        SSTmean_Lat_annotated_plot, SSTmin_SSTmax_annotated_plot, 
-                                       SSTmin_Lat_annotated_plot, SSTmax_Lat_annotated_plot, ncol = 5)
+                                       SSTmin_Lat_annotated_plot, SSTmax_Lat_annotated_plot, ncol = 3)
 BF_correlation_all_plot
 
 ###############################################################################################################################################
@@ -219,8 +219,8 @@ SSSmean_XtX_annotated_plot <- SSSmean_XtX_plot + labs(x = "SSS Mean BF", y = "Xt
   theme_bw() + scale_y_continuous(limits = c(0, 25)) + scale_x_continuous(limits = c(0, 55)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 26, color = "black"), axis.title = element_text(size = 26, face = "bold"), 
-        legend.position = "none")
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.75,.5), "cm"))
 SSSmean_XtX_annotated_plot
 
 #SSTmean v. XtX plot
@@ -234,8 +234,8 @@ SSTmean_XtX_annotated_plot <- SSTmean_XtX_plot + labs(x = "SST Mean BF", y = "Xt
   theme_bw() + scale_y_continuous(limits = c(0, 25)) + scale_x_continuous(limits = c(0, 55)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 26, color = "black"), axis.title = element_text(size = 26, face = "bold"), 
-        legend.position = "none")
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.75,.5), "cm"))
 SSTmean_XtX_annotated_plot
 
 #SSTmin v. XtX plot
@@ -245,12 +245,12 @@ SSTmin_XtX_plot <- ggplot(data = BFs, aes(x = BFs$SST_Min, y = BFs$M_XtX)) +
   geom_vline(xintercept = 20, size = 2, color = "#999999", linetype = "dashed") + 
   geom_point(aes(size = 0.5, alpha = 0.1)) + 
   annotate("text", x = 3, y = 24, label = "C", size = 15)
-SSTmin_XtX_annotated_plot <- SSTmin_XtX_plot + labs(x = "SST Min BF", y = "XtX") + 
+SSTmin_XtX_annotated_plot <- SSTmin_XtX_plot + labs(x = "SST Minimum BF", y = "XtX") + 
   theme_bw() + scale_y_continuous(limits = c(0, 25)) + scale_x_continuous(limits = c(0, 55)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 26, color = "black"), axis.title = element_text(size = 26, face = "bold"), 
-        legend.position = "none")
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.75,.5), "cm"))
 SSTmin_XtX_annotated_plot
 
 #SSTmax v. XtX plot
@@ -260,12 +260,12 @@ SSTmax_XtX_plot <- ggplot(data = BFs, aes(x = SST_Max, y = M_XtX)) +
   geom_vline(xintercept = 20, size = 2, color = "#999999", linetype = "dashed") + 
   geom_point(aes(size = 0.5, alpha = 0.1)) + 
   annotate("text", x = 3, y = 24, label = "D", size = 15)
-SSTmax_XtX_annotated_plot <- SSTmax_XtX_plot + labs(x = "SST Max BF", y = "XtX") + 
+SSTmax_XtX_annotated_plot <- SSTmax_XtX_plot + labs(x = "SST Maximum BF", y = "XtX") + 
   theme_bw() + scale_y_continuous(limits = c(0, 25)) + scale_x_continuous(limits = c(0, 55)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 26, color = "black"), axis.title = element_text(size = 26, face = "bold"), legend.justification = c(1, 0), 
-        legend.position = "none") 
+      axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
+      legend.position = "none", plot.margin = unit(c(.5,.5,.5,.5), "cm"))
 SSTmax_XtX_annotated_plot
 
 #Lat v. XtX plot
@@ -275,12 +275,12 @@ Lat_XtX_plot <- ggplot(data = BFs, aes(x = Lat, y = M_XtX)) +
   geom_vline(xintercept = 20, size = 2, color = "#999999", linetype = "dashed") + 
   geom_point(aes(size = 0.5, alpha = 0.1)) + 
   annotate("text", x = 3, y = 24, label = "E", size = 15)
-Lat_XtX_annotated_plot <- Lat_XtX_plot + labs(x = "Lat Mean BF", y = "XtX") + 
+Lat_XtX_annotated_plot <- Lat_XtX_plot + labs(x = "Latitude BF", y = "XtX") + 
   theme_bw() + scale_y_continuous(limits = c(0, 25)) + scale_x_continuous(limits = c(0, 55)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 26, color = "black"), axis.title = element_text(size = 26, face = "bold"), 
-        legend.position = "none")
+        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.5,.5), "cm"))
 Lat_XtX_annotated_plot
 
 BF_XtX_all_plot <- grid.arrange(SSSmean_XtX_annotated_plot, SSTmean_XtX_annotated_plot, 
