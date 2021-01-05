@@ -1,6 +1,6 @@
 ############################################## Create ECDFs for Sim v Real BayPass Output #################################################
 
-#histograms for simulation vs real BayPass output by environmental variable
+#ECDFs for simulation vs real BayPass output by environmental variable
 #includes Komolgorov-Smirnov test
 
 ################################################################################################################################################
