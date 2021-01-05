@@ -1,6 +1,6 @@
 #################################### Script to write simulation pops for Het metrics ##########################################
 
-#Script to write simulation populations (bootstrap across individuals) to get 95% CIs for heterozygosity & genetic diversity estimates
+#Script to write simulation populations (bootstrap across individuals) to get 95% CIs for heterozygosity & Fis estimates
 #Run 10x for 1000 bootstrapped samples for each population (unless run on HPC then increase # repeats in resampling step)
 #Written for transcriptome project
 
@@ -22,9 +22,7 @@ library(hierfstat)
 library(purrr)
 
 #read in data
-output_hicov2_snps_only_mac2 <- read_csv("../../VCFs_and_PLINK/output.hicov2.snps.only.mac2.csv", col_names = FALSE)
-#quantiles <- read.csv("Data/diversity_bootstrapped_cis.csv", header = TRUE, row.names = 1) #only bc if run all the way through hit errors where Rstudio can't support that many files open at once so won't create plots
-#diversity_boot <- read.csv("Data/diversity_bootstrapped.csv", header = TRUE, row.names = 1)
+output_hicov2_snps_only_mac2 <- read_csv("Data/output.hicov2.snps.only.mac2.csv", col_names = TRUE)
 
 #################################################################################################################################################
 
@@ -34,7 +32,7 @@ output_hicov2_snps_only_mac2 <- read_csv("../../VCFs_and_PLINK/output.hicov2.snp
 loci_df <- output_hicov2_snps_only_mac2[, 1:2] #pull list of contigs & SNP bp
 names(loci_df) <- c("CHROM", "pos") #change headers
 loci_df$contig_bp <- paste(loci_df$CHROM, loci_df$pos, sep = "_") #create row of contig & bp combined
-contig_bp <- loci_df$contig_bp[2:4213] #pull contig-bp column into a vector
+contig_bp <- loci_df$contig_bp[2:4212] #pull contig-bp column into a vector
 
 #pull out first 9 columns containing information on SNPs & genotyping
 output_info <- output_hicov2_snps_only_mac2[, 1:9]
@@ -51,7 +49,7 @@ sample_list_P <- replicate(100, as.data.frame(t(apply(output_P, MARGIN = 1, FUN 
 
 ######## Combine bootstrapped samples into one large dataframe for analysis ########
 
-#unlist matrices into separate df for each boostrapped sample
+#unlist matrices into separate df for each bootstrapped sample
 for (i in 1:100) {
   df <- data.frame(sample_list_J[[i]])
   assign(paste('J', i , sep = ''), df)
@@ -69,15 +67,15 @@ for (i in 1:100) {
 
 #combine all dataframes into one large dataframe per pop
 tot_J <- do.call("cbind", mget(ls(pattern = "^J"))) #search in env for any object starting with J and combine by columns
-tot_J <- tot_J[2:4213, ] #remove header row
+tot_J <- tot_J[2:4212, ] #remove header row
 colnames(tot_J) <- paste("J", 1:800, sep = '') #create header row with unique individual ID for each sample
 
 tot_I <- do.call("cbind", mget(ls(pattern = "^I"))) #search in env for any object starting with I and combine by columns
-tot_I <- tot_I[2:4213, ]
+tot_I <- tot_I[2:4212, ]
 colnames(tot_I) <- paste("I", 1:700, sep = '')
 
 tot_P <- do.call("cbind", mget(ls(pattern = "^P"))) #search in env for any object starting with P and combine by columns
-tot_P <- tot_P[2:4213, ]
+tot_P <- tot_P[2:4212, ]
 colnames(tot_P) <- paste("I", 1:1000, sep = '')
 
 #combine all pops into one large dataframe with all simulations for all populations
@@ -96,23 +94,23 @@ output_boot <- as.data.frame(output_boot) #turn matrix from apply into datframe
 colnames(output_boot) <- contig_bp #create header row w/contig_bp notation
 
 #write out dataframe as table
-write.table(output_boot, file = "Data/bootstrap_het.txt") #rename with subscript numbers so don't overwrite as run 10x
+write.table(output_boot, file = "Data/bootstrap_het_10.txt") #rename with subscript numbers so don't overwrite as run 10x
 
 #################################################################################################################################################
 
-######## Calculate Ho & He for each boostrapped sample ########
+######## Calculate Ho & He for each bootstrapped sample ########
 
 #read in data from bootstrapping runs earlier
-bs_run_1 <- read.table(file = "Data/bootstrap_het1.txt", colClasses = "character", header = TRUE, row.names = 1) #colClasses as character to keep leading zeros
-bs_run_2 <- read.table(file = "Data/bootstrap_het2.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_3 <- read.table(file = "Data/bootstrap_het3.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_4 <- read.table(file = "Data/bootstrap_het4.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_5 <- read.table(file = "Data/bootstrap_het5.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_6 <- read.table(file = "Data/bootstrap_het6.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_7 <- read.table(file = "Data/bootstrap_het7.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_8 <- read.table(file = "Data/bootstrap_het8.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_9 <- read.table(file = "Data/bootstrap_het9.txt", colClasses = "character", header = TRUE, row.names = 1)
-bs_run_10 <- read.table(file = "Data/bootstrap_het10.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_1 <- read.table(file = "Data/bootstrap_het_1.txt", colClasses = "character", header = TRUE, row.names = 1) #colClasses as character to keep leading zeros
+bs_run_2 <- read.table(file = "Data/bootstrap_het_2.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_3 <- read.table(file = "Data/bootstrap_het_3.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_4 <- read.table(file = "Data/bootstrap_het_4.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_5 <- read.table(file = "Data/bootstrap_het_5.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_6 <- read.table(file = "Data/bootstrap_het_6.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_7 <- read.table(file = "Data/bootstrap_het_7.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_8 <- read.table(file = "Data/bootstrap_het_8.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_9 <- read.table(file = "Data/bootstrap_het_9.txt", colClasses = "character", header = TRUE, row.names = 1)
+bs_run_10 <- read.table(file = "Data/bootstrap_het_10.txt", colClasses = "character", header = TRUE, row.names = 1)
 
 #set population vector to assign individuals to discrete bootstrap sample
 pop <- c(rep("J1", 8), rep("J2", 8), rep("J3", 8), rep("J4", 8), rep("J5", 8), rep("J6", 8), rep("J7", 8), rep("J8", 8), 
@@ -258,7 +256,7 @@ colnames(Means_Ho_10) <- c("J", "I", "P")
 Ho_means_all <- rbind(Means_Ho_1, Means_Ho_2, Means_Ho_3, Means_Ho_4, Means_Ho_5, Means_Ho_6, Means_Ho_7, Means_Ho_8,
                       Means_Ho_9, Means_Ho_10)
 colnames(Ho_means_all) <- c("J_Ho", "I_Ho", "P_Ho")
-#write.csv(Ho_means_all, "Data/Ho_bootstrapped_all.csv") #to write out along the way
+write.csv(Ho_means_all, "Data/Ho_bootstrapped_all_mac2.csv") #to write out along the way
 
 #pull out He for each run
 He_J_1 <- colMeans(sum_stats_1$Hs[,1:100])
@@ -335,10 +333,10 @@ colnames(Means_He_10) <- c("J", "I", "P")
 He_means_all <- rbind(Means_He_1, Means_He_2, Means_He_3, Means_He_4, Means_He_5, Means_He_6, Means_He_7, Means_He_8,
                       Means_He_9, Means_He_10)
 colnames(He_means_all) <- c("J_He", "I_He", "P_He")
-#write.csv(He_means_all, "Data/He_bootstrapped_all.csv") #to write out along the way
+write.csv(He_means_all, "Data/He_bootstrapped_all_mac2.csv") #to write out along the way
 
 #combine He & Ho into one df
-He_means_all <- read.csv("He_bootstrapped_all.csv", header = TRUE, row.names = 1)
+He_means_all <- read.csv("Data/He_bootstrapped_all_mac2.csv", header = TRUE, row.names = 1)
 colnames(He_means_all) <- c("J_He", "I_He", "P_He")
 
 diversity_boot <- cbind(Ho_means_all, He_means_all)
@@ -362,15 +360,23 @@ quantiles$diff_lower <- quantiles$median - quantiles$`2.5_per` #calculate diff b
 quantiles$diff_upper <- quantiles$`97.5_per` - quantiles$median # calculate diff btwn median and 97.5 percentile for CI visualization
 
 #write out data
-write.csv(diversity_boot, "Data/diversity_bootstrapped.csv")
-write.csv(quantiles, "Data/diversity_bootstrapped_cis.csv")
+write.csv(diversity_boot, "Data/diversity_bootstrapped_mac2.csv")
+write.csv(quantiles, "Data/diversity_bootstrapped_cis_mac2.csv")
 
 ################################################################################################################################################
 
 ######## Visualize results ########
+#designed to be run separately
 
-quantiles <- read.csv("Data/diversity_bootstrapped_cis.csv", header = TRUE, row.names = 1)
-quantiles$pop <- factor(quantiles$pop, levels = c("Japan", "Philippines", "Indonesia"))
+remove(list = ls())
+
+#load libraries
+library(readr)
+library(tidyverse)
+
+#read in data
+quantiles <- read.csv("Data/diversity_bootstrapped_cis_mac2.csv", header = TRUE, row.names = 1)
+  quantiles$pop <- factor(quantiles$pop, levels = c("Japan", "Philippines", "Indonesia"))
 
 #plot of median Ho w/95% CI error bars
 Ho_plot <- ggplot(data = quantiles[which(quantiles$metric == "Ho"), ], aes(x = pop, y = median)) + 
