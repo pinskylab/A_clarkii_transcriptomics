@@ -1,7 +1,7 @@
 ##################################### Creating Simulation Population Data Sets for Sim Runs of BayPass #########################################
 
-# to create null distribution of what BF distribution would look like with random data
-# modified from script by Jennifer Hoey
+#to create null distribution of what BF distribution would look like with random data
+#modified from script by Jennifer Hoey
 
 ################################################################################################################################################
 
@@ -10,7 +10,7 @@
 remove(list = ls())
 
 #set working directory
-setwd("C:/Users/Rene/Dropbox/Pinsky_Lab/Transcriptome_Proj/R_scripts/A_clarkii_transcriptomics/")
+setwd("C:/Users/rclar/Dropbox/Pinsky_Lab/Transcriptome_Proj/R_scripts/A_clarkii_transcriptomics/")
 getwd()
 
 #load libraries
@@ -18,7 +18,7 @@ library(readr)
 
 #read in data
 transcript_individs <- read_csv("Data/Individual_Env_Data.csv", col_names = TRUE) #all 25 fish with environ data divided into 3 pops
-output_hicov2_snps_only <- read_csv("Data/output.hicov2.snps.only.csv", col_names = TRUE) #modified VCF (without header)
+output_hicov2_snps_only <- read_csv("Data/output.hicov2.snps.only.mac2.csv", col_names = TRUE) #modified VCF (without header)
 
 ################################################################################################################################################
 
@@ -30,7 +30,7 @@ ran_individ <- apply(transcript_individs[, 1], 2, sample)
 #trim to individuals (filters columns with NPJ & digit in the name)
 cols <- grepl('[NPJ][[:digit:]]', names(output_hicov2_snps_only)) #creates pattern of logic values (T/F if fit grepl filter)
 output_hicov2_snps_only <- output_hicov2_snps_only[, cols] #keeps only columns with T value
-dim(output_hicov2_snps_only) #check to make sure correct dimensions (10977 x 25)
+dim(output_hicov2_snps_only) #check to make sure correct dimensions (4212 x 25)
 
 #rename column headers with randomized individual vector (EX: makes J11 column now P1 column to be included with Philippines pop)
 names(output_hicov2_snps_only) <- c(ran_individ)
@@ -71,11 +71,11 @@ nals <- apply(trans_ngeno, MARGIN = 1, FUN = count01s) #count indonesia alleles 
 
 #use 1:n indexing to turn allele counts from 2xnloci matrices to nloci*2vectors
 be <- data.frame(J = jals[1:length(jals)], P = pals[1:length(pals)], N = nals[1:length(nals)])
-dim(be) #check to make sure correct dimensions (1600 x 3)
+dim(be) #check to make sure correct dimensions (8424 x 3)
 summary(be)
 
 #write out
 write.table(be, file = "Data/sim10.baypass.format.txt", sep = '\t', col.names = TRUE, row.names = FALSE) #table with J P N columns, 2*nloci rows
-write.table(ran1_individ, file = "Data/sim10.popassignments.txt", sep = '\t', col.names = TRUE, row.names = FALSE) #list of sim pop assignments for individuals
+write.table(ran_individ, file = "Data/sim10.popassignments.txt", sep = '\t', col.names = TRUE, row.names = FALSE) #list of sim pop assignments for individuals
 
 #repeat as needed to get desired number of randomized populations
