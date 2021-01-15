@@ -404,20 +404,3 @@ Fis_plot <- ggplot(data = quantiles[which(quantiles$metric == "Fis"), ], aes(x =
   theme(panel.border = element_rect(size = 1), axis.title = element_text(size = 14, face = "bold"), 
         axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 12, color = "black"))
 Fis_plot
-
-
-######## Optional: turn genotypes into separate columns (1 per allele) ########
-#ideally split this way, randomly sample from alleles and then merge back together two columns at a time
-#dt <- data.frame(id = 1:2,
- #                AIN5997 = c("01/02", "01/02"),
-  #               AIN7452 = c("02/02", NA),
-   #              AIN8674 = c("02/02", "02/02"), stringsAsFactors = F)
-
-#function for splitting genotypes into different columns
-#f <- function(x) {
- # dt %>% select("id", x) %>% separate_(x, paste0(x, c(".1", ".2")))
-#}
-
-#dt_new <- names(dt)[2:4] %>%
- # map(f) %>%
-#reduce(left_join, by = "id")
