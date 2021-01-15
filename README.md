@@ -1,3 +1,6 @@
-Repo is currently undergoing updates!
+Data files, code, figures and analyses for *Amphiprion clarkii* transcriptomics manuscript.
 
-Will be a home for all scripts, data, and plots from the *Amphiprion clarkii* transcriptomics project.
+General repo structure is as follows:
+ * **/Data:** Contains source data for R scripts.
+ * **/Scripts:** Contains R scripts and code for analyses included in the manuscript.
+ * **/Plots:** Contains jpegs of plots included in the manuscript, as well as additional plots for data exploration purposes.
