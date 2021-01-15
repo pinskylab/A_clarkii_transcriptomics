@@ -23,13 +23,15 @@ library(gtable)
 library(pophelper)
 
 #read in data
-mac2_SNPs_sfiles <- list.files(path = "../../STRUCTURE_Output/allSNPs_results/mac2/mac2SNPs_StructureResults/", full.names = TRUE)
-  mac2_SNPs_slist <- readQ(files = mac2_SNPs_sfiles, filetype = "structure")
-mac2_HWE_SNPs_sfiles <- list.files(path = "../../STRUCTURE_Output/inhweSNPs_results/inhwe_mac2/inhwe_mac2_StructureResults/", full.names = TRUE)
+#mac2_SNPs_sfiles <- list.files(path = "../../STRUCTURE_Output/allSNPs_results/mac2/mac2SNPs_StructureResults/", full.names = TRUE)
+ # mac2_SNPs_slist <- readQ(files = mac2_SNPs_sfiles, filetype = "structure")
+mac2_SNPs_sfiles <- list.files(path = "Data/STRUCTURE_Output/allSNPs_results/mac2SNPs_StructureResults/", full.names = TRUE)
+  mac2_SNPs_slist <- readQ(files = mac2_SNPs_sfiles, filetype = "structure") 
+mac2_HWE_SNPs_sfiles <- list.files(path = "Data/STRUCTURE_Output/inhweSNPs_results/inhwe_mac2_StructureResults/", full.names = TRUE)
   mac2_HWE_SNPs_slist <- readQ(files = mac2_HWE_SNPs_sfiles, filetype = "structure")
-nooutlier_mac2_sfiles <- list.files(path = "../../STRUCTURE_Output/nooutliers_results/nooutliers_mac2_strict/nooutliers_mac2_StructureResults/", full.names = TRUE)
+nooutlier_mac2_sfiles <- list.files(path = "Data/STRUCTURE_Output/nooutliers_results/nooutliers_mac2_StructureResults/", full.names = TRUE)
   nooutlier_mac2_slist <- readQ(files = nooutlier_mac2_sfiles, filetype = "structure")
-outlier_SNPs_sfiles <- list.files(path = "../../STRUCTURE_Output/outliersonly_results/outliersonly_strict/outliersonly_strict_StructureResults/", full.names = TRUE)
+outlier_SNPs_sfiles <- list.files(path = "Data/STRUCTURE_Output/outliersonly_results/outliersonly_StructureResults/", full.names = TRUE)
   outlier_SNPs_slist <- readQ(files = outlier_SNPs_sfiles, filetype = "structure")
 
 #create group labels 
@@ -55,10 +57,10 @@ clumppExport(qlist = mac2_SNPs_slist, useexe = TRUE) #run clumpp to order cluste
 ######## Create STRUCTURE Plot ########
 
 #read in CLUMPP data
-mac2_SNPs_aligned_K2 <- readQ("../../STRUCTURE_Output/allSNPs_results/mac2/mac2SNPs_CLUMPP/K2/pop_K2-combined-aligned.txt")
-mac2_SNPs_aligned_K3 <- readQ("../../STRUCTURE_Output/allSNPs_results/mac2/mac2SNPs_CLUMPP/K3/pop_K3-combined-aligned.txt")
-mac2_SNPs_aligned_K4 <- readQ("../../STRUCTURE_Output/allSNPs_results/mac2/mac2SNPs_CLUMPP/K4/pop_K4-combined-aligned.txt")
-mac2_SNPs_aligned_K5 <- readQ("../../STRUCTURE_Output/allSNPs_results/mac2/mac2SNPs_CLUMPP/K5/pop_K5-combined-aligned.txt")
+mac2_SNPs_aligned_K2 <- readQ("Data/STRUCTURE_Output/allSNPs_results/mac2_CLUMPP/pop_K2-combined-aligned.txt")
+mac2_SNPs_aligned_K3 <- readQ("Data/STRUCTURE_Output/allSNPs_results/mac2_CLUMPP/pop_K3-combined-aligned.txt")
+mac2_SNPs_aligned_K4 <- readQ("Data/STRUCTURE_Output/allSNPs_results/mac2_CLUMPP/pop_K4-combined-aligned.txt")
+mac2_SNPs_aligned_K5 <- readQ("Data/STRUCTURE_Output/allSNPs_results/mac2_CLUMPP/pop_K5-combined-aligned.txt")
 
 #create plots
 mac2_SNPs_K2 <- plotQ(mac2_SNPs_aligned_K2[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE, 
@@ -107,10 +109,10 @@ clumppExport(qlist = mac2_HWE_SNPs_slist, useexe = TRUE) #run clumpp to order cl
 ######## Create STRUCTURE Plot ########
 
 #read in CLUMPP data
-mac2_HWE_SNPs_aligned_K2 <- readQ("../../STRUCTURE_Output/inhweSNPs_results/inhwe_mac2/inhwe_mac2_CLUMPP/K2/pop_K2-combined-aligned.txt")
-mac2_HWE_SNPs_aligned_K3 <- readQ("../../STRUCTURE_Output/inhweSNPs_results/inhwe_mac2/inhwe_mac2_CLUMPP/K3/pop_K3-combined-aligned.txt")
-mac2_HWE_SNPs_aligned_K4 <- readQ("../../STRUCTURE_Output/inhweSNPs_results/inhwe_mac2/inhwe_mac2_CLUMPP/K4/pop_K4-combined-aligned.txt")
-mac2_HWE_SNPs_aligned_K5 <- readQ("../../STRUCTURE_Output/inhweSNPs_results/inhwe_mac2/inhwe_mac2_CLUMPP/K5/pop_K5-combined-aligned.txt")
+mac2_HWE_SNPs_aligned_K2 <- readQ("Data/STRUCTURE_Output/inhweSNPs_results/inhwe_mac2_CLUMPP/pop_K2-combined-aligned.txt")
+mac2_HWE_SNPs_aligned_K3 <- readQ("Data/STRUCTURE_Output/inhweSNPs_results/inhwe_mac2_CLUMPP/pop_K3-combined-aligned.txt")
+mac2_HWE_SNPs_aligned_K4 <- readQ("Data/STRUCTURE_Output/inhweSNPs_results/inhwe_mac2_CLUMPP/pop_K4-combined-aligned.txt")
+mac2_HWE_SNPs_aligned_K5 <- readQ("Data/STRUCTURE_Output/inhweSNPs_results/inhwe_mac2_CLUMPP/pop_K5-combined-aligned.txt")
 
 #create plots
 mac2_HWE_SNPs_K2 <- plotQ(mac2_HWE_SNPs_aligned_K2[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE, 
@@ -159,10 +161,10 @@ clumppExport(qlist = nooutlier_mac2_slist, useexe = TRUE) #run clumpp to order c
 ######## Create STRUCTURE Plot ########
 
 #read in CLUMPP data
-nooutlier_mac2_SNPs_aligned_K2 <- readQ("../../STRUCTURE_Output/nooutliers_results/nooutliers_mac2_strict/nooutliers_mac2_CLUMPP/K2/pop_K2-combined-aligned.txt")
-nooutlier_mac2_SNPs_aligned_K3 <- readQ("../../STRUCTURE_Output/nooutliers_results/nooutliers_mac2_strict/nooutliers_mac2_CLUMPP/K3/pop_K3-combined-aligned.txt")
-nooutlier_mac2_SNPs_aligned_K4 <- readQ("../../STRUCTURE_Output/nooutliers_results/nooutliers_mac2_strict/nooutliers_mac2_CLUMPP/K4/pop_K4-combined-aligned.txt")
-nooutlier_mac2_SNPs_aligned_K5 <- readQ("../../STRUCTURE_Output/nooutliers_results/nooutliers_mac2_strict/nooutliers_mac2_CLUMPP/K5/pop_K5-combined-aligned.txt")
+nooutlier_mac2_SNPs_aligned_K2 <- readQ("Data/STRUCTURE_Output/nooutliers_results/nooutliers_mac2_CLUMPP/pop_K2-combined-aligned.txt")
+nooutlier_mac2_SNPs_aligned_K3 <- readQ("Data/STRUCTURE_Output/nooutliers_results/nooutliers_mac2_CLUMPP/pop_K3-combined-aligned.txt")
+nooutlier_mac2_SNPs_aligned_K4 <- readQ("Data/STRUCTURE_Output/nooutliers_results/nooutliers_mac2_CLUMPP/pop_K4-combined-aligned.txt")
+nooutlier_mac2_SNPs_aligned_K5 <- readQ("Data/STRUCTURE_Output/nooutliers_results/nooutliers_mac2_CLUMPP/pop_K5-combined-aligned.txt")
 
 #create plots
 nooutlier_mac2_SNPs_K2 <- plotQ(nooutlier_mac2_SNPs_aligned_K2[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE, 
@@ -211,10 +213,10 @@ clumppExport(qlist = outlier_SNPs_slist, useexe = TRUE) #run clumpp to order clu
 ######## Create STRUCTURE Plot ########
 
 #read in CLUMPP data
-outlier_SNPs_aligned_K2 <- readQ("../../STRUCTURE_Output/outliersonly_results/outliersonly_strict/outliersonly_strict_CLUMPP/K2/pop_K2-combined-aligned.txt")
-outlier_SNPs_aligned_K3 <- readQ("../../STRUCTURE_Output/outliersonly_results/outliersonly_strict/outliersonly_strict_CLUMPP/K3/pop_K3-combined-aligned.txt")
-outlier_SNPs_aligned_K4 <- readQ("../../STRUCTURE_Output/outliersonly_results/outliersonly_strict/outliersonly_strict_CLUMPP/K4/pop_K4-combined-aligned.txt")
-outlier_SNPs_aligned_K5 <- readQ("../../STRUCTURE_Output/outliersonly_results/outliersonly_strict/outliersonly_strict_CLUMPP/K5/pop_K5-combined-aligned.txt")
+outlier_SNPs_aligned_K2 <- readQ("Data/STRUCTURE_Output/outliersonly_results/outliersonly_CLUMPP/pop_K2-combined-aligned.txt")
+outlier_SNPs_aligned_K3 <- readQ("Data/STRUCTURE_Output/outliersonly_results/outliersonly_CLUMPP/pop_K3-combined-aligned.txt")
+outlier_SNPs_aligned_K4 <- readQ("Data/STRUCTURE_Output/outliersonly_results/outliersonly_CLUMPP/pop_K4-combined-aligned.txt")
+outlier_SNPs_aligned_K5 <- readQ("Data/STRUCTURE_Output/outliersonly_results/outliersonly_CLUMPP/pop_K5-combined-aligned.txt")
 
 #create plots
 outlier_SNPs_K2 <- plotQ(outlier_SNPs_aligned_K2[1], imgoutput = "sep", returnplot = TRUE, exportplot = TRUE, 
