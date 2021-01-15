@@ -277,9 +277,9 @@ TD_boxplot_annotated <- TD_boxplot + theme_bw() +
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(), axis.line = element_line(size = 1), 
         axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 20, color = "black"),
-        axis.title = element_text(size = 20, face = "bold"), legend.position = "top",
-        legend.text = element_text(size = 18), legend.title = element_blank())
+        axis.text = element_text(size = 28, color = "black"),
+        axis.title = element_text(size = 30), legend.position = "top",
+        legend.text = element_text(size = 30), legend.title = element_blank())
 TD_boxplot_annotated
 
 ######## Mann-Whitney U-tests & ECDF plots ########
