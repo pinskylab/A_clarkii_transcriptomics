@@ -23,15 +23,15 @@ source("Scripts/baypass_utils.R") #script that comes with BayPass download with 
 
 #read in data
 #read in output from BayPass runs with real dataset (4212 loci)
-omega_realdata <- as.matrix(read.table("../../BayPass_Output/mac2_SNPs/clownfish_mac2_mat.cov")) #read in posterior distribution of covariance matrix
-pi.beta.coef_realdata <- read.table("../../BayPass_Output/mac2_SNPs/mac2core1_summary_beta_params.out", h = T)$Mean #read in posterior distributions of mean a(pi) and mean b(pi)
-XtX_realdata <- read.table("../../BayPass_Output/mac2_SNPs/mac2core1_summary_pi_xtx.out", h = T)$M_XtX #read in posterior distribution of Xtx values for each loci
-geno <- geno2YN("../../BayPass_Output/mac2_SNPs/clownfish_mac2.geno") #read in allele counts in BayPass format to convert to total allele counts (per SNP)
+omega_realdata <- as.matrix(read.table("Data/clownfish_mac2_mat.cov")) #read in posterior distribution of covariance matrix
+pi.beta.coef_realdata <- read.table("Data/mac2core1_summary_beta_params.out", h = T)$Mean #read in posterior distributions of mean a(pi) and mean b(pi)
+XtX_realdata <- read.table("Data/mac2core1_summary_pi_xtx.out", h = T)$M_XtX #read in posterior distribution of Xtx values for each loci
+geno <- geno2YN("Data/clownfish_mac2.geno") #read in allele counts in BayPass format to convert to total allele counts (per SNP)
 
 #read in output from POD runs with pseudo-observed dataset
-omega_POD <- as.matrix(read.table("../../BayPass_Output/mac2_SNPs/core1_PODs/mac2core1_pod_mat_omega.out"))
-pi.beta.coef_POD <- read.table("../../BayPass_Output/mac2_SNPs/core1_PODs/mac2core1_pod_summary_beta_params.out", h = T)$Mean
-XtX_POD <- read.table("../../BayPass_Output/mac2_SNPs/core1_PODs/mac2core1_pod_summary_pi_xtx.out", h = T)$M_XtX
+omega_POD <- as.matrix(read.table("Data/mac2core1_pod_mat_omega.out"))
+pi.beta.coef_POD <- read.table("Data/mac2core1_pod_summary_beta_params.out", h = T)$Mean
+XtX_POD <- read.table("Data/mac2core1_pod_summary_pi_xtx.out", h = T)$M_XtX
 
 ################################################################################################################################################
 
