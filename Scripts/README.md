@@ -1,4 +1,5 @@
 **Scripts:**
+ * **Allele Freq Line Plots.R:** Creates polarized allele frequency plots (outlier and non-outlier).
  * **BF Correlation Plots.R:** Reads in .csv file of Bayes Factors and XtX values outputted by BayPass and creates correlation plots by environmental variables.
  * **Diversity_Script.R:** Calculates Ho, He and Fis from allele frequencies.
  * **ECDFS for Sim v Real BFs.R:** Contains code for Mann-Whitney U-tests and plots of empirical cumulative distribution functions for Bayes Factors from raw data and permuted data.
