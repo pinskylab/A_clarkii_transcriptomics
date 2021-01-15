@@ -22,7 +22,7 @@ library(mvtnorm)
 source("Scripts/baypass_utils.R") #script that comes with BayPass download with functions used below (Gautier 2015)
 
 #read in data
-#read in output from BayPass runs with real dataset (5718 loci)
+#read in output from BayPass runs with real dataset (4212 loci)
 omega_realdata <- as.matrix(read.table("../../BayPass_Output/mac2_SNPs/clownfish_mac2_mat.cov")) #read in posterior distribution of covariance matrix
 pi.beta.coef_realdata <- read.table("../../BayPass_Output/mac2_SNPs/mac2core1_summary_beta_params.out", h = T)$Mean #read in posterior distributions of mean a(pi) and mean b(pi)
 XtX_realdata <- read.table("../../BayPass_Output/mac2_SNPs/mac2core1_summary_pi_xtx.out", h = T)$M_XtX #read in posterior distribution of Xtx values for each loci
