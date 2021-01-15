@@ -20,7 +20,7 @@ library(adegenet)
 library(hierfstat)
 
 #read in data
-mac2_vcf <- read.vcfR("../../VCFs_and_PLINK/output.hicov2.snps.only.mac2.vcf", verbose = FALSE)
+mac2_vcf <- read.vcfR("Data/output.hicov2.snps.only.mac2.vcf", verbose = FALSE)
   mac2_genind <- vcfR2genind(mac2_vcf) #convert to genind object for analyses
 locnames <- read_table2("Data/Loc_Names_mac2.txt", col_names = TRUE) #read in contig & bp for loci passing mac2 filter
 outlierloc <- read.csv("Data/outlier_loci_mac2.csv", header = TRUE) #to add outlier status

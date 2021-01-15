@@ -16,10 +16,10 @@ getwd()
 library(tidyverse)
 
 #read in data
-data_PC_mac2 <- read_csv("../../VCFs_and_PLINK/PCA_stuff/mac2/output.hicov2.snps.only.mac2_eigenvec.csv") #eigenvector for PCA w/mac >2 loci
-data_PC_mac2_inhwe <- read_csv("../../VCFs_and_PLINK/PCA_stuff/mac2/output.hicov2.snps.only.mac2.inhwe_eigenvec.csv") #eigenvector for PCA w/mac >2 and in HWE loci
-data_PC_mac2_nooutliers <- read_csv("../../VCFs_and_PLINK/PCA_stuff/mac2/output.hicov2.snps.only.mac2.nooutliers_eigenvec.csv") #eigenvector for PCA w/mac >2 w/no outlier loci
-data_PC_mac2_outliersonly <- read_csv("../../VCFs_and_PLINK/PCA_stuff/mac2/output.hicov2.snps.only.mac2.outliersonly_eigenvec.csv") #eigenvector for PCA w/only outlier loci
+data_PC_mac2 <- read_csv("Data/output.hicov2.snps.only.mac2_eigenvec.csv") #eigenvector for PCA w/mac >2 loci
+data_PC_mac2_inhwe <- read_csv("Data/output.hicov2.snps.only.mac2.inhwe_eigenvec.csv") #eigenvector for PCA w/mac >2 and in HWE loci
+data_PC_mac2_nooutliers <- read_csv("Data/output.hicov2.snps.only.mac2.nooutliers_eigenvec.csv") #eigenvector for PCA w/mac >2 w/no outlier loci
+data_PC_mac2_outliersonly <- read_csv("Data/output.hicov2.snps.only.mac2.outliersonly_eigenvec.csv") #eigenvector for PCA w/only outlier loci
 
 #################################################################################################################################################
 

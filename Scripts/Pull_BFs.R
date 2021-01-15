@@ -15,11 +15,15 @@ getwd()
 library(readr)
 
 #read in BFs
-BFs_ssmean <- read_table2("../../BayPass_Output/mac2_SNPs/aux_output/mac2aux1_ssmean_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
-BFs_sstmean <- read_table2("../../BayPass_Output/mac2_SNPs/aux_output/mac2aux1_sstmean_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
-BFs_sstmin <- read_table2("../../BayPass_Output/mac2_SNPs/aux_output/mac2aux1_sstmin_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
-BFs_sstmax <- read_table2("../../BayPass_Output/mac2_SNPs/aux_output/mac2aux1_sstmax_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
-BFs_lat <- read_table2("../../BayPass_Output/mac2_SNPs/aux_output/mac2aux1_lat_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs_ssmean <- read_table2("Data/mac2aux1_ssmean_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs_sstmean <- read_table2("Data/mac2aux1_sstmean_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs_sstmin <- read_table2("Data/mac2aux1_sstmin_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs_sstmax <- read_table2("Data/mac2aux1_sstmax_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs_lat <- read_table2("Data/mac2aux1_lat_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+
+#read in loc names
+locnames <- read_table2("Data/Loc_Names_mac2.txt", col_names = FALSE)
+  dim(locnames) #4213
 
 ################################################################################################################################################
 
@@ -70,11 +74,6 @@ potential_loci_list <- append(potential_loci_list, BFs_greater_than20_SSTmax)
 potential_loci_list <- append(potential_loci_list, BFs_greater_than20_Latitude)
 
 ######## Grab ID names of the contigs containing candidate SNPs ########
-
-#read in loc names
-#locnames <- read_table2("Data/Loc_Names_All.txt", col_names = TRUE)
-locnames <- read_table2("Data/Loc_Names_mac2.txt", col_names = FALSE)
-  dim(locnames) #4213
 
 #snps <- c(1:4213) #create column to match "marker" column pulled earlier from aux1_summary_betai.txt
 snps <- c(1:4213)
