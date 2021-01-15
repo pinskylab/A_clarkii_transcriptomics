@@ -89,4 +89,5 @@ can_all <- merge(can_names, can_BFs, by = "snp_id")
 all <- merge(locnames, BFs_ALL, by = "snp_id")
 
 #write out
-write.table(can_loci, file = "Data/mac2aux1_original_all_candidate_loci.txt", sep = "\t", row.names = FALSE, col.names = TRUE)
+write.csv(can_all, file = "Data/mac2aux1_candidate_loci.csv")
+write.csv(all, file = "Data/mac2aux1_all_loci.csv")
