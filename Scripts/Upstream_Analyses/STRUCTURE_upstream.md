@@ -184,3 +184,5 @@ sbatch STRUCTURE.sbatch
 ```
 
 Ran 5 replicates of each value of K (1-5). Done for full mac2 dataset, only SNPs in HWE, only non-outlier SNPS, and only outlier SNPs.
+
+Copied `*_f` files to local computer and read into R for downstream analyses (`Scripts/STRUCTURE.R`).
