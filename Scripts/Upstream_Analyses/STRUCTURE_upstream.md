@@ -67,7 +67,7 @@ STRUCTURE_WRITER_FAST_FORMAT_QUESTION=FALSE
 
 Moved `STRUCTURE_mac2.txt` to `~/Programs/console`.
 
-Created `.sbatch` file to run STRUCTURE:
+Created `STRUCTURE.sbatch` file to run STRUCTURE:
 
 ``` bash
 #!/bin/bash
@@ -175,6 +175,12 @@ PROGRAM OPTIONS
 #define FREQSCORR   1 // (B) allele frequencies are correlated among pops
 
 #everything else left unchanged
+```
+
+Submitted job:
+
+``` bash
+sbatch STRUCTURE.sbatch
 ```
 
 Ran 5 replicates of each value of K (1-5). Done for full mac2 dataset, only SNPs in HWE, only non-outlier SNPS, and only outlier SNPs.
