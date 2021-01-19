@@ -1,6 +1,6 @@
 ############################################# Script for pulling candidate loci from BayPass runs #################################################
 
-#assumes candidate loci have a BF > 15 for at least one env variable tested
+#assumes candidate loci have a BF > 20 for at least one env variable tested
 
 #################################################################################################################################################
 
