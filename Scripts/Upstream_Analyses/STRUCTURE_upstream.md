@@ -18,7 +18,7 @@ Used following code to run PGDSpider v.2.1.1.5 on Amarel:
 srun --partition=main --nodes=1 --ntasks=1 --cpus-per-task=1 --mem=2000 --time=00:30:00 --export=ALL --pty bash -i
 
 #called #PGDSpider in ~/Programs/PGDSpider_2.1.1.5
-java -Xmx1024m -Xms512m -jar PGDSpider2-cli.jar -inputfile output.hicov2.snps.only.mac2.vsc -inputformat VCF -outputfile STRUCTURE_mac2.txt -outputformat STRUCTURE -spid VCF_STRUCTURE.spid
+java -Xmx1024m -Xms512m -jar PGDSpider2-cli.jar -inputfile output.hicov2.snps.only.mac2.vcf -inputformat VCF -outputfile STRUCTURE_mac2.txt -outputformat STRUCTURE -spid VCF_STRUCTURE.spid
 
 #NOTE: if don't have spid file made, or know proper format, running the previous line of code without the -spid argument will generate a template spid file to modify as needed
 ```
