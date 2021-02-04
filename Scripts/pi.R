@@ -308,3 +308,139 @@ pi_site_boxplot_annotated <- pi_site_boxplot + theme_bw() +
         axis.title = element_text(size = 14, face = "bold"), legend.position = "top", 
         legend.text = element_text(size = 12), legend.title = element_text(size = 12))
 pi_site_boxplot_annotated
+
+########################################################################################################
+
+######## Site pi calculations (synonymous sites only) ########
+#calculated with mac = 1 & only synonymous sites
+#designed to be run separately from previous sections
+
+remove(list = ls())
+
+#load libraries
+library(tidyverse)
+library(boot)
+
+#read in data
+#site pi all calculated with mac1
+SYN_allsites_pi <- read.csv("Data/SYN_mac1_Allpi.csv", header = TRUE) #read in data from vcftools
+SYN_Jsites_pi <- read.csv("Data/SYN_mac1_Jpi.csv", header = TRUE)
+SYN_Nsites_pi <- read.csv("Data/SYN_mac1_Npi.csv", header = TRUE)
+SYN_Psites_pi <- read.csv("Data/SYN_mac1_Ppi.csv", header = TRUE)
+contig_length <- read.csv("Data/Contig_length.csv", header = TRUE)
+colnames(contig_length) <- c("CHROM", "Contig.length")
+
+######## Calculate mean pi by site ########
+
+#read in total bp in transcriptome
+total_bp_ref <- 45506763 #total bp in New_ref_N3.fa
+total_bp_transcripts <- 534055 #total bp in transcripts included in mac2 VCF
+
+#### All pops ####
+sum_allpi <- sum(SYN_allsites_pi$PI) #sum pi across all sites
+
+#average pi across transcriptome
+mean_allpi_total <- sum_allpi/total_bp_ref #0.0000235
+mean_allpi_transcripts <- sum_allpi/total_bp_transcripts #0.000955
+
+#add columns to write out together
+SYN_allsites_pi$Pop <- c(rep("All", times = 1453))
+SYN_allsites_pi$NUM <- c(1:1453)
+
+#calculate pi by transcript
+allsites_pi_aggregate <- aggregate(SYN_allsites_pi$PI~SYN_allsites_pi$CHROM, FUN = sum) #sum pi by transcript
+colnames(allsites_pi_aggregate) <- c("CHROM", "PI")
+
+allsites_pi_aggregate <- merge(allsites_pi_aggregate, contig_length) #merge with contig length
+allsites_pi_aggregate$pi_avg <- NA #create empty column to populate
+
+for(i in 1:nrow(allsites_pi_aggregate)) {
+  cat(paste(i, " ", sep = ''))
+  {allsites_pi_aggregate$pi_avg[i] <- allsites_pi_aggregate$PI[i]/allsites_pi_aggregate$Contig.length[i]}
+}
+
+allsites_pi_aggregate$Pop <- c(rep("All", times = 498))
+allsites_pi_aggregate$NUM <- c(1:498)
+
+#### J pop ####
+sum_Jpi <- sum(SYN_Jsites_pi$PI)
+mean_Jpi_total <- sum_Jpi/total_bp_ref #0.0000198
+mean_Jpi_transcripts <- sum_Jpi/total_bp_transcripts #0.000844
+
+#add columns to write out together
+SYN_Jsites_pi$Pop <- c(rep("Japan", times = 1453))
+SYN_Jsites_pi$NUM <- c(1:1453)
+
+#calculate pi by transcript
+Jsites_pi_aggregate <- aggregate(SYN_Jsites_pi$PI~SYN_Jsites_pi$CHROM, FUN = sum) #sum pi by transcript
+colnames(Jsites_pi_aggregate) <- c("CHROM", "PI")
+
+Jsites_pi_aggregate <- merge(Jsites_pi_aggregate, contig_length) #merge with contig length
+Jsites_pi_aggregate$pi_avg <- NA #create empty column to populate
+
+for(i in 1:nrow(Jsites_pi_aggregate)) {
+  cat(paste(i, " ", sep = ''))
+  {Jsites_pi_aggregate$pi_avg[i] <- Jsites_pi_aggregate$PI[i]/Jsites_pi_aggregate$Contig.length[i]}
+}
+
+Jsites_pi_aggregate$Pop <- c(rep("Japan", times = 498))
+Jsites_pi_aggregate$NUM <- c(1:498)
+
+#### P pop ####
+sum_Ppi <- sum(SYN_Psites_pi$PI)
+mean_Ppi_total <- sum_Ppi/total_bp_ref #0.0000225
+mean_Ppi_transcripts <- sum_Ppi/total_bp_transcripts #0.000964
+
+#add columns to write out together
+SYN_Psites_pi$Pop <- c(rep("Philippines", times = 1453))
+SYN_Psites_pi$NUM <- c(1:1453)
+
+#calculate pi by transcript
+Psites_pi_aggregate <- aggregate(SYN_Psites_pi$PI~SYN_Psites_pi$CHROM, FUN = sum) #sum pi by transcript
+colnames(Psites_pi_aggregate) <- c("CHROM", "PI")
+
+Psites_pi_aggregate <- merge(Psites_pi_aggregate, contig_length) #merge with contig length
+Psites_pi_aggregate$pi_avg <- NA #create empty column to populate
+
+for(i in 1:nrow(Psites_pi_aggregate)) {
+  cat(paste(i, " ", sep = ''))
+  {Psites_pi_aggregate$pi_avg[i] <- Psites_pi_aggregate$PI[i]/Psites_pi_aggregate$Contig.length[i]}
+}
+
+Psites_pi_aggregate$Pop <- c(rep("Philippines", times = 498))
+Psites_pi_aggregate$NUM <- c(1:498)
+
+#### N pop ####
+sum_Npi <- sum(SYN_Nsites_pi$PI)
+mean_Npi_total <- sum_Npi/total_bp_ref #0.0000223
+mean_Npi_transcripts <- sum_Npi/total_bp_transcripts #0.000953
+
+#add columns to write out together
+SYN_Nsites_pi$Pop <- c(rep("Indonesia", times = 1453))
+SYN_Nsites_pi$NUM <- c(1:1453)
+
+#calculate pi by transcript
+Nsites_pi_aggregate <- aggregate(SYN_Nsites_pi$PI~SYN_Nsites_pi$CHROM, FUN = sum) #sum pi by transcript
+colnames(Nsites_pi_aggregate) <- c("CHROM", "PI")
+
+Nsites_pi_aggregate <- merge(Nsites_pi_aggregate, contig_length) #merge with contig length
+Nsites_pi_aggregate$pi_avg <- NA #create empty column to populate
+
+for(i in 1:nrow(Nsites_pi_aggregate)) {
+  cat(paste(i, " ", sep = ''))
+  {Nsites_pi_aggregate$pi_avg[i] <- Nsites_pi_aggregate$PI[i]/Nsites_pi_aggregate$Contig.length[i]}
+}
+
+Nsites_pi_aggregate$Pop <- c(rep("Indonesia", times = 498))
+Nsites_pi_aggregate$NUM <- c(1:498)
+
+#merge dataframes
+SYN_pi_site_all <- rbind(SYN_Jsites_pi, SYN_Psites_pi, SYN_Nsites_pi, SYN_allsites_pi)
+lapply(SYN_pi_site_all, class) #check character class for columns
+
+pi_site_all_aggregate <- rbind(Jsites_pi_aggregate, Psites_pi_aggregate, Nsites_pi_aggregate, allsites_pi_aggregate)
+lapply(pi_site_all_aggregate, class)
+
+#write out combined data
+write.csv(SYN_pi_site_all, "Data/pi_combined_site_mac1_SYN_full.csv")
+write.csv(pi_site_all_aggregate, "Data/pi_combined_site_full_mac1_SYN_aggregate.csv")
