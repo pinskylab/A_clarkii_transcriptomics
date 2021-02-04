@@ -20,7 +20,7 @@ vcftools --vcf output.hicov2.snps.only.mac2.vcf --keep J_individuals.txt --recod
 #repeated for Philippines & Indonesia
 ```
 
-Calculated site pi, both within each population and with the full dataset (all individuals included in VCF):
+Calculated site pi, both within each population and with the full dataset (all individuals included in VCF). Also calculate with only synonymous SNPs (see `TajimasD_upstream.md` for more information on how SNPs were identified):
 
 ``` bash
 #NOTE: don't grab interactive node for VCFtools jobs bc run in seconds, BUT if is more data-intensive, should get off log-in node to do this.
