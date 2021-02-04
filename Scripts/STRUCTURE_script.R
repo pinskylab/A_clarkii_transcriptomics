@@ -23,8 +23,6 @@ library(gtable)
 library(pophelper)
 
 #read in data
-#mac2_SNPs_sfiles <- list.files(path = "../../STRUCTURE_Output/allSNPs_results/mac2/mac2SNPs_StructureResults/", full.names = TRUE)
- # mac2_SNPs_slist <- readQ(files = mac2_SNPs_sfiles, filetype = "structure")
 mac2_SNPs_sfiles <- list.files(path = "Data/STRUCTURE_Output/allSNPs_results/mac2SNPs_StructureResults/", full.names = TRUE)
   mac2_SNPs_slist <- readQ(files = mac2_SNPs_sfiles, filetype = "structure") 
 mac2_HWE_SNPs_sfiles <- list.files(path = "Data/STRUCTURE_Output/inhweSNPs_results/inhwe_mac2_StructureResults/", full.names = TRUE)
