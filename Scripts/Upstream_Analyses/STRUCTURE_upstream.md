@@ -152,7 +152,7 @@ Advanced data file options
 #define NOTAMBIGUOUS  -999 // (int) for use in some analyses of polyploid data
 ```
 
-`extraparams` file structure (top lines). Ran with the admixture model, correlated allele frequencies and incorporated prior location information:
+`extraparams` file structure (top lines). Ran with the admixture model and correlated allele frequencies:
 
 ``` bash
 EXTRA PARAMS FOR THE PROGRAM structure.  THESE PARAMETERS CONTROL HOW THE
@@ -170,7 +170,7 @@ PROGRAM OPTIONS
 #define LINKAGE     0 // (B) Use the linkage model model
 #define USEPOPINFO  0 // (B) Use prior population information to pre-assign individuals to clusters
 
-#define LOCPRIOR    1 //(B)  Use location information to improve weak data (LOCISPOP = 1)
+#define LOCPRIOR    0 //(B)  Use location information to improve weak data (LOCISPOP = 1)
 
 #define FREQSCORR   1 // (B) allele frequencies are correlated among pops
 
