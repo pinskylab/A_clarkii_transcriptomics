@@ -15,7 +15,7 @@ Data for R scripts or upstream analyses on Amarel:
 * **clownfish_data.env** & **clownfish_data_std.env:** Raw and standardized environmental variable data for each sample site. Input files for BayPass core and auxiliary models on Amarel (once separated into files for each environmental variable).
 * **clownfish_mac2_mat.cov:** Input file with covariance matrix for BayPass (experimental data). Created by running BayPass core model on Amarel. Read into `XtX_Calibration.R`.
 * **mac2core1_pod_mat_omega.out:** Output file from running BayPass core model on Amarel (pseudo-observed datasets (PODs)). Contains covariance matrix. Read into `XtX_Calibration.R`.
-* **mac2core1_summary_beta_params.out:**Output file from running BayPass core model on Amarel (either experimental or POD data). Contains estimates for beta parameters. Read into `XtX_Calibration.R`.
+* **mac2core1_summary_beta_params.out:** Output file from running BayPass core model on Amarel (either experimental or POD data). Contains estimates for beta parameters. Read into `XtX_Calibration.R`.
 * **mac2core1_summary_pi_xtx.out:** Output file from running BayPass core model on Amarel (either experimental or POD data). Contains XtX estimates for each SNP. Read into `XtX_Calibration.R`.
 * **Individual_Env_Data.csv:** Environmental variable data for each individual. Read into `Write Simulation Pop Data for BayPass.R`.
 * **M-W_test_BF_data.csv:** BFs for experimental dataset (raw) and permuted datasets (mean) for each SNP/environmental variable combination. Read into `ECDFs for Sim v Real BFs.R`.
