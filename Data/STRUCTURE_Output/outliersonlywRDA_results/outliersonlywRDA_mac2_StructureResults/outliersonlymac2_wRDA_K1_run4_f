@@ -1,0 +1,423 @@
+
+
+----------------------------------------------------
+STRUCTURE by Pritchard, Stephens and Donnelly (2000)
+     and Falush, Stephens and Pritchard (2003)
+       Code by Pritchard, Falush and Hubisz
+             Version 2.3.4 (Jul 2012)
+----------------------------------------------------
+
+
+
+Command line arguments:   structure -m mainparams_K1 -o outliersonlymac2_wRDA_K1_run4 
+Input File:    STRUCTURE_mac2_outliersonlywRDA.txt
+
+Run parameters:
+   25 individuals
+   56 loci
+   1 populations assumed
+   100000 Burn-in period
+   10000 Reps
+
+
+--------------------------------------------
+Proportion of membership of each pre-defined
+ population in each of the 1 clusters
+
+Given    Inferred Clusters       Number of
+ Pop       1                    Individuals
+
+  1:     1.000                      8
+  2:     1.000                      7
+  3:     1.000                     10
+--------------------------------------------
+
+Allele-freq. divergence among pops (Net nucleotide distance),
+computed using point estimates of P.
+
+      1      
+ 1      -    
+
+Average distances (expected heterozygosity) between individuals in same cluster:
+cluster  1  : 0.4289 
+
+--------------------------------------------
+Estimated Ln Prob of Data   = -1752.0
+Mean value of ln likelihood = -1739.7
+Variance of ln likelihood   = 24.6
+
+Mean value of Fst_1         = 0.0093
+
+
+Inferred ancestry of individuals:
+        Label (%Miss) Pop:  Inferred clusters
+  1      J11    (0)    1 :  1.000 
+  2      J13    (0)    1 :  1.000 
+  3      J15    (0)    1 :  1.000 
+  4      J17    (0)    1 :  1.000 
+  5      J19    (0)    1 :  1.000 
+  6       J3    (0)    1 :  1.000 
+  7       J5    (0)    1 :  1.000 
+  8       J9    (0)    1 :  1.000 
+  9       N1    (0)    2 :  1.000 
+ 10       N2    (0)    2 :  1.000 
+ 11       N3    (0)    2 :  1.000 
+ 12       N4    (0)    2 :  1.000 
+ 13       N5    (0)    2 :  1.000 
+ 14       N6    (0)    2 :  1.000 
+ 15       N7    (0)    2 :  1.000 
+ 16       P1    (0)    3 :  1.000 
+ 17      P10    (0)    3 :  1.000 
+ 18      P14    (0)    3 :  1.000 
+ 19      P16    (0)    3 :  1.000 
+ 20      P18    (0)    3 :  1.000 
+ 21      P20    (0)    3 :  1.000 
+ 22      P22    (0)    3 :  1.000 
+ 23      P24    (0)    3 :  1.000 
+ 24       P3    (0)    3 :  1.000 
+ 25       P6    (0)    3 :  1.000 
+
+
+Estimated Allele Frequencies in each cluster
+First column gives estimated ancestral frequencies
+
+
+Locus 1 : SNP_1 
+2 alleles
+0.0% missing data
+   1   (0.278) 0.274 
+   3   (0.722) 0.726 
+
+Locus 2 : SNP_2 
+2 alleles
+0.0% missing data
+   3   (0.290) 0.285 
+   1   (0.710) 0.715 
+
+Locus 3 : SNP_3 
+2 alleles
+0.0% missing data
+   1   (0.294) 0.291 
+   3   (0.706) 0.709 
+
+Locus 4 : SNP_4 
+2 alleles
+0.0% missing data
+   1   (0.269) 0.265 
+   4   (0.731) 0.735 
+
+Locus 5 : SNP_5 
+2 alleles
+0.0% missing data
+   3   (0.338) 0.334 
+   2   (0.662) 0.666 
+
+Locus 6 : SNP_6 
+2 alleles
+0.0% missing data
+   3   (0.263) 0.257 
+   4   (0.737) 0.743 
+
+Locus 7 : SNP_7 
+2 alleles
+0.0% missing data
+   3   (0.694) 0.698 
+   1   (0.306) 0.302 
+
+Locus 8 : SNP_8 
+2 alleles
+0.0% missing data
+   4   (0.557) 0.558 
+   1   (0.443) 0.442 
+
+Locus 9 : SNP_9 
+2 alleles
+0.0% missing data
+   3   (0.767) 0.772 
+   1   (0.233) 0.228 
+
+Locus 10 : SNP_10 
+2 alleles
+0.0% missing data
+   1   (0.264) 0.260 
+   4   (0.736) 0.740 
+
+Locus 11 : SNP_11 
+2 alleles
+0.0% missing data
+   3   (0.341) 0.340 
+   2   (0.659) 0.660 
+
+Locus 12 : SNP_12 
+2 alleles
+0.0% missing data
+   2   (0.311) 0.309 
+   3   (0.689) 0.691 
+
+Locus 13 : SNP_13 
+2 alleles
+0.0% missing data
+   3   (0.829) 0.835 
+   1   (0.171) 0.165 
+
+Locus 14 : SNP_14 
+2 alleles
+0.0% missing data
+   3   (0.832) 0.837 
+   1   (0.168) 0.163 
+
+Locus 15 : SNP_15 
+2 alleles
+0.0% missing data
+   2   (0.632) 0.634 
+   4   (0.368) 0.366 
+
+Locus 16 : SNP_16 
+2 alleles
+0.0% missing data
+   1   (0.332) 0.329 
+   3   (0.668) 0.671 
+
+Locus 17 : SNP_17 
+2 alleles
+0.0% missing data
+   2   (0.311) 0.306 
+   3   (0.689) 0.694 
+
+Locus 18 : SNP_18 
+2 alleles
+0.0% missing data
+   2   (0.584) 0.585 
+   4   (0.416) 0.415 
+
+Locus 19 : SNP_19 
+2 alleles
+0.0% missing data
+   3   (0.328) 0.325 
+   2   (0.672) 0.675 
+
+Locus 20 : SNP_20 
+2 alleles
+0.0% missing data
+   3   (0.291) 0.286 
+   1   (0.709) 0.714 
+
+Locus 21 : SNP_21 
+2 alleles
+0.0% missing data
+   1   (0.281) 0.276 
+   3   (0.719) 0.724 
+
+Locus 22 : SNP_22 
+2 alleles
+0.0% missing data
+   2   (0.217) 0.211 
+   4   (0.783) 0.789 
+
+Locus 23 : SNP_23 
+2 alleles
+0.0% missing data
+   4   (0.216) 0.210 
+   1   (0.784) 0.790 
+
+Locus 24 : SNP_24 
+2 alleles
+0.0% missing data
+   1   (0.380) 0.377 
+   3   (0.620) 0.623 
+
+Locus 25 : SNP_25 
+2 alleles
+0.0% missing data
+   2   (0.560) 0.560 
+   4   (0.440) 0.440 
+
+Locus 26 : SNP_26 
+2 alleles
+0.0% missing data
+   2   (0.434) 0.431 
+   4   (0.566) 0.569 
+
+Locus 27 : SNP_27 
+2 alleles
+0.0% missing data
+   2   (0.424) 0.422 
+   3   (0.576) 0.578 
+
+Locus 28 : SNP_28 
+2 alleles
+0.0% missing data
+   3   (0.551) 0.553 
+   1   (0.449) 0.447 
+
+Locus 29 : SNP_29 
+2 alleles
+0.0% missing data
+   4   (0.593) 0.595 
+   2   (0.407) 0.405 
+
+Locus 30 : SNP_30 
+2 alleles
+0.0% missing data
+   4   (0.583) 0.585 
+   3   (0.417) 0.415 
+
+Locus 31 : SNP_31 
+2 alleles
+0.0% missing data
+   1   (0.574) 0.574 
+   3   (0.426) 0.426 
+
+Locus 32 : SNP_32 
+2 alleles
+0.0% missing data
+   3   (0.556) 0.559 
+   1   (0.444) 0.441 
+
+Locus 33 : SNP_33 
+2 alleles
+0.0% missing data
+   1   (0.179) 0.173 
+   3   (0.821) 0.827 
+
+Locus 34 : SNP_34 
+2 alleles
+0.0% missing data
+   4   (0.599) 0.602 
+   2   (0.401) 0.398 
+
+Locus 35 : SNP_35 
+2 alleles
+0.0% missing data
+   2   (0.591) 0.593 
+   4   (0.409) 0.407 
+
+Locus 36 : SNP_36 
+2 alleles
+0.0% missing data
+   4   (0.612) 0.614 
+   2   (0.388) 0.386 
+
+Locus 37 : SNP_37 
+2 alleles
+0.0% missing data
+   4   (0.665) 0.668 
+   2   (0.335) 0.332 
+
+Locus 38 : SNP_38 
+2 alleles
+0.0% missing data
+   1   (0.348) 0.345 
+   3   (0.652) 0.655 
+
+Locus 39 : SNP_39 
+2 alleles
+0.0% missing data
+   4   (0.279) 0.275 
+   3   (0.721) 0.725 
+
+Locus 40 : SNP_40 
+2 alleles
+0.0% missing data
+   3   (0.511) 0.512 
+   1   (0.489) 0.488 
+
+Locus 41 : SNP_41 
+2 alleles
+0.0% missing data
+   2   (0.270) 0.267 
+   4   (0.730) 0.733 
+
+Locus 42 : SNP_42 
+2 alleles
+0.0% missing data
+   4   (0.555) 0.556 
+   3   (0.445) 0.444 
+
+Locus 43 : SNP_43 
+2 alleles
+0.0% missing data
+   1   (0.797) 0.803 
+   2   (0.203) 0.197 
+
+Locus 44 : SNP_44 
+2 alleles
+0.0% missing data
+   3   (0.529) 0.530 
+   4   (0.471) 0.470 
+
+Locus 45 : SNP_45 
+2 alleles
+0.0% missing data
+   1   (0.540) 0.542 
+   3   (0.460) 0.458 
+
+Locus 46 : SNP_46 
+2 alleles
+0.0% missing data
+   1   (0.578) 0.579 
+   3   (0.422) 0.421 
+
+Locus 47 : SNP_47 
+2 alleles
+0.0% missing data
+   1   (0.587) 0.589 
+   4   (0.413) 0.411 
+
+Locus 48 : SNP_48 
+2 alleles
+0.0% missing data
+   2   (0.573) 0.575 
+   4   (0.427) 0.425 
+
+Locus 49 : SNP_49 
+2 alleles
+0.0% missing data
+   2   (0.790) 0.795 
+   3   (0.210) 0.205 
+
+Locus 50 : SNP_50 
+2 alleles
+0.0% missing data
+   1   (0.577) 0.579 
+   3   (0.423) 0.421 
+
+Locus 51 : SNP_51 
+2 alleles
+0.0% missing data
+   4   (0.558) 0.558 
+   3   (0.442) 0.442 
+
+Locus 52 : SNP_52 
+2 alleles
+0.0% missing data
+   3   (0.725) 0.730 
+   1   (0.275) 0.270 
+
+Locus 53 : SNP_53 
+2 alleles
+0.0% missing data
+   2   (0.726) 0.730 
+   4   (0.274) 0.270 
+
+Locus 54 : SNP_54 
+2 alleles
+0.0% missing data
+   3   (0.813) 0.820 
+   4   (0.187) 0.180 
+
+Locus 55 : SNP_55 
+2 alleles
+0.0% missing data
+   3   (0.465) 0.465 
+   2   (0.535) 0.535 
+
+Locus 56 : SNP_56 
+2 alleles
+0.0% missing data
+   3   (0.781) 0.788 
+   1   (0.219) 0.212 
+
+Values of parameters used in structure:
+DATAFILE=STRUCTURE_mac2_outliersonlywRDA.txt,	OUTFILE=outliersonlymac2_wRDA_K1_run4,	NUMINDS=25,	NUMLOCI=56,	MISSING=-9,	LABEL=1,	POPDATA=1,	POPFLAG=0,	PHENOTYPE=0,	EXTRACOLS=0,	MAXPOPS=1,	BURNIN=100000,	NUMREPS=10000,	USEPOPINFO=0,	INFERALPHA=1,	INFERLAMBDA=0,	POPSPECIFICLAMBDA=0,	POPALPHAS=0,	COMPUTEPROB=1,	NOADMIX=0,	ADMBURNIN=500,	UPDATEFREQ=100,	PRINTLIKES=0,	INTERMEDSAVE=0,	PRINTKLD=0,	PRINTNET=1,	PRINTLAMBDA=1,	ANCESTDIST=0,	NUMBOXES=1000,	ANCESTPINT=0.90000,	GENSBACK=2,	MIGRPRIOR=0.01000,	PRINTQHAT=0,	PRINTQSUM=1,	ALPHA=1.0000,	FREQSCORR=1,	FPRIORMEAN=0.0100,	FPRIORSD=0.0500,	ONEFST=0,	LAMBDA=1.0000,	UNIFPRIORALPHA=1,	ALPHAMAX=10.0000,	ALPHAPRIORA=1.0000,	ALPHAPRIORB=2.0000,	ALPHAPROPSD=0.0250,	STARTATPOPINFO=0,	RANDOMIZE=1,	LINKAGE=0,	METROFREQ=10,	REPORTHITRATE=0,	MARKOVPHASE=0,	PHASED=0,	PLOIDY=2,	PHASEINFO=0	LOCPRIOR=0, 	LOCPRIORINIT=1.000000, 	LOCDATA=0, 	LOCISPOP=1, 	LOCPRIORSTEP=0.100000, 	MAXLOCPRIOR=20.000000, 	SEED=1618168651,	
+[STRAT parameters]:    NUMSIMSTATS=1000,	PHENOTYPECOL=-9,	POOLFREQ=10,	LOCUSxONLY=0,	EMERROR=0.00100,	MISSINGPHENO=-9,	
