@@ -2,6 +2,7 @@ Contains files either read into R scripts or uploaded to Amarel for analyses. Al
 
 Metadata and data unrelated to specific scripts:
  * **Aclarkii_metadata.csv:** Metadata for individuals (sampling location, time, etc.).
+ * **Aclarkii_ref_transcriptome.fa:** Reference fasta file that reads were mapped to.
  * **annotations_combined.xlsx:** Functional and structural annotations for every outlier SNP. Also contains BFs for each environmental variable and XtX values.
 
 Data for R scripts or upstream analyses on Amarel:
