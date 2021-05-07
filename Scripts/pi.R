@@ -33,7 +33,7 @@ contig_length <- read.csv("Data/Contig_length.csv", header = TRUE) #to calculate
 ######## Calculate mean pi by site ########
 
 #read in total bp in transcriptome
-total_bp_transcripts <- 1064586 #total bp in transcripts included in mac2 VCF
+total_bp_transcripts <- 1064586 #total bp in transcripts included in mac2 VCF (mac1: 1200194)
 
 #### All pops ####
 sum_allpi <- sum(allsites_pi$PI) #sum pi across all sites
