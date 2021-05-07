@@ -18,7 +18,8 @@ library(readr)
 
 #read in data
 transcript_individs <- read_csv("Data/Individual_Env_Data.csv", col_names = TRUE) #all 25 fish with environ data divided into 3 pops
-output_hicov2_snps_only <- read_csv("Data/output.hicov2.snps.only.mac2.csv", col_names = TRUE) #modified VCF (without header)
+  transcript_individs <- transcript_individs[-12,] #only if need to remove N4
+output_hicov2_snps_only <- read_csv("Data/output.hicov2.snps.only.mac2.noN4.csv", col_names = TRUE) #modified VCF (without header)
 
 ################################################################################################################################################
 
@@ -75,7 +76,7 @@ dim(be) #check to make sure correct dimensions (8424 x 3)
 summary(be)
 
 #write out
-write.table(be, file = "Data/sim10.baypass.format.txt", sep = '\t', col.names = TRUE, row.names = FALSE) #table with J P N columns, 2*nloci rows
-write.table(ran_individ, file = "Data/sim10.popassignments.txt", sep = '\t', col.names = TRUE, row.names = FALSE) #list of sim pop assignments for individuals
+write.table(be, file = "Data/sim10.noN4.baypass.format.txt", sep = '\t', col.names = TRUE, row.names = FALSE) #table with J P N columns, 2*nloci rows
+write.table(ran_individ, file = "Data/sim10.noN4.popassignments.txt", sep = '\t', col.names = TRUE, row.names = FALSE) #list of sim pop assignments for individuals
 
 #repeat as needed to get desired number of randomized populations
