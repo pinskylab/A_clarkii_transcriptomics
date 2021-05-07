@@ -25,6 +25,10 @@ Data for R scripts or upstream analyses on Amarel:
 * **outlier_loci_mac2.csv:** List of outlier SNPs (contig_bp). Read into `Fst_script.R`.
 * **output.hicov2.snps.only.mac2_eigenvec.csv:** Eigenvectors from creating PCAs with Plink1.9 on Amarel (output imported into Excel and saved as .csv). Read into `PCAs.R`.
 * **STRUCTURE_Output:** Directories with STRUCTURE & CLUMPP output files generated with different sets of SNPs (all SNPs, SNPs in HWE, outlier SNPs only, no outlier SNPs). One set of files for wN4 and for w/out N4s. Created by running STRUCTURE on Amarel and `STRUCTURE_script.R`. Read into `STRUCTURE_script.R`.
+* **apcl_MSFS.obs:** multidimensional site frequency spectrum (experimental (not bootstrapped)). Read into *fastsimcoal2*.
+* **apcl.tpl:** tpl file that contains the model structure (sampling scheme information, number/types of demographic events, etc.) for *fastsimcoal2*. Read into *fastsimcoal2*.
+* **apcl.est:** est file that contains the prior distributions for each parameter estimated in the *fastsimcoal2* model. Read into *fastsimcoal2*.
+* **apcl_raw_bestlhoods.csv:** Parameter estimates & ML from each of the 50 *fastsimcoal2* replicate runs with `apcl_MSFS.obs`. Estimates from the best ML run are the point estimates included in the paper.
 * **output.hicov2.snps.only.mac1.nooutliersfinal.contigsonly.reordered.csv:** Body of `output.hicov2.snps.only.mac1.vcf` (no header info) without outlier loci included. Read into `Bootstrap_forSFS.R`.
 * **fsc_maxLhood_CI_summary.csv:** Parameter values from the best maximum likelihood run for each bootstrapped SFS from *fastsimcoal2*. Read into `fsc_CIs.R`.
 * **SYN_mac1_TajimasD.csv:** Tajima's D for every contig (that was able to be mapped to *A. frenatus* and contained at least one synonymous SNP). Calculated within sampling sites and with all sampling sites pooled. Created by running VCFtools on Amarel (output imported into Excel and saved as .csv). Read into `TajimaD_script.R`.
@@ -38,4 +42,3 @@ Data for R scripts or upstream analyses on Amarel:
 * **mac2_sitespi.csv:** Per-site pi for every SNP. Calculated within sampling sites and with all sampling sites pooled. Created by running VCFtools on Amarel (output imported into Excel and saved as .csv). Read into `pi.R`.
 * **SYN_mac1_pi.csv:** Pi for every contig (that was able to be mapped to A. frenatus and contained at least one synonymous SNP). Calculated within sampling sites and with all sampling sites pooled. Created by running VCFtools on Amarel (output imported into Excel and saved as .csv). Read into `pi.R`.
 * **relatedness_input_mac2.txt:** Genotype information for every SNP. Read into `relatedness.R`.
-*
