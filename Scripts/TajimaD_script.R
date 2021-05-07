@@ -74,7 +74,7 @@ full_JTD$NUM <- c(1:498)
 #pull outlier seq & stats for J pop
 J_outlierseq <- full_JTD[full_JTD$uniqseq %in% outlierseq$CONTIG, ]
 J_outlierseq <- J_outlierseq[, 1:6]
-J_outlierseq$NUM <- c(1:28) #re-numbering for plotting
+J_outlierseq$NUM <- c(1:24) #re-numbering for plotting
   J_outlierseq$TajimaD <- as.numeric(J_outlierseq$TajimaD)
 
 ######## P pop calculations ########
@@ -104,7 +104,7 @@ full_PTD$NUM <- c(1:498)
 #pull outlier seq & stats for P pop
 P_outlierseq <- full_PTD[full_PTD$uniqseq %in% outlierseq$CONTIG, ]
 P_outlierseq <- P_outlierseq[, 1:6]
-P_outlierseq$NUM <- c(1:28)
+P_outlierseq$NUM <- c(1:24)
   P_outlierseq$TajimaD <- as.numeric(P_outlierseq$TajimaD)
 
 ######## N pop calculations ########
@@ -134,7 +134,7 @@ full_NTD$NUM <- c(1:498)
 #pull outlier seq & stats for N pop
 N_outlierseq <- full_NTD[full_NTD$uniqseq %in% outlierseq$CONTIG, ]
 N_outlierseq <- N_outlierseq[, 1:6]
-N_outlierseq$NUM <- c(1:28)
+N_outlierseq$NUM <- c(1:24)
   N_outlierseq$TajimaD <- as.numeric(N_outlierseq$TajimaD)
 
 ######## Combine pop data ########
@@ -143,7 +143,7 @@ N_outlierseq$NUM <- c(1:28)
 all_outlierseq <- AllTD_data_clean[AllTD_data_clean$uniqseq %in% outlierseq$CONTIG, ]
 all_outlierseq <- all_outlierseq[order(all_outlierseq$uniqseq), ] #reorder by contig
 all_outlierseq <- all_outlierseq[, 2:7]
-all_outlierseq$NUM <- c(1:28)
+all_outlierseq$NUM <- c(1:24)
   all_outlierseq$TajimaD <- as.numeric(all_outlierseq$TajimaD)
 
 #combine TD for all seqs
@@ -173,8 +173,8 @@ J_SE_TD_all <- std.error(JTD_data_clean$TajimaD) #0.052
 #calculate mean Tajimas D for outlier seq
 J_outlierseq_clean <- J_outlierseq[which(J_outlierseq$TajimaD!='NA'),]
   J_outlierseq_clean$TajimaD <- as.numeric(J_outlierseq_clean$TajimaD)
-J_mean_TD_outlierseq <- mean(J_outlierseq_clean$TajimaD) #0.290
-J_SE_TD_outlierseq <- std.error(J_outlierseq_clean$TajimaD) #0.253
+J_mean_TD_outlierseq <- mean(J_outlierseq_clean$TajimaD) #0.031
+J_SE_TD_outlierseq <- std.error(J_outlierseq_clean$TajimaD) #0.255
 
 ######## P pop calculations ########
 
@@ -185,8 +185,8 @@ P_SE_TD_all <- std.error(PTD_data_clean$TajimaD) #0.046
 #calculate mean Tajimas D for outlier seq
 P_outlierseq_clean <- P_outlierseq[which(P_outlierseq$TajimaD!='NA'),]
   P_outlierseq_clean$TajimaD <- as.numeric(P_outlierseq_clean$TajimaD)
-P_mean_TD_outlierseq <- mean(P_outlierseq_clean$TajimaD) #0.139
-P_SE_TD_outlierseq <- std.error(P_outlierseq_clean$TajimaD) #0.231
+P_mean_TD_outlierseq <- mean(P_outlierseq_clean$TajimaD) #0.066
+P_SE_TD_outlierseq <- std.error(P_outlierseq_clean$TajimaD) #0.244
 
 ######## N pop calculations ########
 
@@ -197,8 +197,8 @@ N_SE_TD_all <- std.error(NTD_data_clean$TajimaD) #0.050
 #calculate mean Tajimas D for outlier seq
 N_outlierseq_clean <- N_outlierseq[which(N_outlierseq$TajimaD!='NA'),]
   N_outlierseq_clean$TajimaD <- as.numeric(N_outlierseq_clean$TajimaD)
-N_mean_TD_outlierseq <- mean(N_outlierseq_clean$TajimaD) #0.004
-N_SE_TD_outlierseq <- std.error(N_outlierseq_clean$TajimaD) #0.204
+N_mean_TD_outlierseq <- mean(N_outlierseq_clean$TajimaD) #0.006
+N_SE_TD_outlierseq <- std.error(N_outlierseq_clean$TajimaD) #0.244
 
 ######## All pop calculations ########
 
@@ -209,8 +209,8 @@ Tot_SE_TD_all <- std.error(AllTD_data_clean$TajimaD) #0.041
 #calculate mean Tajimas D for outlier seq
 all_outlierseq_clean <- all_outlierseq[which(all_outlierseq$TajimaD!='NA'),]
   all_outlierseq_clean$TajimaD <- as.numeric(all_outlierseq_clean$TajimaD)
-Tot_mean_TD_outlierseq <- mean(all_outlierseq_clean$TajimaD) #0.470
-Tot_SE_TD_outlierseq <- std.error(all_outlierseq_clean$TajimaD) #0.184
+Tot_mean_TD_outlierseq <- mean(all_outlierseq_clean$TajimaD) #0.012
+Tot_SE_TD_outlierseq <- std.error(all_outlierseq_clean$TajimaD) #0.208
 
 #################################################################################################################################################
 
@@ -229,8 +229,8 @@ outliers <- TD_only_all[TD_only_all$uniqseq %in% outlierseq$CONTIG, ] #df with o
 nonoutliers <- TD_only_all[!(TD_only_all$uniqseq %in% outlierseq$CONTIG), ] #df with all other loci
 
 #set seq status
-outliers$Status <- c(rep("Outlier", times = 28))
-nonoutliers$Status <- c(rep("Not_Outlier", times = 1880))
+outliers$Status <- c(rep("Outlier", times = 96))
+nonoutliers$Status <- c(rep("Not_Outlier", times = 1896))
 TD_only_all$Status <- c(rep("All", times = 1992))
 
 #merge together
@@ -300,14 +300,14 @@ Japan_df_all <- Japan_df_all[which(Japan_df_all$TajimaD!='NA'),]
 Japan_all_TD <- Japan_df_all$TajimaD
 
 #run Mann-Whitney U-test for Japan dataset
-Japan_TD_MUtest <- wilcox.test(Japan_outliers_TD, Japan_all_TD) #W = 4003, p = 0.026
+Japan_TD_MUtest <- wilcox.test(Japan_outliers_TD, Japan_all_TD) #W = 2987, p = 0.237
 
 #plot distributions
 Japan_ecdf_plot <- ggplot(data = Japan_df, aes(x = TajimaD, color = Status)) + stat_ecdf(geom = "step", size = 1.5) + 
   geom_hline(yintercept = 1, size = 1, linetype = "dashed", color = "#666666") + 
   geom_hline(yintercept = 0, size = 1, linetype = "dashed", color = "#666666") + 
-  annotate("text", x = 1.4, y = 0.65, label = "W = 4003", size = 12) + 
-  annotate("text", x = 1.4, y = 0.57, label = "p = 0.026", size = 12) + 
+  annotate("text", x = 1.4, y = 0.65, label = "W = 2987", size = 12) + 
+  annotate("text", x = 1.4, y = 0.57, label = "p = 0.237", size = 12) + 
   annotate("text", x = -1, y = 0.9, label = "Japan", size = 18)
 Japan_ecdf_plot_annotated <- Japan_ecdf_plot + theme_bw() + labs(x = "Tajima's D", y = "Proportion of loci") + 
   scale_x_continuous(limits = c(-2,2)) + scale_color_manual(values = c("#999999", "#E69F00"), labels = c("Not_Outlier", "Outlier")) + 
@@ -335,14 +335,14 @@ Philippines_df_all <- Philippines_df_all[which(Philippines_df_all$TajimaD!='NA')
 Philippines_all_TD <- Philippines_df_all$TajimaD
 
 #run Mann-Whitney U-test for Philippines dataset
-Philippines_TD_MUtest <- wilcox.test(Philippines_outliers_TD, Philippines_all_TD) #W = 5895, p = 0.097
+Philippines_TD_MUtest <- wilcox.test(Philippines_outliers_TD, Philippines_all_TD) #W = 5211, p = 0.227
 
 #plot distributions
 Philippines_ecdf_plot <- ggplot(data = Philippines_df, aes(x = TajimaD, color = Status)) + stat_ecdf(geom = "step", size = 1.5) + 
   geom_hline(yintercept = 1, size = 1, linetype = "dashed", color = "#666666") + 
   geom_hline(yintercept = 0, size = 1, linetype = "dashed", color = "#666666") + 
-  annotate("text", x = 1.4, y = 0.65, label = "W = 5895", size = 12) + 
-  annotate("text", x = 1.4, y = 0.57, label = "p = 0.097", size = 12) + 
+  annotate("text", x = 1.4, y = 0.65, label = "W = 5211", size = 12) + 
+  annotate("text", x = 1.4, y = 0.57, label = "p = 0.227", size = 12) + 
   annotate("text", x = -1, y = 0.9, label = "Philippines", size = 18)
 Philippines_ecdf_plot_annotated <- Philippines_ecdf_plot + theme_bw() + labs(x = "Tajima's D", y = "Proportion of loci") + 
   scale_x_continuous(limits = c(-2,2)) + scale_color_manual(values = c("#999999", "#E69F00"), labels = c("Not_Outlier", "Outlier")) + 
@@ -369,21 +369,21 @@ Indonesia_df_all <- Indonesia_df_all[which(Indonesia_df_all$TajimaD!='NA'),]
 Indonesia_all_TD <- Indonesia_df_all$TajimaD
 
 #run Mann-Whitney U-test for Indonesia dataset
-Indonesia_TD_MUtest <- wilcox.test(Indonesia_outliers_TD, Indonesia_all_TD) #W = 3948, p = 0.359
+Indonesia_TD_MUtest <- wilcox.test(Indonesia_outliers_TD, Indonesia_all_TD) #W = 3558, p = 0.402
 
 #plot distributions
 Indonesia_ecdf_plot <- ggplot(data = Indonesia_df, aes(x = TajimaD, color = Status)) + stat_ecdf(geom = "step", size = 1.5) + 
   geom_hline(yintercept = 1, size = 1, linetype = "dashed", color = "#666666") + 
   geom_hline(yintercept = 0, size = 1, linetype = "dashed", color = "#666666") + 
-  annotate("text", x = 1.4, y = 0.65, label = "W = 3948", size = 12) + 
-  annotate("text", x = 1.4, y = 0.57, label = "p = 0.359", size = 12) + 
+  annotate("text", x = 1.4, y = 0.65, label = "W = 3558", size = 12) + 
+  annotate("text", x = 1.4, y = 0.57, label = "p = 0.402", size = 12) + 
   annotate("text", x = -1, y = 0.9, label = "Indonesia", size = 18)
 Indonesia_ecdf_plot_annotated <- Indonesia_ecdf_plot + theme_bw() + labs(x = "Tajima's D", y = "Proportion of loci") + 
   scale_x_continuous(limits = c(-2,2)) + scale_color_manual(values = c("#999999", "#E69F00"), labels = c("Not_Outlier", "Outlier")) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(), axis.line = element_line(size = 1), 
         axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 20, color = "black"), 
-        axis.title = element_text(size = 24, face = "bold"), legend.position = "top", 
+        axis.title = element_text(size = 24, face = "bold"), legend.position = "none", 
         legend.text = element_text(size = 20), legend.title = element_blank())
 Indonesia_ecdf_plot_annotated
 
@@ -403,21 +403,21 @@ All_df_all <- All_df_all[which(All_df_all$TajimaD!='NA'),]
 All_all_TD <- All_df_all$TajimaD
 
 #run Mann-Whitney U-test for All dataset
-All_TD_MUtest <- wilcox.test(All_outliers_TD, All_all_TD) #W = 8279, p = 0.022
+All_TD_MUtest <- wilcox.test(All_outliers_TD, All_all_TD) #W = 6936, p = 0.069
 
 #plot distributions
 All_ecdf_plot <- ggplot(data = All_df, aes(x = TajimaD, color = Status)) + stat_ecdf(geom = "step", size = 1.5) + 
   geom_hline(yintercept = 1, size = 1, linetype = "dashed", color = "#666666") + 
   geom_hline(yintercept = 0, size = 1, linetype = "dashed", color = "#666666") + 
-  annotate("text", x = 1.4, y = 0.65, label = "W = 8279", size = 12) + 
-  annotate("text", x = 1.4, y = 0.57, label = "p = 0.022", size = 12) + 
+  annotate("text", x = 1.4, y = 0.65, label = "W = 6936", size = 12) + 
+  annotate("text", x = 1.4, y = 0.57, label = "p = 0.069", size = 12) + 
   annotate("text", x = -1, y = 0.9, label = "All", size = 18)
 All_ecdf_plot_annotated <- All_ecdf_plot + theme_bw() + labs(x = "Tajima's D", y = "Proportion of loci") + 
   scale_x_continuous(limits = c(-2,2)) + scale_color_manual(values = c("#999999", "#E69F00"), labels = c("Not_Outlier", "Outlier")) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(), axis.line = element_line(size = 1), 
         axis.ticks = element_line(color = "black", size = 1), axis.text = element_text(size = 20, color = "black"), 
-        axis.title = element_text(size = 24, face = "bold"), legend.position = "top", 
+        axis.title = element_text(size = 24, face = "bold"), legend.position = "none", 
         legend.text = element_text(size = 20), legend.title = element_blank())
 All_ecdf_plot_annotated
 
