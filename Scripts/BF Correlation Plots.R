@@ -209,79 +209,100 @@ BF_correlation_all_plot
 ######## BF v. XtX scatter plots ########
 
 #SSSmean v. XtX plot
-SSSmean_XtX_plot <- ggplot(data = BFs, aes(x = SSS_Mean, y = M_XtX)) + 
+SSSmean_XtX_plot <- ggplot(data = BFs, aes(x = SSS_Mean, y = M_XtX, color = Outlier_Status, shape = Outlier_Status)) + 
   annotate("rect", xmin = 20, xmax = Inf, ymin = 6.03, ymax = Inf, fill = "darkolivegreen", alpha = 0.4) + 
-  geom_hline(yintercept = 6.03, size = 2, color = "#999999", linetype = "dashed") + 
-  geom_vline(xintercept = 20, size = 2, color = "#999999", linetype = "dashed") + 
-  geom_point(aes(size = 0.5, alpha = 0.1)) + 
-  annotate("text", x = 3, y = 24, label = "A", size = 15)
-SSSmean_XtX_annotated_plot <- SSSmean_XtX_plot + labs(x = "SSS Mean BF", y = "XtX") + 
+  geom_hline(yintercept = 6.03, size = 1.5, color = "#000000", linetype = "dashed") + 
+  geom_vline(xintercept = 20, size = 1.5, color = "#000000", linetype = "dashed") + 
+  geom_point(size = 8, alpha = 0.65) + 
+  annotate("text", x = 3, y = 24, label = "A", size = 15) + 
+  scale_color_manual(values = c("#999999", "#000000"), labels = c("Non-Outlier", "Outlier")) + 
+  scale_shape_manual(values = c(19, 17), labels = c("Non-Outlier", "Outlier")) + 
+  guides(alpha = FALSE, size = FALSE, color = guide_legend(override.aes = list(size = 8)))
+SSSmean_XtX_annotated_plot <- SSSmean_XtX_plot + labs(x = "SSS Mean BF (dB)", y = "XtX") + 
   theme_bw() + scale_y_continuous(limits = c(0, 25)) + scale_x_continuous(limits = c(0, 55)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
-        legend.position = "none", plot.margin = unit(c(.5,.5,.75,.5), "cm"))
+        axis.text = element_text(size = 28, color = "black"), axis.title = element_text(size = 30), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.75,.5), "cm"), legend.text = element_text(size = 26), 
+        legend.title = element_blank())
 SSSmean_XtX_annotated_plot
 
 #SSTmean v. XtX plot
-SSTmean_XtX_plot <- ggplot(data = BFs, aes(x = SST_Mean, y = M_XtX)) + 
+SSTmean_XtX_plot <- ggplot(data = BFs, aes(x = SST_Mean, y = M_XtX, color = Outlier_Status, shape = Outlier_Status)) + 
   annotate("rect", xmin = 20, xmax = Inf, ymin = 6.03, ymax = Inf, fill = "darkolivegreen", alpha = 0.4) + 
-  geom_hline(yintercept = 6.03, size = 2, color = "#999999", linetype = "dashed") + 
-  geom_vline(xintercept = 20, size = 2, color = "#999999", linetype = "dashed") + 
-  geom_point(aes(size = 0.5, alpha = 0.1)) + 
-  annotate("text", x = 3, y = 24, label = "B", size = 15)
-SSTmean_XtX_annotated_plot <- SSTmean_XtX_plot + labs(x = "SST Mean BF", y = "XtX") + 
+  geom_hline(yintercept = 6.03, size = 1.5, color = "#000000", linetype = "dashed") + 
+  geom_vline(xintercept = 20, size = 1.5, color = "#000000", linetype = "dashed") + 
+  geom_point(size = 8, alpha = 0.65) + 
+  annotate("text", x = 3, y = 24, label = "B", size = 15) + 
+  scale_color_manual(values = c("#999999", "#000000"), labels = c("Non-Outlier", "Outlier")) + 
+  scale_shape_manual(values = c(19, 17), labels = c("Non-Outlier", "Outlier")) + 
+  guides(alpha = FALSE, size = FALSE, color = guide_legend(override.aes = list(size = 8)))
+SSTmean_XtX_annotated_plot <- SSTmean_XtX_plot + labs(x = "SST Mean BF (dB)", y = "XtX") + 
   theme_bw() + scale_y_continuous(limits = c(0, 25)) + scale_x_continuous(limits = c(0, 55)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
-        legend.position = "none", plot.margin = unit(c(.5,.5,.75,.5), "cm"))
+        axis.text = element_text(size = 28, color = "black"), axis.title = element_text(size = 30), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.75,.5), "cm"), legend.text = element_text(size = 26), 
+        legend.title = element_blank())
 SSTmean_XtX_annotated_plot
 
 #SSTmin v. XtX plot
-SSTmin_XtX_plot <- ggplot(data = BFs, aes(x = BFs$SST_Min, y = BFs$M_XtX)) +  
+SSTmin_XtX_plot <- ggplot(data = BFs, aes(x = SST_Min, y = M_XtX, color = Outlier_Status, shape = Outlier_Status)) + 
   annotate("rect", xmin = 20, xmax = Inf, ymin = 6.03, ymax = Inf, fill = "darkolivegreen", alpha = 0.4) + 
-  geom_hline(yintercept = 6.03, size = 2, color = "#999999", linetype = "dashed") + 
-  geom_vline(xintercept = 20, size = 2, color = "#999999", linetype = "dashed") + 
-  geom_point(aes(size = 0.5, alpha = 0.1)) + 
-  annotate("text", x = 3, y = 24, label = "C", size = 15)
-SSTmin_XtX_annotated_plot <- SSTmin_XtX_plot + labs(x = "SST Minimum BF", y = "XtX") + 
+  geom_hline(yintercept = 6.03, size = 1.5, color = "#000000", linetype = "dashed") + 
+  geom_vline(xintercept = 20, size = 1.5, color = "#000000", linetype = "dashed") + 
+  geom_point(size = 8, alpha = 0.65) + 
+  annotate("text", x = 3, y = 24, label = "C", size = 15) + 
+  scale_color_manual(values = c("#999999", "#000000"), labels = c("Non-Outlier", "Outlier")) + 
+  scale_shape_manual(values = c(19, 17), labels = c("Non-Outlier", "Outlier")) + 
+  guides(alpha = FALSE, size = FALSE, color = guide_legend(override.aes = list(size = 8)))
+SSTmin_XtX_annotated_plot <- SSTmin_XtX_plot + labs(x = "SST Min BF (dB)", y = "XtX") + 
   theme_bw() + scale_y_continuous(limits = c(0, 25)) + scale_x_continuous(limits = c(0, 55)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
-        legend.position = "none", plot.margin = unit(c(.5,.5,.75,.5), "cm"))
+        axis.text = element_text(size = 28, color = "black"), axis.title = element_text(size = 30), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.75,.5), "cm"), legend.text = element_text(size = 26), 
+        legend.title = element_blank())
 SSTmin_XtX_annotated_plot
 
 #SSTmax v. XtX plot
-SSTmax_XtX_plot <- ggplot(data = BFs, aes(x = SST_Max, y = M_XtX)) + 
+SSTmax_XtX_plot <- ggplot(data = BFs, aes(x = SST_Max, y = M_XtX, color = Outlier_Status, shape = Outlier_Status)) + 
   annotate("rect", xmin = 20, xmax = Inf, ymin = 6.03, ymax = Inf, fill = "darkolivegreen", alpha = 0.4) + 
-  geom_hline(yintercept = 6.03, size = 2, color = "#999999", linetype = "dashed") + 
-  geom_vline(xintercept = 20, size = 2, color = "#999999", linetype = "dashed") + 
-  geom_point(aes(size = 0.5, alpha = 0.1)) + 
-  annotate("text", x = 3, y = 24, label = "D", size = 15)
-SSTmax_XtX_annotated_plot <- SSTmax_XtX_plot + labs(x = "SST Maximum BF", y = "XtX") + 
+  geom_hline(yintercept = 6.03, size = 1.5, color = "#000000", linetype = "dashed") + 
+  geom_vline(xintercept = 20, size = 1.5, color = "#000000", linetype = "dashed") + 
+  geom_point(size = 8, alpha = 0.65) + 
+  annotate("text", x = 3, y = 24, label = "D", size = 15) + 
+  scale_color_manual(values = c("#999999", "#000000"), labels = c("Non-Outlier", "Outlier")) + 
+  scale_shape_manual(values = c(19, 17), labels = c("Non-Outlier", "Outlier")) + 
+  guides(alpha = FALSE, size = FALSE, color = guide_legend(override.aes = list(size = 8)))
+SSTmax_XtX_annotated_plot <- SSTmax_XtX_plot + labs(x = "SST Max BF (dB)", y = "XtX") + 
   theme_bw() + scale_y_continuous(limits = c(0, 25)) + scale_x_continuous(limits = c(0, 55)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-      axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
-      legend.position = "none", plot.margin = unit(c(.5,.5,.5,.5), "cm"))
+        axis.text = element_text(size = 28, color = "black"), axis.title = element_text(size = 30), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.75,.5), "cm"), legend.text = element_text(size = 26), 
+        legend.title = element_blank())
 SSTmax_XtX_annotated_plot
 
 #Lat v. XtX plot
-Lat_XtX_plot <- ggplot(data = BFs, aes(x = Lat, y = M_XtX)) + 
+Lat_XtX_plot <- ggplot(data = BFs, aes(x = Lat, y = M_XtX, color = Outlier_Status, shape = Outlier_Status)) + 
   annotate("rect", xmin = 20, xmax = Inf, ymin = 6.03, ymax = Inf, fill = "darkolivegreen", alpha = 0.4) + 
-  geom_hline(yintercept = 6.03, size = 2, color = "#999999", linetype = "dashed") + 
-  geom_vline(xintercept = 20, size = 2, color = "#999999", linetype = "dashed") + 
-  geom_point(aes(size = 0.5, alpha = 0.1)) + 
-  annotate("text", x = 3, y = 24, label = "E", size = 15)
-Lat_XtX_annotated_plot <- Lat_XtX_plot + labs(x = "Latitude BF", y = "XtX") + 
+  geom_hline(yintercept = 6.03, size = 1.5, color = "#000000", linetype = "dashed") + 
+  geom_vline(xintercept = 20, size = 1.5, color = "#000000", linetype = "dashed") + 
+  geom_point(size = 8, alpha = 0.65) + 
+  annotate("text", x = 3, y = 24, label = "E", size = 15) + 
+  scale_color_manual(values = c("#999999", "#000000"), labels = c("Non-Outlier", "Outlier")) + 
+  scale_shape_manual(values = c(19, 17), labels = c("Non-Outlier", "Outlier")) + 
+  guides(alpha = FALSE, size = FALSE, color = guide_legend(override.aes = list(size = 8)))
+Lat_XtX_annotated_plot <- Lat_XtX_plot + labs(x = "Latitude BF (dB)", y = "XtX") + 
   theme_bw() + scale_y_continuous(limits = c(0, 25)) + scale_x_continuous(limits = c(0, 55)) + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         axis.line = element_line(size = 1), axis.ticks = element_line(color = "black", size = 1), 
-        axis.text = element_text(size = 22, color = "black"), axis.title = element_text(size = 25), 
-        legend.position = "none", plot.margin = unit(c(.5,.5,.5,.5), "cm"))
+        axis.text = element_text(size = 28, color = "black"), axis.title = element_text(size = 30), 
+        legend.position = "none", plot.margin = unit(c(.5,.5,.75,.5), "cm"), legend.text = element_text(size = 26), 
+        legend.title = element_blank())
 Lat_XtX_annotated_plot
+
 
 BF_XtX_all_plot <- grid.arrange(SSSmean_XtX_annotated_plot, SSTmean_XtX_annotated_plot, 
                                 SSTmin_XtX_annotated_plot, SSTmax_XtX_annotated_plot, 
