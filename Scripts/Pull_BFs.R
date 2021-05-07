@@ -15,11 +15,11 @@ getwd()
 library(readr)
 
 #read in BFs
-BFs_ssmean <- read_table2("Data/mac2aux1_ssmean_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
-BFs_sstmean <- read_table2("Data/mac2aux1_sstmean_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
-BFs_sstmin <- read_table2("Data/mac2aux1_sstmin_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
-BFs_sstmax <- read_table2("Data/mac2aux1_sstmax_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
-BFs_lat <- read_table2("Data/mac2aux1_lat_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs_ssmean <- read_table2("Data/mac2aux1_noN4_sssmean_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs_sstmean <- read_table2("Data/mac2aux1_noN4_sstmean_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs_sstmin <- read_table2("Data/mac2aux1_noN4_sstmin_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs_sstmax <- read_table2("Data/mac2aux1_noN4_sstmax_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
+BFs_lat <- read_table2("Data/mac2aux1_noN4_lat_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns
 
 #read in loc names
 locnames <- read_table2("Data/Loc_Names_mac2.txt", col_names = FALSE)
@@ -30,15 +30,15 @@ locnames <- read_table2("Data/Loc_Names_mac2.txt", col_names = FALSE)
 ######## Pull info out from BF dataframe ########
 
 #pull BFs for each covariable
-BFs_SSSmean <- c(BFs_ssmean[1:5718, 'BF(dB)'])
-BFs_SSTmean <- c(BFs_sstmean[1:5718, 'BF(dB)'])
-BFs_SSTmin <- c(BFs_sstmin[1:5718, 'BF(dB)'])
-BFs_SSTmax <- c(BFs_sstmax[1:5718, 'BF(dB)'])
-BFs_lat <- c(BFs_lat[1:5718, 'BF(dB)'])
+BFs_SSSmean <- c(BFs_ssmean[1:4212, 'BF(dB)'])
+BFs_SSTmean <- c(BFs_sstmean[1:4212, 'BF(dB)'])
+BFs_SSTmin <- c(BFs_sstmin[1:4212, 'BF(dB)'])
+BFs_SSTmax <- c(BFs_sstmax[1:4212, 'BF(dB)'])
+BFs_lat <- c(BFs_lat[1:4212, 'BF(dB)'])
 
 #pull marker numbers
 #markers <- c(BFs[1:5729, 'MRK'])
-markers <- c(BFs_ssmean[1:5718, 'MRK'])
+markers <- c(BFs_ssmean[1:4212, 'MRK'])
 
 #Create data frame with markers & BFs for each covariable as rows
 BFs_ALL <- data.frame(markers, BFs_SSSmean, BFs_SSTmean, BFs_SSTmin, BFs_SSTmax, BFs_lat)
@@ -89,5 +89,5 @@ can_all <- merge(can_names, can_BFs, by = "snp_id")
 all <- merge(locnames, BFs_ALL, by = "snp_id")
 
 #write out
-write.csv(can_all, file = "Data/mac2aux1_candidate_loci.csv")
-write.csv(all, file = "Data/mac2aux1_all_loci.csv")
+write.csv(can_all, file = "Data/mac2aux1_noN4_candidate_loci.csv")
+write.csv(all, file = "Data/mac2aux1_noN4_all_loci.csv")

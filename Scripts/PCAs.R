@@ -18,8 +18,8 @@ library(tidyverse)
 #read in data
 data_PC_mac2 <- read_csv("Data/output.hicov2.snps.only.mac2_eigenvec.csv") #eigenvector for PCA w/mac >2 loci
 data_PC_mac2_inhwe <- read_csv("Data/output.hicov2.snps.only.mac2.inhwe_eigenvec.csv") #eigenvector for PCA w/mac >2 and in HWE loci
-data_PC_mac2_nooutliers <- read_csv("Data/output.hicov2.snps.only.mac2.nooutliers_eigenvec.csv") #eigenvector for PCA w/mac >2 w/no outlier loci
-data_PC_mac2_outliersonly <- read_csv("Data/output.hicov2.snps.only.mac2.outliersonly_eigenvec.csv") #eigenvector for PCA w/only outlier loci
+data_PC_mac2_nooutliers <- read_csv("Data/output.hicov2.snps.only.mac2.nooutlierswRDA_eigenvec.csv") #eigenvector for PCA w/mac >2 w/no outlier loci
+data_PC_mac2_outliersonly <- read_csv("Data/output.hicov2.snps.only.mac2.outliersonlywRDA_eigenvec.csv") #eigenvector for PCA w/only outlier loci
 
 #################################################################################################################################################
 
@@ -55,7 +55,7 @@ PCA_mac2_inhwe_annotated
 PCA_mac2_nooutliers<- ggplot(data = data_PC_mac2_nooutliers, aes(x = PC1, y = PC2, color = Location)) + 
   geom_point(size = 8) + ggtitle("PCA without outlier loci (mac > 2)") + 
   scale_color_manual(values = c("dodgerblue4", "goldenrod1", "darkorange2"), labels = c("Japan", "Philippines", "Indonesia")) + 
-  labs(x = "PC1 (explains 12.75% of total variance)", y = "PC2 (explains 9.54% of total variance)")
+  labs(x = "PC1 (explains 12.73% of total variance)", y = "PC2 (explains 9.52% of total variance)")
 PCA_mac2_nooutliers_annotated <- PCA_mac2_nooutliers + scale_size(guide = "none") + theme_bw() + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         legend.justification = c(1, 0), axis.line = element_line(size = 1), plot.title = element_blank(), 
@@ -68,7 +68,7 @@ PCA_mac2_nooutliers_annotated
 PCA_mac2_outliersonly <- ggplot(data = data_PC_mac2_outliersonly, aes(x = PC1, y = PC2, color = Location)) + 
   geom_point(size = 8) + ggtitle("PCA with only outlier loci (mac > 2)") + 
   scale_color_manual(values = c("dodgerblue4", "goldenrod1", "darkorange2"), labels = c("Japan", "Philippines", "Indonesia")) + 
-  labs(x = "PC1 (explains 65.66% of total variance)", y = "PC2 (explains 8.14% of total variance)")
+  labs(x = "PC1 (explains 72.54% of total variance)", y = "PC2 (explains 7.41% of total variance)")
 PCA_mac2_outliersonly_annotated <- PCA_mac2_outliersonly + scale_size(guide = "none") + theme_bw() + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         legend.justification = c(1, 0), axis.line = element_line(size = 1), plot.title = element_blank(), 
