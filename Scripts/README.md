@@ -5,9 +5,12 @@
  * **BF Correlation Plots.R:** Reads in .csv file of Bayes Factors and XtX values outputted by BayPass and creates correlation plots by environmental variables.
  * **Write Simulation Pop Data for BayPass.R:** Creates permuted datasets to run in BayPass and create distributions of Bayes Factors under null hypothesis (no association between allele frequencies and environmental factors).
  * **ECDFS for Sim v Real BFs.R:** Contains code for Mann-Whitney U-tests and plots of empirical cumulative distribution functions for Bayes Factors from raw data and permuted data.
+ * **RDA.R:** Runs RDA, creates bi-plots for visualization, and identifies outliers from RDA analysis using two different methods.
  * **Fst_script.R:** Calculates per-SNP Fst and site pairwise Fst values from VCF.
  * **PCAs.R:** Reads in eigenvector information from plink and creates PCA plots.
  * **STRUCTURE_script.R:** Reads in STRUCTURE output files, runs CLUMPP and creates output plots for visualization of STRUCTURE results. Also creates ML and Evanno method plots to identify the "best" value of K.
+ * **Bootstrap_forSFS.R:** Creates bootstrapped VCF files. These files can then be read into easySFS to create bootstrapped SFS for reading into *fastsimcoal2* and calculating 95% CIs.
+ * **fsc_CIs.R:** Reads in the parameter estimates the best maximum likelihood run for each bootstrapped SFS from *fastsimcoal2* and calculates 95% CIs.
  * **TajimaD_script.R:** Reads in .csv files containing Tajima's D output from VCFtools and calculates the mean (+ SE) Tajima's D in each site and with all sites pooled. Also contains code for Mann-Whitney U-tests and plots of empirical cumulative distribution functions (outlier vs. all transcripts).
  * **TD_v_pi.R:** Creates plots of Tajima's D v. pi for each sampling site and for all sampling sites pooled.
  * **Diversity_Script.R:** Calculates Ho, He and Fis from allele frequencies.
