@@ -5,6 +5,8 @@ Code for BayPass analyses run on an HPC cluster (Amarel at Rutgers) before trans
 
 Downloaded BAYPASS v.2.1 to Amarel and unzipped/installed in `~/Programs`.
 
+*Note: Process below is for running BAYPASS with the full mac2 dataset (wN4). For the dataset w/out N4, inputs and file names were changed as needed.*
+
 Created BAYPASS input file with PGDSpider v.2.1.1.5 & modifications on local computer.
 
 -   Took `output.hicov2.snps.only.mac2.vcf` file and converted to `clownfish_mac2.snps`.
