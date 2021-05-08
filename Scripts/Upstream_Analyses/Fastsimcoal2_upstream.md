@@ -329,7 +329,7 @@ do
 #Sorts the file by column 6 (likelihood) in descending order and then prints the last row (maximum since it's negative)
 sort -nk 7 "$file" | tail -n 1 > "$file.max"
 
-#Concatinates the run with the maximum likelihood for each SFS into a file
+#Concatenates the run with the maximum likelihood for each SFS into a file
 cat /scratch/rdc129/Aclarkii_Demo/bootstrapSFS/*/cis_sfs_summary.max > /scratch/rdc129/Aclarkii_Demo/bootstrapSFS/fsc_maxLhood_CI_summary.txt
 
 done
