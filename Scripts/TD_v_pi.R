@@ -34,8 +34,8 @@ outliers <- data_all[data_all$uniqseq %in% outlierseq$CONTIG, ] #df with only ou
 nonoutliers <- data_all[!(data_all$uniqseq %in% outlierseq$CONTIG), ] #df with all other loci
 
 #set seq status
-outliers$Status <- c(rep("Outlier", times = 112))
-nonoutliers$Status <- c(rep("Not_Outlier", times = 1880))
+outliers$Status <- c(rep("Outlier", times = 96))
+nonoutliers$Status <- c(rep("Not_Outlier", times = 1896))
 data_all$Status <- c(rep("All", times = 1992))
 
 #merge together
@@ -57,7 +57,7 @@ outliers_only <- subset(data_all, Status == "Outlier")
 #Scatterplots of Tajima's D v. pi
 
 #TD v pi for pooled individuals
-all_plot <- ggplot(data = all_only, aes(x = pi, y = TajimaD, color = Status)) + 
+all_plot <- ggplot(data = all_only %>% arrange(Status), aes(x = pi, y = TajimaD, color = Status)) + 
   geom_point(size = 8) + geom_hline(yintercept = 0, color = "black", size = 3)
 all_plot_annotated <- all_plot + theme_bw() + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(),
@@ -69,7 +69,7 @@ all_plot_annotated <- all_plot + theme_bw() +
 all_plot_annotated
 
 #TD v pi for Japan
-J_plot <- ggplot(data = J_only, aes(x = pi, y = TajimaD, color = Status)) + 
+J_plot <- ggplot(data = J_only %>% arrange(Status), aes(x = pi, y = TajimaD, color = Status)) + 
   geom_point(size = 8) + geom_hline(yintercept = 0, color = "black", size = 3)
 J_plot_annotated <- J_plot + theme_bw() + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(),
@@ -81,7 +81,7 @@ J_plot_annotated <- J_plot + theme_bw() +
 J_plot_annotated
 
 #TD v pi for Philippines
-P_plot <- ggplot(data = P_only, aes(x = pi, y = TajimaD, color = Status)) + 
+P_plot <- ggplot(data = P_only %>% arrange(Status), aes(x = pi, y = TajimaD, color = Status)) + 
   geom_point(size = 8) + geom_hline(yintercept = 0, color = "black", size = 3)
 P_plot_annotated <- P_plot + theme_bw() + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(),
@@ -93,7 +93,7 @@ P_plot_annotated <- P_plot + theme_bw() +
 P_plot_annotated
 
 #TD v pi for Indonesia
-N_plot <- ggplot(data = N_only, aes(x = pi, y = TajimaD, color = Status)) + 
+N_plot <- ggplot(data = N_only %>% arrange(Status), aes(x = pi, y = TajimaD, color = Status)) + 
   geom_point(size = 8) + geom_hline(yintercept = 0, color = "black", size = 3)
 N_plot_annotated <- N_plot + theme_bw() + 
   theme(panel.border = element_blank(), panel.grid.major = element_blank(),
