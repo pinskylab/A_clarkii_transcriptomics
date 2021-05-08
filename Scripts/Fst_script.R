@@ -69,8 +69,8 @@ outlier_stats <- stats_perloc[stats_perloc$Contig_bp %in% outlierloc$contig_bp, 
 nonoutlier_stats <- stats_perloc[!(stats_perloc$Contig_bp %in% outlierloc$contig_bp), ] #df with all other loci
 
 #set outlier status
-outlier_stats$status <- c(rep("Outlier", times = 82))
-nonoutlier_stats$status <- c(rep("Not_Outlier", times = 4130))
+outlier_stats$status <- c(rep("Outlier", times = 56))
+nonoutlier_stats$status <- c(rep("Not_Outlier", times = 4156))
 
 #merge together
 stats_perloc <- rbind(outlier_stats, nonoutlier_stats)
