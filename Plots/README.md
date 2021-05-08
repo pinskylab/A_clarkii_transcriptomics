@@ -18,6 +18,7 @@ Supplemental Plots:
 Other plots:
  * **Fst_boxplot_mac2.png:** Boxplot of per-locus Fsts, separated by outlier status. Created with `Fst_script.R`.
  * **Fst_plot_mac2.png:** "Manhattan plot" of per-locus Fsts. Color-coded by outlier status. X-axis ordered by contig # (not necessarily place in genome). Created with `Fst_script.R.`.
+ * **RDA_biplot_noN4_edited.png:** RDA biplot with the distribution of SNPs (red plus signs) and genotypes of each individual (open grey circles). Blue vectors indicate correlations between the constraining axes and the environmental (predictor) variables. Individual N4 excluded from analysis. Created with `RDA.R` and edited in PowerPoint.
  * **TajimasD_all_mac1_SYN.png** & **TajimasD_outliersonly_mac1_SYN.png:** Scatterplots of Tajima's D for either all contigs or outlier only contigs (outlier = contig with at least one outlier locus). Color-coded by sampling site. Created with `TajimaD_script.R`.
   * **TD_pi_plot.png:** Scatterplots of Tajima's D v. pi for each sampling site, for all sampling sites pooled, and for outlier contigs only.Color-coded by outlier status (outlier contigs only is color-coded by sampling site). Created by `TD_v_pi.R`.
  * **pi_boxplot_mac2.png:** Boxplot of pi for each sampling site and for all sampling sites pooled. Color-coded by outlier status. Created by `pi.R`.
