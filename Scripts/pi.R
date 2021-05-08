@@ -273,8 +273,8 @@ outlier_loci <- pi_site_all[pi_site_all$CONTIG %in% outliers$CONTIG, ] #df with 
 nonoutlier_loci <- pi_site_all[!(pi_site_all$CONTIG %in% outliers$CONTIG), ] #df with all other loci
 
 #set loci status
-outlier_loci$Status <- c(rep("Outlier", times = 172))
-nonoutlier_loci$Status <- c(rep("Not_Outlier", times = 3836))
+outlier_loci$Status <- c(rep("Outlier", times = 128))
+nonoutlier_loci$Status <- c(rep("Not_Outlier", times = 3880))
 pi_site_all$Status <- c(rep("All", times = 4008))
 
 #merge together
