@@ -19,7 +19,7 @@ conda create -n easySFS #create easySFS environment
 conda config --add channels bioconda #channel with bioinformatics packages
 conda install -c bioconda dadi pandas #add dadi & pandas packages
 
-#downloaded easySFS repo fron GitHub and unzipped in ~/Programs directory
+#downloaded easySFS repo from GitHub and unzipped in ~/Programs directory
 unzip easySFS-master.zip
 mv easySFS-master easySFS
 cd easySFS
