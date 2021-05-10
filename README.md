@@ -10,4 +10,4 @@ This repository is organized into 3 folders:
 
 Please contact René at rene.clark[at]rutgers.edu with any questions.
 
-
+*Also available to download as a zip archive from DRYAD: https://doi.org/10.5061/dryad.5x69p8d30.**
