@@ -1,7 +1,7 @@
 This repository provides the data, scripts, and figures for the analyses in "Genomic signatures of spatially divergent selection at clownfish range margins," which identifies the population structure and signatures of selection in populations of *Amphiprion clarkii* (the yellowtail clownfish) across the northern half of its range. 
 
 **Citation:**
-Clark RD, Aardema ML, Andolfatto P, Barber PH, Hattori A, Hoey JA, Montes Jr. HR, Pinsky ML. (2021) Genomic signatures of spatially divergent selection at clownfish range margins. *Proceedings of the Royal Society B: Biological Sciences. (accepted)*
+Clark RD, Aardema ML, Andolfatto P, Barber PH, Hattori A, Hoey JA, Montes Jr. HR, Pinsky ML. (2021) Genomic signatures of spatially divergent selection at clownfish range margins. *Proceedings of the Royal Society B: Biological Sciences.* **288**:20210407. (https://doi.org/10.1098/rspb.2021.0407)
 
 This repository is organized into 3 folders: 
 1. **/Data:** Contains source data for R scripts, reference fasta, and metadata from sample collections.
