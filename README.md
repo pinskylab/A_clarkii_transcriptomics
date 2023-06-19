@@ -13,3 +13,49 @@ Raw reads can be found in the GenBank short reads archive (BioProject PRJNA69946
 Please contact René at rclark848[at]gmail.com with any questions.
 
 *Also available to download as a zip archive from DRYAD: https://doi.org/10.5061/dryad.5x69p8d30.*
+_______________________________________________________
+
+**Necessary Programs/Software for Bioinformatics**
+1. Bowtie (v.1.1.2)
+2. BUSCO (v.5)
+3. CD-HIT-EST (v.4.6.6)
+4. GATK (v.3.8.1)
+5. Picard Tools (v.1.119)
+6. SAMtools (v.1.3.0)
+7. Stampy (v.1.0.28)
+8. Trinity (v.2.2.0)
+9. VCFtools (v.1.16)
+
+**Necessary Programs/Software for Data Analysis**   
+1. BAYPASS (v.2.1)
+2. easySFS (v.1)
+3. fastsimcoal2 (v.2.6)
+4. PGDSpider (v.2.1.1.5)
+5. plink (v.1.9)
+6. R (v.3.4.4 or above)
+7. RStudio (v.2022.12.0 or above)
+8. SnpEff (v.4.5)
+9. Stairway Plot (v.2)
+10. STRUCTURE (v.2.3.4)
+11. VCFtools (v.1.16)
+
+**Necessary R Packages**
+1. adegenet (v.2.1.10)
+2. boot (v.1.3.28)
+3. corrplot (v.0.92)
+4. devtools (v.2.4.5)
+5. ggpubr (v.0.6.0)
+6. gridExtra (v.2.3)
+7. gtable (v.0.3.1)
+8. hierfstat (v.0.5.11)
+9. mvtnorm (v.1.2.2)
+10. pegas (v.1.2)
+11. plotrix (v.3.8.2)
+12. pophelper (v.2.3.1)
+13. purrr (v.1.0.1)
+14. readr (v.2.1.4)
+15. related (v.0.7)
+16. robust (v.0.7.1)
+17. tidyverse (v.2.0.0)
+18. vcfR (v.1.14.0)
+19. vegan (v.2.6.4)
