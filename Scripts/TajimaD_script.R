@@ -15,8 +15,8 @@ getwd()
 remove(list = ls())
 
 #load libraries
-library(tidyverse)
-library(plotrix)
+library(tidyverse) #v.2.0.0
+library(plotrix) #v.3.8.2
 
 #read in data
 J_TD <- read.csv("Data/SYN_mac1_JTajimasD.csv", header = TRUE) #read in data from vcftools

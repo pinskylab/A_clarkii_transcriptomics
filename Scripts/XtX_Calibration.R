@@ -15,8 +15,8 @@ setwd("C:/Users/rclar/Dropbox/Pinsky_Lab/Transcriptome_Proj/R_scripts/A_clarkii_
 getwd()
 
 #load libraries
-library(corrplot)
-library(mvtnorm)
+library(corrplot) #v.0.92
+library(mvtnorm) #v.1.2.2
 
 #source functions
 source("Scripts/baypass_utils.R") #script that comes with BayPass download with functions used below (Gautier 2015)

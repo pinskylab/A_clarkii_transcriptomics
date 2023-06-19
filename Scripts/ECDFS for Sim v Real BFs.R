@@ -14,8 +14,8 @@ setwd("C:/Users/rclar/Dropbox/Pinsky_Lab/Transcriptome_Proj/R_scripts/A_clarkii_
 getwd()
 
 #load libraries
-library(tidyverse)
-library(ggpubr)
+library(tidyverse) #v.2.0.0
+library(ggpubr) #v.0.6.0
 
 #read in data
 BFs_MW <- read_csv("Data/M-W_test_BF_data.csv", col_names = TRUE)

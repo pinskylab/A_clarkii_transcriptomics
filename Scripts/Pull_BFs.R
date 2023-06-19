@@ -12,7 +12,7 @@ setwd("C:/Users/rclar/Dropbox/Pinsky_Lab/Transcriptome_Proj/R_scripts/A_clarkii_
 getwd()
 
 #load libraries
-library(readr)
+library(readr) #v.2.1.4
 
 #read in BFs
 BFs_ssmean <- read_table2("Data/mac2aux1_noN4_sssmean_summary_betai.txt", col_names = TRUE) #use read_table2 because uneven amount of white spaces between columns

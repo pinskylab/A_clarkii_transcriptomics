@@ -14,7 +14,7 @@ getwd()
 remove(list = ls())
 
 #load libraries
-library(tidyverse)
+library(tidyverse) #v.2.0.0
 
 #read in data
 TD_only_all <- read.csv("Data/SYN_mac1_TajimasD_combined_full.csv", header = TRUE, row.names = 1)

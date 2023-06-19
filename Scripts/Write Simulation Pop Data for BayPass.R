@@ -14,7 +14,7 @@ setwd("C:/Users/rclar/Dropbox/Pinsky_Lab/Transcriptome_Proj/R_scripts/A_clarkii_
 getwd()
 
 #load libraries
-library(readr)
+library(readr) #v.2.1.4
 
 #read in data
 transcript_individs <- read_csv("Data/Individual_Env_Data.csv", col_names = TRUE) #all 25 fish with environ data divided into 3 pops

@@ -14,14 +14,13 @@ setwd("C:/Users/rclar/Dropbox/Pinsky_Lab/Transcriptome_Proj/R_scripts/A_clarkii_
 getwd()
 
 #load libraries
-library(adegenet)
-library(devtools)
-library(hierfstat)
-library(pegas)
-library(vegan)
-library(robust)
-library(qvalue)
-library(ggplot2)
+library(adegenet) #v.2.1.10
+library(devtools) #v.2.4.5
+library(hierfstat) #v.0.5.11
+library(pegas) #v.1.2
+library(vegan) #v.2.6.4
+library(robust) #v.0.7.1
+library(tidyverse) #v.2.0.0
 
 #read in data
 mac2_loci <- read.structure("Data/STRUCTURE_mac2.str", n.ind = 25, n.loc = 4212, onerowperind = FALSE,

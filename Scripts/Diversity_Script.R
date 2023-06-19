@@ -14,11 +14,11 @@ getwd()
 remove(list = ls())
 
 #load libraries
-library(adegenet)
-library(pegas)
-library(hierfstat)
-library(tidyverse)
-library(boot)
+library(adegenet) #v.2.1.10
+library(pegas) #v.1.2
+library(hierfstat) #v.0.5.11
+library(tidyverse) #v.2.0.0
+library(boot) #v.1.3.28
 
 #read in data
 SNPs_mac2 <- read.genetix("Data/output.hicov2.snps.only.mac2_genetix.gtx") #convert genetix file to genind object for use in R (filtered SNPs for those with mac >/= 2) (maf >/= 0.05))

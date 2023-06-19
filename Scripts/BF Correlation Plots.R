@@ -14,9 +14,9 @@ getwd()
 remove(list = ls())
 
 #load libraries
-library(readr)
-library(tidyverse)
-library(gridExtra)
+library(readr) #v.2.1.4
+library(tidyverse) #v.2.0.0
+library(gridExtra) #v.2.3
 
 #read in data
 BFs <- read_csv("Data/BF_total_mac2.csv", col_names = TRUE)

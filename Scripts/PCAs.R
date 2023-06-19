@@ -13,7 +13,7 @@ setwd("C:/Users/Rene/Dropbox/Pinsky_Lab/Transcriptome_Proj/R_scripts/A_clarkii_t
 getwd()
 
 #load libraries
-library(tidyverse)
+library(tidyverse) #v.2.0.0
 
 #read in data
 data_PC_mac2 <- read_csv("Data/output.hicov2.snps.only.mac2_eigenvec.csv") #eigenvector for PCA w/mac >2 loci

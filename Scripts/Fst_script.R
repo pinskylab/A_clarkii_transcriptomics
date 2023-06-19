@@ -14,10 +14,10 @@ getwd()
 remove(list = ls())
 
 #load libraries
-library(tidyverse)
-library(vcfR)
-library(adegenet)
-library(hierfstat)
+library(tidyverse) #v.2.0.0
+library(vcfR) #v.1.14.0
+library(adegenet) #v.2.1.10
+library(hierfstat) #v.0.5.11
 
 #read in data
 mac2_vcf <- read.vcfR("Data/output.hicov2.snps.only.mac2.vcf", verbose = FALSE)

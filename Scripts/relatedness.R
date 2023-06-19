@@ -13,9 +13,9 @@ getwd()
 remove(list = ls())
 
 #load libraries
-library(tidyverse)
-library(related)
-library(boot)
+library(tidyverse) #v.2.0.0
+library(related) #v.0.7
+library(boot) #v.1.3.28
 
 #read in data
 #relatedness.txt file created by making genepop file with PGDSpider, pulling only genotype information, pasting all columns together, then separating by # characters (3) in excel

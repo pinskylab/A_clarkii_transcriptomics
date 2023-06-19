@@ -15,9 +15,9 @@ getwd()
 remove(list = ls())
 
 #loading libraries
-library(readr)
-library(tidyverse)
-library(gridExtra)
+library(readr) #v.2.1.4
+library(tidyverse) #v.2.0.0
+library(gridExtra) #v.2.3
 
 #read in data
 allele_freqs <- read_csv("Data/polarized_allele_freqs.csv", col_names = TRUE)

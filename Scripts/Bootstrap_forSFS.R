@@ -14,8 +14,8 @@ getwd()
 remove(list = ls())
 
 #load libraries
-library(readr)
-library(tidyverse)
+library(readr) #v.2.1.4
+library(tidyverse) #v.2.0.0
 
 #read in data
 snps_data <- read_csv("Data/output.hicov2.snps.only.mac1.nooutliersfinal.contigsonly.reordered.csv", 

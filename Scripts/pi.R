@@ -14,8 +14,8 @@ getwd()
 remove(list = ls())
 
 #load libraries
-library(tidyverse)
-library(boot)
+library(tidyverse) #v.2.0.0
+library(boot) #v.1.3.28
 
 #read in data
 allsites_pi <- read.csv("Data/allmac2_sitespi.csv", header = TRUE) #read in data from vcftools

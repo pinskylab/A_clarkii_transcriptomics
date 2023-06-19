@@ -14,7 +14,7 @@ getwd()
 remove(list = ls())
 
 #load libraries
-library(tidyverse)
+library(tidyverse) #v.2.0.0
 
 #read in data
 fsc_bootstraps <- read.csv("Data/fsc_maxLhood_CI_summary.csv", header = TRUE) #read in data from fsc runs

@@ -15,11 +15,11 @@ getwd()
 remove(list = ls())
 
 #load libraries
-library(readr)
-library(tidyverse)
-library(adegenet)
-library(hierfstat)
-library(purrr)
+library(readr) #v.2.1.4
+library(tidyverse) #v.2.0.0
+library(adegenet) #v.2.1.10
+library(hierfstat) #v.0.5.11
+library(purrr) #v.1.0.1
 
 #read in data
 output_hicov2_snps_only_mac2 <- read_csv("Data/output.hicov2.snps.only.mac2.csv", col_names = TRUE)

@@ -15,12 +15,12 @@ getwd()
 remove(list = ls())
 
 #load libraries
-library(devtools)
-library(tidyverse)
-library(gridExtra)
-library(gtable)
+library(devtools) #v.2.4.5
+library(tidyverse) #v.2.0.0
+library(gridExtra) #v.2.3
+library(gtable) #v.0.3.1
 #devtools::install_github('royfrancis/pophelper')
-library(pophelper)
+library(pophelper) #v.2.3.1
 
 #read in data
 mac2_SNPs_sfiles <- list.files(path = "Data/STRUCTURE_Output/allSNPs_results/mac2SNPs_StructureResults/", full.names = TRUE)
