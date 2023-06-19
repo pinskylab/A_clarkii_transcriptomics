@@ -8,6 +8,8 @@ This repository is organized into 3 folders:
 2. **/Scripts:** Contains R scripts and code for analyses included in the manuscript.
 3. **/Plots:** Contains pngs and tiffs of plots included in the manuscript, as well as additional plots for data exploration purposes.
 
+Raw reads can be found in the GenBank short reads archive (BioProject PRJNA699463, SRA accession numbers SRR13627993–13628017)
+
 Please contact René at rclark848[at]gmail.com with any questions.
 
 *Also available to download as a zip archive from DRYAD: https://doi.org/10.5061/dryad.5x69p8d30.*
