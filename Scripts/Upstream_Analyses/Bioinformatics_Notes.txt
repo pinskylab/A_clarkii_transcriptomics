@@ -1,0 +1,463 @@
+# split reads by barcode
+
+python /home/maardema/bin/barcode_splitter.py --bcfile barcodes.txt clownfish-ciliate-2-for-148-cycles-h0fcgadxx_1_read_1_passed_filter.fastq clownfish-ciliate-2-for-148-cycles-h0fcgadxx_1_read_2_index_read_passed_filter.fastq --idxread 2 --suffix .fastq &
+
+# trim reads
+
+/home/maardema/bin/TQSfastq.py -f all.fq -t 20 -c 30 -q > trim_progress.txt &
+
+# de novo assembly of single-end reads
+
+Trinity --seqType fq --single all.fq_T20C30.trim.fastq --max_memory 20G --CPU 8 --min_kmer_cov 2 > output_from_trinity_run.txt &
+
+/home/maardema/bin/trinityrnaseq-2.2.0/util/align_and_estimate_abundance.pl --transcripts Trinity.fasta --seqType fq --single ../all.fq_T20C30.trim.fastq --est_method RSEM --aln_method bowtie --trinity_mode --prep_reference --output_dir rsem_outdir --fragment_length 100 --fragment_std 20 &
+
+/home/maardema/bin/trinityrnaseq-2.2.0/util/filter_fasta_by_rsem_values.pl --rsem_output=RSEM.isoforms.results --fasta=../Trinity.fasta --output=Trinity.filtered111.fasta --isopct_cutoff=1 --fpkm_cutoff=1 --tpm_cutoff=1 &
+
+/home/maardema/bin/cd-hit-v4.6.6-2016-0711/cd-hit-est -i Trinity.filtered111.fasta -o red_c_90_n_7_r_1_trans.fa -c 0.9 -n 7 -r 1 &
+
+/home/maardema/bin/cd-hit-v4.6.6-2016-0711/cd-hit-est -i Trinity.fasta -o red_c_90_n_7_r_1_trans.fa -c 0.9 -n 7 -r 1 &
+
+## stats
+
+/usr/local/software/trinity/trinityrnaseq-2.1.1/util/TrinityStats.pl /home/maardema/nas1/MALIN/SAMPLES/New_ref_N3.fa
+
+# prep ref
+
+/home/maardema/bin/stampy-1.0.28/stampy.py -G New_ref_N3 New_ref_N3.fa &
+
+/home/maardema/bin/stampy-1.0.28/stampy.py -g New_ref_N3 -H New_ref_N3 &
+
+
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+
+# map reads
+
+/home/maardema/bin/stampy-1.0.28/stampy.py -g /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -h /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -M /home/maardema/nas1/MALIN/SAMPLES/J19/all.fq_T20C30.trim.fastq > /home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample.sam &
+
+/home/maardema/bin/stampy-1.0.28/stampy.py -g /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -h /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -M /home/maardema/nas1/MALIN/SAMPLES/J3/all.fq_T20C30.trim.fastq > /home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample.sam &
+
+/home/maardema/bin/stampy-1.0.28/stampy.py -g /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -h /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -M /home/maardema/nas1/MALIN/SAMPLES/J5/all.fq_T20C30.trim.fastq > /home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample.sam &
+
+/home/maardema/bin/stampy-1.0.28/stampy.py -g /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -h /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -M /home/maardema/nas1/MALIN/SAMPLES/J9/all.fq_T20C30.trim.fastq > /home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample.sam &
+
+/home/maardema/bin/stampy-1.0.28/stampy.py -g /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -h /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -M /home/maardema/nas1/MALIN/SAMPLES/N1/all.fq_T20C30.trim.fastq > /home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample.sam &
+
+/home/maardema/bin/stampy-1.0.28/stampy.py -g /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -h /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -M /home/maardema/nas1/MALIN/SAMPLES/N2/all.fq_T20C30.trim.fastq > /home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample.sam &
+
+/home/maardema/bin/stampy-1.0.28/stampy.py -g /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -h /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -M /home/maardema/nas1/MALIN/SAMPLES/N7/all.fq_T20C30.trim.fastq > /home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample.sam &
+
+/home/maardema/bin/stampy-1.0.28/stampy.py -g /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -h /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -M /home/maardema/nas1/MALIN/SAMPLES/P1/all.fq_T20C30.trim.fastq > /home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample.sam &
+
+/home/maardema/bin/stampy-1.0.28/stampy.py -g /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -h /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -M /home/maardema/nas1/MALIN/SAMPLES/P20/all.fq_T20C30.trim.fastq > /home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample.sam &
+
+/home/maardema/bin/stampy-1.0.28/stampy.py -g /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -h /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -M /home/maardema/nas1/MALIN/SAMPLES/P22/all.fq_T20C30.trim.fastq > /home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample.sam &
+
+/home/maardema/bin/stampy-1.0.28/stampy.py -g /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -h /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -M /home/maardema/nas1/MALIN/SAMPLES/P24/all.fq_T20C30.trim.fastq > /home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample.sam &
+
+/home/maardema/bin/stampy-1.0.28/stampy.py -g /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -h /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -M /home/maardema/nas1/MALIN/SAMPLES/P3/all.fq_T20C30.trim.fastq > /home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample.sam &
+
+/home/maardema/bin/stampy-1.0.28/stampy.py -g /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -h /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3 -M /home/maardema/nas1/MALIN/SAMPLES/P6/all.fq_T20C30.trim.fastq > /home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample.sam &
+
+#### SAM -> BAM ####
+
+samtools view -bS -q 20 -o /home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample.bam /home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample.sam &
+samtools view -bS -q 20 -o /home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample.bam /home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample.sam &
+samtools view -bS -q 20 -o /home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample.bam /home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample.sam &
+samtools view -bS -q 20 -o /home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample.bam /home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample.sam &
+samtools view -bS -q 20 -o /home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample.bam /home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample.sam &
+samtools view -bS -q 20 -o /home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample.bam /home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample.sam &
+samtools view -bS -q 20 -o /home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample.bam /home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample.sam &
+samtools view -bS -q 20 -o /home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample.bam /home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample.sam &
+samtools view -bS -q 20 -o /home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample.bam /home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample.sam &
+samtools view -bS -q 20 -o /home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample.bam /home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample.sam &
+samtools view -bS -q 20 -o /home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample.bam /home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample.sam &
+samtools view -bS -q 20 -o /home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample.bam /home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample.sam &
+samtools view -bS -q 20 -o /home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample.bam /home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample.sam &
+
+#### SORT BAM ####
+
+samtools sort /home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample.bam -o /home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample.sorted.bam &
+samtools sort /home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample.bam -o /home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample.sorted.bam &
+samtools sort /home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample.bam -o /home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample.sorted.bam &
+samtools sort /home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample.bam -o /home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample.sorted.bam &
+samtools sort /home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample.bam -o /home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample.sorted.bam &
+samtools sort /home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample.bam -o /home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample.sorted.bam &
+samtools sort /home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample.bam -o /home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample.sorted.bam &
+samtools sort /home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample.bam -o /home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample.sorted.bam &
+samtools sort /home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample.bam -o /home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample.sorted.bam &
+samtools sort /home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample.bam -o /home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample.sorted.bam &
+samtools sort /home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample.bam -o /home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample.sorted.bam &
+samtools sort /home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample.bam -o /home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample.sorted.bam &
+samtools sort /home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample.bam -o /home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample.sorted.bam &
+
+#### REMOVE DUPLICATES ####
+
+java -jar /home/maardema/bin/picard-tools-1.119/MarkDuplicates.jar INPUT=/home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample.sorted.bam OUTPUT=/home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample_DR.sorted.bam REMOVE_DUPLICATES=true METRICS_FILE=dup_removal_metrics.txt ASSUME_SORTED=true MAX_FILE_HANDLES=1000 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/MarkDuplicates.jar INPUT=/home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample.sorted.bam OUTPUT=/home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample_DR.sorted.bam REMOVE_DUPLICATES=true METRICS_FILE=dup_removal_metrics.txt ASSUME_SORTED=true MAX_FILE_HANDLES=1000 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/MarkDuplicates.jar INPUT=/home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample.sorted.bam OUTPUT=/home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample_DR.sorted.bam REMOVE_DUPLICATES=true METRICS_FILE=dup_removal_metrics.txt ASSUME_SORTED=true MAX_FILE_HANDLES=1000 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/MarkDuplicates.jar INPUT=/home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample.sorted.bam OUTPUT=/home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample_DR.sorted.bam REMOVE_DUPLICATES=true METRICS_FILE=dup_removal_metrics.txt ASSUME_SORTED=true MAX_FILE_HANDLES=1000 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/MarkDuplicates.jar INPUT=/home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample.sorted.bam OUTPUT=/home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample_DR.sorted.bam REMOVE_DUPLICATES=true METRICS_FILE=dup_removal_metrics.txt ASSUME_SORTED=true MAX_FILE_HANDLES=1000 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/MarkDuplicates.jar INPUT=/home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample.sorted.bam OUTPUT=/home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample_DR.sorted.bam REMOVE_DUPLICATES=true METRICS_FILE=dup_removal_metrics.txt ASSUME_SORTED=true MAX_FILE_HANDLES=1000 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/MarkDuplicates.jar INPUT=/home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample.sorted.bam OUTPUT=/home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample_DR.sorted.bam REMOVE_DUPLICATES=true METRICS_FILE=dup_removal_metrics.txt ASSUME_SORTED=true MAX_FILE_HANDLES=1000 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/MarkDuplicates.jar INPUT=/home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample.sorted.bam OUTPUT=/home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample_DR.sorted.bam REMOVE_DUPLICATES=true METRICS_FILE=dup_removal_metrics.txt ASSUME_SORTED=true MAX_FILE_HANDLES=1000 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/MarkDuplicates.jar INPUT=/home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample.sorted.bam OUTPUT=/home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample_DR.sorted.bam REMOVE_DUPLICATES=true METRICS_FILE=dup_removal_metrics.txt ASSUME_SORTED=true MAX_FILE_HANDLES=1000 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/MarkDuplicates.jar INPUT=/home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample.sorted.bam OUTPUT=/home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample_DR.sorted.bam REMOVE_DUPLICATES=true METRICS_FILE=dup_removal_metrics.txt ASSUME_SORTED=true MAX_FILE_HANDLES=1000 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/MarkDuplicates.jar INPUT=/home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample.sorted.bam OUTPUT=/home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample_DR.sorted.bam REMOVE_DUPLICATES=true METRICS_FILE=dup_removal_metrics.txt ASSUME_SORTED=true MAX_FILE_HANDLES=1000 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/MarkDuplicates.jar INPUT=/home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample.sorted.bam OUTPUT=/home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample_DR.sorted.bam REMOVE_DUPLICATES=true METRICS_FILE=dup_removal_metrics.txt ASSUME_SORTED=true MAX_FILE_HANDLES=1000 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/MarkDuplicates.jar INPUT=/home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample.sorted.bam OUTPUT=/home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample_DR.sorted.bam REMOVE_DUPLICATES=true METRICS_FILE=dup_removal_metrics.txt ASSUME_SORTED=true MAX_FILE_HANDLES=1000 &
+
+
+#### ADD HEADER ####
+
+java -jar /home/maardema/bin/picard-tools-1.119/AddOrReplaceReadGroups.jar I=/home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample_DR.sorted.bam O=/home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample_HEADER.sorted.bam SO=coordinate RGID=id RGLB=library RGPL=illumina RGPU=machine RGSM=J19 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/AddOrReplaceReadGroups.jar I=/home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample_DR.sorted.bam O=/home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample_HEADER.sorted.bam SO=coordinate RGID=id RGLB=library RGPL=illumina RGPU=machine RGSM=J3 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/AddOrReplaceReadGroups.jar I=/home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample_DR.sorted.bam O=/home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample_HEADER.sorted.bam SO=coordinate RGID=id RGLB=library RGPL=illumina RGPU=machine RGSM=J5 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/AddOrReplaceReadGroups.jar I=/home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample_DR.sorted.bam O=/home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample_HEADER.sorted.bam SO=coordinate RGID=id RGLB=library RGPL=illumina RGPU=machine RGSM=J9 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/AddOrReplaceReadGroups.jar I=/home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample_DR.sorted.bam O=/home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample_HEADER.sorted.bam SO=coordinate RGID=id RGLB=library RGPL=illumina RGPU=machine RGSM=N1 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/AddOrReplaceReadGroups.jar I=/home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample_DR.sorted.bam O=/home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample_HEADER.sorted.bam SO=coordinate RGID=id RGLB=library RGPL=illumina RGPU=machine RGSM=N2 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/AddOrReplaceReadGroups.jar I=/home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample_DR.sorted.bam O=/home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample_HEADER.sorted.bam SO=coordinate RGID=id RGLB=library RGPL=illumina RGPU=machine RGSM=N7 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/AddOrReplaceReadGroups.jar I=/home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample_DR.sorted.bam O=/home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample_HEADER.sorted.bam SO=coordinate RGID=id RGLB=library RGPL=illumina RGPU=machine RGSM=P1 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/AddOrReplaceReadGroups.jar I=/home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample_DR.sorted.bam O=/home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample_HEADER.sorted.bam SO=coordinate RGID=id RGLB=library RGPL=illumina RGPU=machine RGSM=P20 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/AddOrReplaceReadGroups.jar I=/home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample_DR.sorted.bam O=/home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample_HEADER.sorted.bam SO=coordinate RGID=id RGLB=library RGPL=illumina RGPU=machine RGSM=P22 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/AddOrReplaceReadGroups.jar I=/home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample_DR.sorted.bam O=/home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample_HEADER.sorted.bam SO=coordinate RGID=id RGLB=library RGPL=illumina RGPU=machine RGSM=P24 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/AddOrReplaceReadGroups.jar I=/home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample_DR.sorted.bam O=/home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample_HEADER.sorted.bam SO=coordinate RGID=id RGLB=library RGPL=illumina RGPU=machine RGSM=P3 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/AddOrReplaceReadGroups.jar I=/home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample_DR.sorted.bam O=/home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample_HEADER.sorted.bam SO=coordinate RGID=id RGLB=library RGPL=illumina RGPU=machine RGSM=P6 &
+
+#### INDEX ####
+
+samtools index /home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample_HEADER.sorted.bam &
+samtools index /home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample_HEADER.sorted.bam &
+samtools index /home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample_HEADER.sorted.bam &
+samtools index /home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample_HEADER.sorted.bam &
+samtools index /home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample_HEADER.sorted.bam &
+samtools index /home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample_HEADER.sorted.bam &
+samtools index /home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample_HEADER.sorted.bam &
+samtools index /home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample_HEADER.sorted.bam &
+samtools index /home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample_HEADER.sorted.bam &
+samtools index /home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample_HEADER.sorted.bam &
+samtools index /home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample_HEADER.sorted.bam &
+samtools index /home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample_HEADER.sorted.bam &
+samtools index /home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample_HEADER.sorted.bam &
+
+
+#### PREP FOR INDEL REALIGNMENT ####
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample_HEADER.sorted.bam -o /home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample_realignTargets.list &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample_HEADER.sorted.bam -o /home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample_realignTargets.list &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample_HEADER.sorted.bam -o /home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample_realignTargets.list &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample_HEADER.sorted.bam -o /home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample_realignTargets.list &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample_HEADER.sorted.bam -o /home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample_realignTargets.list &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample_HEADER.sorted.bam -o /home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample_realignTargets.list &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample_HEADER.sorted.bam -o /home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample_realignTargets.list &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample_HEADER.sorted.bam -o /home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample_realignTargets.list &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample_HEADER.sorted.bam -o /home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample_realignTargets.list &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample_HEADER.sorted.bam -o /home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample_realignTargets.list &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample_HEADER.sorted.bam -o /home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample_realignTargets.list &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample_HEADER.sorted.bam -o /home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample_realignTargets.list &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T RealignerTargetCreator -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample_HEADER.sorted.bam -o /home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample_realignTargets.list &
+
+
+#### REALIGN INDELS ####
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T IndelRealigner -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample_HEADER.sorted.bam -targetIntervals /home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample_realignTargets.list -o /home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample_markdup_realigned.bam &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T IndelRealigner -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample_HEADER.sorted.bam -targetIntervals /home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample_realignTargets.list -o /home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample_markdup_realigned.bam &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T IndelRealigner -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample_HEADER.sorted.bam -targetIntervals /home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample_realignTargets.list -o /home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample_markdup_realigned.bam &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T IndelRealigner -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample_HEADER.sorted.bam -targetIntervals /home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample_realignTargets.list -o /home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample_markdup_realigned.bam &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T IndelRealigner -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample_HEADER.sorted.bam -targetIntervals /home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample_realignTargets.list -o /home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample_markdup_realigned.bam &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T IndelRealigner -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample_HEADER.sorted.bam -targetIntervals /home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample_realignTargets.list -o /home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample_markdup_realigned.bam &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T IndelRealigner -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample_HEADER.sorted.bam -targetIntervals /home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample_realignTargets.list -o /home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample_markdup_realigned.bam &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T IndelRealigner -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample_HEADER.sorted.bam -targetIntervals /home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample_realignTargets.list -o /home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample_markdup_realigned.bam &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T IndelRealigner -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample_HEADER.sorted.bam -targetIntervals /home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample_realignTargets.list -o /home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample_markdup_realigned.bam &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T IndelRealigner -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample_HEADER.sorted.bam -targetIntervals /home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample_realignTargets.list -o /home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample_markdup_realigned.bam &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T IndelRealigner -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample_HEADER.sorted.bam -targetIntervals /home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample_realignTargets.list -o /home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample_markdup_realigned.bam &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T IndelRealigner -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample_HEADER.sorted.bam -targetIntervals /home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample_realignTargets.list -o /home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample_markdup_realigned.bam &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T IndelRealigner -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample_HEADER.sorted.bam -targetIntervals /home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample_realignTargets.list -o /home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample_markdup_realigned.bam &
+
+
+#### CREATE VCF ####
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T HaplotypeCaller -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -I /home/maardema/nas1/MALIN/SAMPLES/N5/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/J11/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/J13/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/J15/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/J17/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/N3/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/N4/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/N6/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/P10/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/P14/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/P16/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/P18/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/J19/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/J3/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/J5/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/J9/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/N1/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/N2/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/N7/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/P1/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/P20/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/P22/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/P24/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/P3/fin_sample_markdup_realigned.bam -I /home/maardema/nas1/MALIN/SAMPLES/P6/fin_sample_markdup_realigned.bam -stand_call_conf 20 -stand_emit_conf 20 -o output.raw.snps.indels.vcf &
+
+#### FILTER OUT INDELS ###
+
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T SelectVariants -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa --variant output.raw.snps.indels.vcf --selectTypeToExclude INDEL -o output.raw.snps.only.vcf &
+
+
+#### FILTER OUT MULTIALLELIC SITES ### 
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T SelectVariants -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa --variant output.raw.snps.only.vcf -selectType SNP -restrictAllelesTo BIALLELIC -o output.biallelic.snps.only.vcf &
+
+#### FILTER OUT SNPS REPRESNETED IN TOO FEW SAMPLES ###
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T SelectVariants -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa --variant output.biallelic.snps.only.vcf --maxNOCALLnumber 0 -o output.hicov2.snps.only.vcf &
+
+#### CONVERT .VCF TO STRUCTURE ####
+
+/home/maardema/bin/plink2 --vcf output.hicov.snps.only.vcf --recode structure --allow-extra-chr --out struc_format
+
+
+
+
+
+
+
+##### FILTER ###### # https://software.broadinstitute.org/gatk/gatkdocs/org_broadinstitute_gatk_tools_walkers_variantutils_SelectVariants.php #
+
+# no indels #
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -T SelectVariants --variant output.raw.snps.indels.vcf -o no_indels_output.vcf --selectTypeToExclude INDEL &
+ 
+# 50% present #
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -T SelectVariants -V no_indels_output.vcf -o no_indels_50perc_rep.vcf -fraction 0.5 &
+
+# 90% present #
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -R /home/maardema/nas1/MALIN/SAMPLES/REF/New_ref_N3.fa -T SelectVariants -V no_indels_output.vcf -o no_indels_10of12rep.vcf --minFilteredGenotypes 10
+
+/home/maardema/bin/plink2 --vcf no_indels_10perc_rep.vcf --recode structure --allow-extra-chr --out struc_format_10perc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+###########################################################################################################################################################################
+
+
+OLD STUFF
+
+
+
+bcftools annotate --set-id +'%CHROM\_%POS\_%REF\_%FIRST_ALT' test.vcf > out.vcf
+
+/home/maardema/bin/plink2 --vcf out.vcf --out bed_format --make-bed --allow-extra-chr
+
+/home/maardema/bin/mega2_v4.9.0_src/srcdir/mega2_linux
+
+bed_format.log
+bed_format.nosex
+bed_format.bed
+bed_format.fam
+bed_format.bim
+
+
+samtools view -bS -q 20 -o sample.bam sample.sam &
+
+samtools sort sample.bam -o sample.sorted.bam &
+
+java -jar /home/maardema/bin/picard-tools-1.119/MarkDuplicates.jar INPUT=sample.sorted.bam OUTPUT=sample_DR.sorted.bam REMOVE_DUPLICATES=true METRICS_FILE=dup_removal_metrics.txt ASSUME_SORTED=true MAX_FILE_HANDLES=1000 &
+
+java -jar /home/maardema/bin/picard-tools-1.119/AddOrReplaceReadGroups.jar I=sample_DR.sorted.bam O=final_N5.sorted.bam SO=coordinate RGID=id RGLB=library RGPL=illumina RGPU=machine RGSM=N5
+
+samtools index final_N5.sorted.bam &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T HaplotypeCaller -R /home/maardema/nas1/MALIN/SAMPLES/REF/N3_contigs.fa -I final_N5.sorted.bam -stand_call_conf 20 -stand_emit_conf 20 -o output.raw.snps.indels.vcf &
+
+/home/maardema/bin/samtools-0.1.18/samtools mpileup -B -ug -q 20 -f /home/maardema/nas1/MALIN/SAMPLES/REF.fasta sample_DR.sorted.bam > mpileup_sample &
+
+/home/maardema/bin/samtools-0.1.18/bcftools/bcftools view -bcg -in mpileup_sample > mpileup_sample.bcf &
+
+/home/maardema/bin/samtools-0.1.18/bcftools/bcftools view -N mpileup_sample.bcf > mpileup_sample.vcf &
+
+perl /home/maardema/bin/min_coverage.pl mpileup_sample.vcf sample_filtered.vcf &
+
+vcfutils.pl vcf2fq sample_filtered.vcf > sample.fq &
+
+/home/maardema/bin/samtools-0.1.18/misc/seqtk fq2fa sample.fq 20 > sample.fa
+
+
+
+
+###### BLAST ######
+
+formatdb -i Trinity.fasta -p F
+
+blastall -i N3_contigs.fa -d N3_contigs.fa -p blastn -o blast_out_N3_contigs.fa.txt -e 1e-50 -m 8 &
+
+###### ###### ######
+
+
+java -jar /home/maardema/bin/picard-tools-1.119/AddOrReplaceReadGroups.jar I=sample_DR.sorted.bam O=final_sample_merged.sorted.bam SO=coordinate RGID=id RGLB=library RGPL=illumina RGPU=machine RGSM=J11
+
+
+/home/maardema/bin/samtools-1.3/samtools dict trinity_longest_transcripts.fa -o trinity_longest_transcripts.dict &
+
+/home/maardema/bin/samtools-0.1.18/samtools mpileup -B -ug -q 20 -f bundled_iworm_contigs.fasta final_sample_merged.sorted.bam > temp_mpileup_sample &
+#### find better way to make .fai file
+
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T HaplotypeCaller -R trinity_longest_transcripts.fa -I final_sample_merged.sorted.bam -stand_call_conf 20.0 -stand_emit_conf 20.0 -o output_ALL.vcf --emitRefConfidence BP_RESOLUTION --variant_index_type LINEAR --variant_index_parameter 128000 &
+
+
+****************** (1)
+
+java -Xmx30g -jar /home/maardema/bin/GenomeAnalysisTK.jar -T HaplotypeCaller -ERC GVCF -variant_index_type LINEAR -variant_index_parameter 128000 -R trinity_longest_transcripts.fa -I final_sample_merged.sorted.bam -o output_ALL.vcf 2>&1 > GATK_HaplotypeCaller.log &
+
+****************** (2)
+
+python insnp_v8_alisa.py output_ALL.vcf out.in.snp 20 30 40 2 60 4 -12.5 -8.0 5 &
+
+perl create_insnp_oneindiv_GATK3_4_v9.pl output_ALL.vcf 20 10 30 2 60 4 -12.5 -8.0 5 20 10000 > Molly.in.snp &
+
+
+****************** (3)
+
+/home/maardema/bin/seqtk-master/seqtk mutfa trinity_longest_transcripts.fa Molly.in.snp > updated.fasta &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T HaplotypeCaller -R trinity_longest_transcripts.fa -I final_sample_merged.sorted.bam -stand_call_conf 20.0 -stand_emit_conf 20.0 -o output_ALL.vcf -out_mode EMIT_ALL_CONFIDENT_SITES --max_alternate_alleles 1 &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T FastaAlternateReferenceMaker -R trinity_longest_transcripts.fa -V new_output.vcf -o sample.fa --use_IUPAC_sample J11 --snpmask mask.vcf &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T VariantFiltration -R trinity_longest_transcripts.fa -o new_output.vcf --variant output_ALL.vcf --filterExpression "DP < 30" --filterName "FAIL" 
+
+
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T VariantAnnotator -R trinity_longest_transcripts.fa -V new_output.vcf -o wewillsee.vcf -A Coverage 
+
+
+Arguments for VariantAnnotator:
+ -V,--variant <variant>                                                                   Input VCF file
+ -snpEffFile,--snpEffFile <snpEffFile>                                                    A SnpEff output file from 
+                                                                                          which to add annotations
+ -D,--dbsnp <dbsnp>                                                                       dbSNP file
+ -comp,--comp <comp>                                                                      comparison VCF file
+ -resource,--resource <resource>                                                          External resource VCF file
+ -o,--out <out>                                                                           File to which variants should 
+                                                                                          be written
+ -A,--annotation <annotation>                                                             One or more specific 
+                                                                                          annotations to apply to 
+                                                                                          variant calls
+ -XA,--excludeAnnotation <excludeAnnotation>                                              One or more specific 
+                                                                                          annotations to exclude
+ -G,--group <group>                                                                       One or more classes/groups of 
+                                                                                          annotations to apply to 
+                                                                                          variant calls
+ -E,--expression <expression>                                                             One or more specific 
+                                                                                          expressions to apply to 
+                                                                                          variant calls
+ -all,--useAllAnnotations                                                                 Use all possible annotations 
+                                                                                          (not for the faint of heart)
+ -ls,--list                                                                               List the available annotations 
+                                                                                          and exit
+ -alwaysAppendDbsnpId,--alwaysAppendDbsnpId                                               Append the dbSNP ID even when 
+                                                                                          the variant VCF already has 
+                                                                                          the ID field populated
+ -mvq,--MendelViolationGenotypeQualityThreshold                                           The genotype quality threshold 
+<MendelViolationGenotypeQualityThreshold>                                                 in order to annotate mendelian 
+                                                                                          violation ratio
+
+
+samtools index sample_DR.sorted.bam &
+
+/home/maardema/bin/samtools-0.1.18/samtools mpileup -B -ug -q 20 -f /home/maardema/nas1/MALIN/SAMPLES/REF.fasta sample_DR.sorted.bam > mpileup_sample &
+
+/home/maardema/bin/samtools-0.1.18/bcftools/bcftools view -bcg -in mpileup_sample > mpileup_sample.bcf &
+
+/home/maardema/bin/samtools-0.1.18/bcftools/bcftools view -N mpileup_sample.bcf > mpileup_sample.vcf &
+
+########################################################################
+
+perl /home/maardema/bin/min_coverage.pl mpileup_sample.vcf sample_filtered.vcf &
+
+vcfutils.pl vcf2fq sample_filtered.vcf > sample.fq &
+
+/home/maardema/bin/samtools-0.1.18/misc/seqtk fq2fa sample.fq 20 > sample.fa
+
+########################################################################
+
+/home/maardema/bin/samtools-1.3/samtools dict /home/maardema/nas1/MALIN/SAMPLES/REF.fasta -o /home/maardema/nas1/MALIN/SAMPLES/REF.dict &
+
+java -jar /home/maardema/bin/GenomeAnalysisTK.jar -T FastaAlternateReferenceMaker -R /home/maardema/nas1/MALIN/SAMPLES/REF.fasta -V mpileup_sample.vcf -o FARM_sample.fa --use_IUPAC_sample sample_DR.sorted.bam &
+
+
+
+
+formatdb -i GCF_000690725.1_Stegastes_partitus-1.0.2_protein.faa -p T
+
+blastall -d /home/maardema/nas1/MALIN/SAMPLES/REF/GCF_000690725.1_Stegastes_partitus-1.0.2_protein.faa -i sample.fa -p blastx -o blast_out.txt -e 1e-50 -m 8 &
+
+
+
+
+seth.bybee@gmail.com
+401 WIDB
+
+
+
+
