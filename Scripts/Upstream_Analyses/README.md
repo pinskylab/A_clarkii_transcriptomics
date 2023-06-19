@@ -6,3 +6,5 @@ Contains code for upstream analyses that create input files for some of the R sc
  * **StairwayPlot_upstream.md:** Contains fode for running Stairway Plot v.2 on Amarel. Creates figures with estimates of demographic histories for each sampling site.
  * **TajimasD_upstream.md:** Contains code for running SnpEff and calculating Tajima's D using VCFtools on Amarel. Also contains information on how mapping to *Amphiprion frenatus* was done. Creates input files for `TajimaD_script.R` & `TD_v_pi.R`.
  * **pi_upstream.md:** Contains code for calculating site-pi using VCFtools on Amarel. Creates input files for `pi.R` & `TD_v_pi.R`.
+
+***Bioinformatics_Notes.txt** has code and notes from the bioinformatics pipeline.*
