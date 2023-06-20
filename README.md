@@ -8,7 +8,7 @@ This repository is organized into 3 folders:
 2. **/Scripts:** Contains R scripts and code for analyses included in the manuscript.
 3. **/Plots:** Contains pngs and tiffs of plots included in the manuscript, as well as additional plots for data exploration purposes.
 
-Raw reads can be found in the GenBank short reads archive (BioProject PRJNA699463, SRA accession numbers SRR13627993–13628017).
+Raw reads can be found in the GenBank short reads archive ([BioProject PRJNA699463](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA699463), [SRA accession numbers SRR13627993–13628017](https://www.ncbi.nlm.nih.gov/sra?linkname=bioproject_sra_all&from_uid=699463)).
 
 Please contact René at rclark848[at]gmail.com with any questions.
 
